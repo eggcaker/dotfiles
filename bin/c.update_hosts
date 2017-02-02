@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+
+#HOST="https://raw.githubusercontent.com/zxdrive/imouto.host/master/imouto.host.txt"
+#HOST="https://raw.githubusercontent.com/txthinking/google-hosts/master/hosts"
+#HOST="https://raw.githubusercontent.com/highsea/Hosts/master/hosts"
+#HOST="https://raw.githubusercontent.com/liuker0x007/hosts/master/hosts"
+#HOST="https://raw.githubusercontent.com/racaljk/hosts/master/hosts"
+HOST="https://raw.githubusercontent.com/sy618/hosts/master/ADFQ"
+
+curl $HOST > hosts; 
+sudo mv hosts /etc/hosts
+
+sudo killall -HUP mDNSResponder

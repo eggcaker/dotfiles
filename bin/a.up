@@ -1,0 +1,2 @@
+#!/bin/bash
+android update project -p . --target android-22 $*

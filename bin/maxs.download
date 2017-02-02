@@ -1,0 +1,59 @@
+#!/usr/bin/env bash
+
+DATE="2015-10-28_-_07:25_CET";
+
+mkdir -p ~/Desktop/apks
+cd ~/Desktop/apks
+
+axel -n 50 "http://projectmaxs.org/releases/nightlies/${DATE}/maxs-module-alarmset-release.apk"
+axel -n 50 "http://projectmaxs.org/releases/nightlies/${DATE}/maxs-main-release.apk"
+axel -n 50 "http://projectmaxs.org/releases/nightlies/${DATE}/maxs-module-alarmset-release.apk"
+axel -n 50 "http://projectmaxs.org/releases/nightlies/${DATE}/maxs-module-bluetooth-release.apk"
+axel -n 50 "http://projectmaxs.org/releases/nightlies/${DATE}/maxs-module-bluetoothadmin-release.apk"
+axel -n 50 "http://projectmaxs.org/releases/nightlies/${DATE}/maxs-module-clipboard-release.apk"
+axel -n 50 "http://projectmaxs.org/releases/nightlies/${DATE}/maxs-module-contactsread-release.apk"
+axel -n 50 "http://projectmaxs.org/releases/nightlies/${DATE}/maxs-module-fileread-release.apk"
+axel -n 50 "http://projectmaxs.org/releases/nightlies/${DATE}/maxs-module-filewrite-release.apk"
+axel -n 50 "http://projectmaxs.org/releases/nightlies/${DATE}/maxs-module-locationfine-release.apk"
+axel -n 50 "http://projectmaxs.org/releases/nightlies/${DATE}/maxs-module-misc-release.apk"
+axel -n 50 "http://projectmaxs.org/releases/nightlies/${DATE}/maxs-module-nfc-release.apk"
+axel -n 50 "http://projectmaxs.org/releases/nightlies/${DATE}/maxs-module-notification-release.apk"
+axel -n 50 "http://projectmaxs.org/releases/nightlies/${DATE}/maxs-module-phonestatemodify-release.apk"
+axel -n 50 "http://projectmaxs.org/releases/nightlies/${DATE}/maxs-module-phonestateread-release.apk"
+axel -n 50 "http://projectmaxs.org/releases/nightlies/${DATE}/maxs-module-ringermode-release.apk"
+axel -n 50 "http://projectmaxs.org/releases/nightlies/${DATE}/maxs-module-shell-release.apk"
+axel -n 50 "http://projectmaxs.org/releases/nightlies/${DATE}/maxs-module-smsnotify-release.apk"
+axel -n 50 "http://projectmaxs.org/releases/nightlies/${DATE}/maxs-module-smsread-release.apk"
+axel -n 50 "http://projectmaxs.org/releases/nightlies/${DATE}/maxs-module-smssend-release.apk"
+axel -n 50 "http://projectmaxs.org/releases/nightlies/${DATE}/maxs-module-smswrite-release.apk"
+axel -n 50 "http://projectmaxs.org/releases/nightlies/${DATE}/maxs-module-wifiaccess-release.apk"
+axel -n 50 "http://projectmaxs.org/releases/nightlies/${DATE}/maxs-module-wifichange-release.apk"
+axel -n 50 "http://projectmaxs.org/releases/nightlies/${DATE}/maxs-transport-xmpp-release.apk"
+
+
+adb install -r maxs-module-alarmset-release.apk
+adb install -r maxs-main-release.apk
+adb install -r maxs-module-alarmset-release.apk
+adb install -r maxs-module-bluetooth-release.apk
+adb install -r maxs-module-bluetoothadmin-release.apk
+adb install -r maxs-module-clipboard-release.apk
+adb install -r maxs-module-contactsread-release.apk
+adb install -r maxs-module-fileread-release.apk
+adb install -r maxs-module-filewrite-release.apk
+adb install -r maxs-module-locationfine-release.apk
+adb install -r maxs-module-misc-release.apk
+adb install -r maxs-module-nfc-release.apk
+adb install -r maxs-module-notification-release.apk
+adb install -r maxs-module-phonestatemodify-release.apk
+adb install -r maxs-module-phonestateread-release.apk
+adb install -r maxs-module-ringermode-release.apk
+adb install -r maxs-module-shell-release.apk
+adb install -r maxs-module-smsnotify-release.apk
+adb install -r maxs-module-smsread-release.apk
+adb install -r maxs-module-smssend-release.apk
+adb install -r maxs-module-smswrite-release.apk
+adb install -r maxs-module-wifiaccess-release.apk
+adb install -r maxs-module-wifichange-release.apk
+adb install -r maxs-transport-xmpp-release.apk
+
+rm -rf  ~/Desktop/apks

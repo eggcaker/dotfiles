@@ -1,0 +1,35 @@
+#!/bin/zsh
+
+function push_changes()  {
+  echo "started push the files of $1 ...";
+  cd "$1"
+  git add --all .
+
+  if [[ "$#" = "1" ]]
+    then
+      git commit -m "Daily commit `date +'%Y-%m-%d'`" -a
+  else
+    git commit -m "$1" -a
+  fi
+
+
+  git push origin `git branch|grep '\*'| awk '{print $2}'`
+  echo "--------------------------------------------------------------------------------";
+  echo "";
+}
+
+#push file to remote repo
+push_changes ~/.org-files;
+push_changes ~/.zprezto;
+#push_changes ~/.task;
+push_changes ~/.spacemacs.d;
+
+#kill apps
+echo "kill IMs if any ..."
+killall QQ
+#killall Adium
+
+echo "--------------------------------------------------------------------------------";
+
+echo "Everythings done! go home !!!!!"
+

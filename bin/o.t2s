@@ -1,0 +1,3 @@
+#!/bin/sh
+
+perl -e "s/\t/    /g;" -pi.save $(find ./ -type f -name '*.java')

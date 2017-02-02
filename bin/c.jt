@@ -1,0 +1,54 @@
+#!/bin/bash
+mkdir $1; 
+cd $1; 
+mkdir -p src/main/java/com/yep8;
+touch build.gradle
+echo "apply plugin: 'java'" >> build.gradle
+echo "apply plugin: 'application'" >> build.gradle
+echo 'mainClassName = "com.yep8.SandBox"' >> build.gradle
+
+echo "repositories {
+  mavenCentral()
+}
+
+dependencies {
+  compile 'joda-time:joda-time:2.8.1'
+}
+
+" >> build.gradle
+
+
+cd src/main/java/com/yep8;
+
+touch SandBox.java
+echo "package com.yep8;" >> SandBox.java
+echo "import java.util.*;" >> SandBox.java;
+echo "import org.joda.time.*;" >> SandBox.java;
+
+
+echo "
+
+public class SandBox {
+  public static void main(String[] args) {
+    TestClass tc = new TestClass();
+    System.out.println(tc.sayHello());
+  }
+}" >> SandBox.java
+
+touch TestClass.java
+echo "package com.yep8;" >> TestClass.java
+
+echo 'public class TestClass{
+  public String sayHello() {
+    return "Hello,World";
+  }
+}' >> TestClass.java
+
+
+cd -
+
+git setup
+
+cd src/main/java/com/yep8;
+
+emacsclient -n SandBox.java

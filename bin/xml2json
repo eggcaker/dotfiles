@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+
+xml-json "$1.xml" map > "/tmp/$1.json"

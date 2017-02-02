@@ -1,0 +1,48 @@
+#!/usr/bin/env node
+
+require('shelljs/global');
+var figures = require('figures');
+var chalk = require('chalk');
+
+var aliases = require(__dirname +"/../plugins/config/aliases.json");
+
+function help(cmd) {
+    console.log();
+    console.log(chalk.green(chalk.bold("Usage:") +" zi <command|alias> args"));
+    console.log();
+    console.log(chalk.yellow(figures.info + " make sure the file zi-" + cmd + " in PATH"));
+}
+
+var args = process.argv;
+args.shift();
+args.shift();
+
+if (!which('zi-' +args[0])) {
+    var alias =  aliases[args[0]];
+    if (alias != undefined) {
+        var full_name = alias['full'];
+        
+        if (full_name == null) {
+            help();
+        } else {
+            var commands = full_name.split(" ");
+            var cmd  = which('zi-' + commands[0]); 
+            if (cmd) {
+                args.shift();
+                if (commands.length >0) {
+                    commands.shift();
+                    exec(cmd + " " + commands.join(" ") + " " + args.join(" "));
+                } else {
+                    exec(cmd + " " +  args.join(" "));
+                }
+            }
+        } 
+    } else {
+        help();
+    }
+} else {
+    var cmd = which("zi-"+args[0]);
+    args.shift();
+    exec(cmd +  " " + args.join(" "));
+}
+

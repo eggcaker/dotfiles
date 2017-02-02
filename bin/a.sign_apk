@@ -1,0 +1,7 @@
+#!/usr/bin/env zsh
+
+zipalign -v -p 4 ./$1.apk  $1-align.apk
+apksigner sign --ks ~/src/work/pacer_android/doc/release.keystore ./$1-align.apk
+mv ./$1-align.apk  ./$1-release.apk
+apksigner verify ./$1-release.apk
+mv ./$1-release.apk ~/Desktop/

@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+CURRENT_BRANCH="$(git b |grep "*"|awk '{print $2}')"
+git log  origin/develop..${CURRENT_BRANCH}  --pretty=oneline --abbrev-commit > /tmp/prdesc
+tail -r /tmp/prdesc > /tmp/pd
+mv /tmp/pd /tmp/prdesc
+b.format_pr_desc
+rm /tmp/prdesc

@@ -1,0 +1,26 @@
+#!/usr/bin/env zsh
+
+git status $* | grep "nothing to commit, working tree clean" || {
+  echo "Working tree not clean, abort...";
+  exit 1;
+}
+
+#git up
+#git rebase origin/develop
+git status $* | grep "nothing to commit, working tree clean" || {
+  echo "Rebase has conflict,  abort...";
+  exit 1;
+}
+
+CURRENT_BRANCH="$(git cb)"
+git push  -f origin $CURRENT_BRANCH;
+
+CURRENT_REPO="$(git repo)"
+PR_NAME="$(echo "$CURRENT_BRANCH" | sed 's/.*/\u&/')"
+DESC="$(git log origin/develop..${CURRENT_BRANCH} --pretty=oneline --abbrev-commit|sed -e 's/^/\* /g' |sed -e :a -e '$!N; s/\n/\\n/; ta')"
+
+curl -H "Content-Type: application/json" \
+-H "Accept: application/json" \
+-d '{"reviewers":[{"username":"machangzhe"},{"username":"luncrzs"},{"username":"Eth4nZ"}],"close_source_branch": true, "title":"'"${PR_NAME}"'","description":"'"${DESC}"'","head":"'"${CURRENT_REPO}"'","source":{"branch":{"name":"'"${CURRENT_BRANCH}"'"}},"destination":{"name":"develop"}}' \
+--user "$BB_USER:$BB_PWD" \
+https://bitbucket.org/api/2.0/repositories/${CURRENT_REPO}/pullrequests

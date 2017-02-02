@@ -1,0 +1,4 @@
+#!/usr/bin/env bash 
+
+adb shell ifconfig|grep 'inet addr'|grep 'Bcast'|awk '{print $2}'|awk -F\: '{print $2}'
+

@@ -1,0 +1,12 @@
+#!/usr/bin/env zsh
+
+
+action="$1";
+
+if [[ $action == "" ]] ; then
+    exit 0;
+fi
+
+clock_in="(pelm-org/clock-in-task-by-id \"gtd_${action}\")"
+emacsclient -e $clock_in
+echo "clocked on gtd $action";

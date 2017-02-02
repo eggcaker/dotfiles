@@ -1,0 +1,31 @@
+#!/usr/bin/env node
+
+'use strict';
+const moment = require('moment');
+const spawn = require( 'child_process' ).spawnSync;
+const xml2js = require('xml2js');
+
+
+let open_permission = spawn( 'adb', [ 'shell', "su -c 'mount -o rw,remount /system'"]);
+let cp_file = spawn('adb', ['shell',  "su -c 'cp /data/data/com.mandian.android.dongdong/shared_prefs/pref_pacer.xml /mnt/sdcard/pref_pacer.xml'"]);
+let close_permission = spawn( 'adb', [ 'shell', "su -c 'mount -o ro,remount /system'"]);
+let pull_file = spawn('adb',  ['pull', '/mnt/sdcard/pref_pacer.xml', '.']);
+
+let convert_file = spawn('xml2json', ['pref_pacer']);
+
+var data = require('/tmp/pref_pacer.json');
+let images = data.set.string;
+if (images) {
+  const day = moment().format('YYYYMMD');
+  spawn('mkdir', ['/Users/eggcaker/src/work/madhouse_ads/' +day]);
+  if (Array.isArray(images)) {
+    for (let i=0, len = images.length; i< len; i++) {
+      console.log(images[i]);
+      spawn('wget', ['-P', '/Users/eggcaker/src/work/madhouse_ads/'+day, images[i]]);
+    }
+  } else {
+    spawn('wget', ['-P', '/Users/eggcaker/src/work/madhouse_ads/'+day, images]);
+  }
+}
+
+let rm_file = spawn('rm',  ['pref_pacer.xml', '/tmp/pref_pacer.json']);

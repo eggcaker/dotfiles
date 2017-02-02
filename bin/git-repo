@@ -1,0 +1,3 @@
+#!/usr/bin/env bash 
+
+git remote -v|grep push|awk -F: '{print $2}'|awk -F\. '{print $1}'

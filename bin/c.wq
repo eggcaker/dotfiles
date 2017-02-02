@@ -1,0 +1,24 @@
+#!/bin/sh 
+
+url="http://www.baidu.com/s?ie=utf-8&bs=%E5%8C%97%E4%BA%AC%E5%A4%A9%E6%B0%94&f=8&rsv_bp=1&rsv_spt=3&wd=%E5%8C%97%E4%BA%AC%E5%A4%A9%E6%B0%94&inputT=0"
+
+wget -O tmp.html $url  > /dev/null 2>&1
+w3m -dump tmp.html > tmp2.html
+start_line="`cat tmp2.html |grep -n '最近访问'|awk -F: '{print $1}'`"
+total_line="`cat tmp2.html|wc -l`"
+
+cut_line="`expr $total_line - $start_line - 1`"
+
+
+tail -n $cut_line tmp2.html |head -n 5 > tmp.html
+
+sed -e 's/\[neverfill\]//g' tmp.html >tmp2.html
+sed '/^[[:space:]][[:space:]]*$/d' tmp2.html |sed -e 's/\[u\]//g'  > tmp.html
+
+echo "--------------------------------------"
+cat tmp.html
+echo "--------------------------------------"
+
+rm tmp.html
+rm tmp2.html
+

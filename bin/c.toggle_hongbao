@@ -1,0 +1,9 @@
+#!/usr/bin/env zsh
+
+if [[ "$1" -eq "stop" ]] ; then
+    adb shell am force-stop com.yep8.hongbao
+else
+  exec "adb shell am start -n com.yep8.hongbao/com.yep8.hongbao.MainActivity"
+fi
+
+

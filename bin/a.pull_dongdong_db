@@ -1,0 +1,4 @@
+#!/usr/bin/env zsh
+
+adb shell "su -c 'cp /data/data/com.mandian.android.dongdong/databases/MDData.db /mnt/sdcard/MDData.db'"
+adb pull /mnt/sdcard/MDData.db ./MDData.db

@@ -1,0 +1,11 @@
+#!/usr/bin/env bash 
+
+COUNTRY="us";
+
+if [[ "$1" != "" ]]; then 
+    COUNTRY=$1;
+fi
+
+URL="https://play.google.com/store/apps/category/HEALTH_AND_FITNESS/collection/topselling_free?gl=${COUNTRY}"
+
+curl -s $URL |pup 'h2'|pup 'a'|pup  'text{}'|grep Pedometer

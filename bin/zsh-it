@@ -1,0 +1,26 @@
+#!/usr/bin/env node
+
+var colors = require('colors');
+
+nesh = require('nesh');
+nesh.log.winston();
+nesh.log.color = true;
+
+opts = {
+  welcome: 'Welcome!',
+  prompt: 'zsh-it> '
+};
+
+// Load user configuration
+nesh.config.load();
+
+// Load CoffeeScript
+nesh.loadLanguage('coffee');
+
+// Start the REPL
+nesh.start(opts, function (err) {
+  if (err) {
+    nesh.log.error(err);
+  }
+});
+

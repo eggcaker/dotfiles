@@ -1,0 +1,9 @@
+#!/usr/bin/env bash 
+
+if [ "$1" == "" ]; then
+  echo "Usage: 2x <image_name>"
+  exit;
+fi
+
+
+identify "$1" |

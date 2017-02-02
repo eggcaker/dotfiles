@@ -1,0 +1,4 @@
+#!/bin/bash
+
+cd ~/src/biz/android/crt/src/crt/;
+mvn clean install android:deploy -Dmaven.test.skip=true $*
