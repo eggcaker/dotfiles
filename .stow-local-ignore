@@ -7,6 +7,7 @@ LICENSE
 \.fseventsd
 \.DS_Store
 Brewfile
+Makefile
 
 
 # GNU stow ignore .gitignore files by default, and so we modify the default
