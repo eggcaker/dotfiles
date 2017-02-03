@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+
+PROGRAMS=(ack commands common git node ruby tig tmux vim zsh)
+
+for program in ${PROGRAMS[@]}; do
+  stow -R $program
+  echo "Configuring $program"
+done
+
+

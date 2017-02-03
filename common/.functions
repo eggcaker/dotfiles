@@ -1,0 +1,90 @@
+function a.ssh() {
+  ssh -p 8022  -i ~/.ssh/oneplus_rsa u0_a108@$(a.ip)
+}
+
+function bb.cpr() {
+curl -X POST -H "Content-Type: application/json" -u $BB_USER:$BB_PWD https://bitbucket.org/api/2.0/repositories/s3m3n/reponame/pullrequests \
+ -d '{ "title": "Merge some branches", "description": "stackoverflow example", "source": { "branch": { "name": "choose branch to merge with" }, "repository": { "full_name": "s3m3n/reponame" } }, "destination": { "branch": { "name": "choose branch that is getting changes" } }, "reviewers": [ { "username": "some other user needed to review changes" } ], "close_source_branch": false }'
+
+}
+
+function command_not_found_handler() {
+  zi-cnf $*
+}
+
+function p.android_web_prod_bundle() {
+  cd ~/src/work/pacer_groups/;
+  PRODUCT=pacer_android  make prod-bundle
+}
+
+function p.android_web_staging_bundle() {
+    cd ~/src/work/pacer_groups/;
+    PRODUCT=pacer_android  make staging-bundle
+}
+
+function p.android_web_114_bundle() {
+    cd ~/src/work/pacer_groups/;
+    PRODUCT=pacer_android  make 114-bundle
+}
+
+function d.android_web_prod_bundle() {
+    cd ~/src/work/pacer_groups/;
+    PRODUCT=dongdong_android  make prod-bundle
+}
+
+function d.android_web_staging_bundle() {
+    cd ~/src/work/pacer_groups/;
+    PRODUCT=dongdong_android  make staging-bundle
+}
+
+function d.android_web_114_bundle() {
+    cd ~/src/work/pacer_groups/;
+    PRODUCT=dongdong_android  make 114-bundle
+}
+
+function pc() {
+  IP="$(ifconfig|grep inet|grep netmask|grep broadcast|awk '{print $2}'|awk -F'.' '{print $1"."$2"."$3"."}')"
+  adb disconnect
+  adb connect "$IP$1:5555"
+}
+
+# from: http://www.digitalinternals.com/unix/unix-linux-include-header-in-grep-result/478/
+function grepb () {
+  IFS= read -r header
+  echo "$header"
+  grep "$@"
+}
+
+# No arguments: `git status`
+# With arguments: acts like `git`
+# from: https://github.com/thoughtbot/dotfiles/blob/master/zsh/functions/g
+function g() {
+  if [[ $# -gt 0 ]]; then
+    git $*
+  else
+    git status
+  fi
+}
+
+# Run "up" to "cd ..", or I can run "up 6" to "cd ../../../../../.."
+# from: https://news.ycombinator.com/item?id=9869231#up_9869613
+function up {
+  if [[ "$#" < 1 ]] ; then
+    cd ..
+  else
+    CDSTR=""
+    for i in {1..$1} ; do
+      CDSTR="../$CDSTR"
+    done
+    cd $CDSTR
+  fi
+}
+
+function a.ip() {
+adb shell ifconfig|grep 'inet addr'|grep 'Bcast'|awk '{print $2}'|awk -F\: '{print $2}'
+}
+
+function takedir() {
+  mkdir -p "$1"
+  cd "$1"
+}
