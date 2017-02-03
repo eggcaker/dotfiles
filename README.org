@@ -1,3 +1,24 @@
 * Dotfiles
 
   You are your dotfiles.
+
+** Predependencies
+    - zplug
+    #+BEGIN_SRC sh
+    git clone https://github.com/zplug/zplug ~/.zplug
+    #+END_SRC
+    - spacemacs
+    #+BEGIN_SRC sh
+    git clone https://github.com/syl20bnr/spacemacs ~/.emacs.d
+    #+END_SRC
+    - SpaceVim
+    #+BEGIN_SRC sh
+    curl -sLf https://spacevim.org/install.sh | bash
+    #+END_SRC
+    -
+
+** Install
+   - clone the repo
+     #+BEGIN_SRC sh
+     git clone
+     #+END_SRC
