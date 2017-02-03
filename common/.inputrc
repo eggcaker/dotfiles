@@ -1,0 +1,56 @@
+set completion-ignore-case On
+set bell-style none
+set editing-mode vi
+
+$if mode=vi
+  bindkey -M viins 'jk' vi-cmd-mode
+  bindkey -M vicmd 'H' beginning-of-line
+  set keymap vi-command
+  "gg": beginning-of-history
+  "G": end-of-history
+  "H": beginning-of-line
+  "L": end-of-line
+  set keymap vi-insert
+  "jj": vi-movement-mode
+  "\C-p": history-search-backward
+  "\C-l": clear-screen
+
+
+# Make Tab autocomplete regardless of filename case
+set completion-ignore-case on
+
+# List all matches in case multiple possible completions are possible
+set show-all-if-ambiguous on
+
+# Immediately add a trailing slash when autocompleting symlinks to directories
+set mark-symlinked-directories on
+
+# Use the text that has already been typed as the prefix for searching through
+# commands (i.e. more intelligent Up/Down behavior)
+"\e[B": history-search-forward
+"\e[A": history-search-backward
+
+# Do not autocomplete hidden files unless the pattern explicitly begins with a dot
+set match-hidden-files off
+
+# Show all autocomplete results at once
+set page-completions off
+
+# Completion Options
+set page-completions on
+set completion-ignore-case on
+set completion-query-items 100
+set show-all-if-ambiguous on
+set show-all-if-unmodified on
+set visible-stats on
+
+set visible-stats on
+set skip-completed-text on
+
+# Allow UTF-8 input and output, instead of showing stuff like $'\0123\0456'
+set input-meta on
+set output-meta on
+set convert-meta off
+
+# disable the beep
+set bell-style none

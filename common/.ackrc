@@ -1,0 +1,5 @@
+--ignore-dir=out/
+--type-set=coffee=.coffee,.iced
+--type-set=haml=.haml
+--type-set=html=.md
+--type-set=less=.less
