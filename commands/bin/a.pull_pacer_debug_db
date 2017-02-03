@@ -1,5 +1,4 @@
 #!/usr/bin/env zsh
-
 adb shell "su -c 'cp /data/data/cc.pacer.androidapp.debug/databases/MDData.db /mnt/sdcard/MDData.db'"
 adb pull /mnt/sdcard/MDData.db ./MDData.db
 adb shell "rm /mnt/sdcard/MDData.db"
