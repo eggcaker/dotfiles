@@ -1,0 +1,7 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhist_cnt =5
+let g:netrw_dirhist_1='/Volumes/安装“快播”/双击安装快播.pkg/Contents/Plugins/CloseRunningApplication.bundle/Contents/Resources/en.lproj'
+let g:netrw_dirhist_2='/Users/eggcaker/src/work/pacer_android/app/src/main/assets/group/pacer'
+let g:netrw_dirhist_3='/Users/eggcaker/src/work/pacer_android/app/src/main/assets/group'
+let g:netrw_dirhist_4='/Users/eggcaker/src/work/pacer_android/app/src/main/assets/group/pacer'
+let g:netrw_dirhist_5='/Users/eggcaker/Desktop/labs/RequestPrams/node_modules'
