@@ -17,3 +17,8 @@ brew 'neovim/neovim/neovim'
 brew 'z'
 brew 'ack'
 brew 'zplug'
+
+
+
+
+import os 
