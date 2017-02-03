@@ -1,0 +1,231 @@
+set timeoutlen=300
+set history=1000
+set hlsearch
+set ignorecase
+set smartcase
+
+set gdefault
+set ignorecase
+
+" easy buffer scrolling
+noremap N 5j
+noremap P 5k
+
+let mapleader=' '
+
+" easy system clipboard copy/paste
+noremap <Leader>y "*y
+noremap <Leader>Y "*Y
+noremap <Leader>p "*p
+noremap <Leader>P "*P
+
+set clipboard+=unnamed
+
+" easy window navigation
+nnoremap <c-l> <c-w>l
+nnoremap <c-j> <c-w>j
+nnoremap <c-h> <c-w>h
+nnoremap <c-k> <c-w>k
+nnoremap <a-h> gT
+nnoremap <a-l> gt
+
+" intellij actions
+nnoremap <Leader>a :action ResourceBundleEditorShowIntentions<cr>
+nnoremap <Leader>a :action ShowIntentionActions<cr>
+nnoremap <Leader>q :action CloseContent<cr>
+nnoremap <Leader>Q :action ReopenClosedTab<cr>
+nnoremap <Leader>j :action EditorJoinLines<cr>
+nnoremap <Leader><Leader> :action VimFilePrevious<cr>
+nnoremap <Leader>e :action GotoFile<cr>
+nnoremap <Leader>E :action Switcher<cr>
+nnoremap <Leader>T :action FileStructure<cr>
+map <Leader>f :action GotoFile<CR>
+
+" code navigation
+nnoremap <Leader>u :action FindUsages<cr>
+nnoremap [] :action MethodUp<cr>
+nnoremap ][ :action MethodDown<cr>
+nnoremap <Leader>n :action GotoNextError<cr>
+nnoremap <Leader>p :action GotoPreviousError<cr>
+nnoremap <Leader>mi :action ImplementMethods<cr>
+nnoremap <Leader>mo :action OverrideMethods<cr>
+nnoremap <Leader>gc :action GotoClass<cr>
+nnoremap <Leader>gs :action GotoSymbol<cr>
+nnoremap <Leader>gi :action GotoImplementation<cr>
+nnoremap <Leader>gp :action GotoSuperMethod<cr>
+nnoremap <Leader>ga :action GotoAction<cr>
+
+" Android actions
+nnoremap <Leader>as :action Android.SyncProject<cr>
+
+" intellij options
+nnoremap cow :action EditorToggleUseSoftWraps<cr>
+nnoremap con :action EditorToggleShowLineNumbers<cr>
+nnoremap col :action EditorToggleShowWhiteLeaders<cr>
+
+
+" ============================================================================
+" Movement
+" ============================================================================
+
+" Scroll screen with the cursor
+noremap <C-j> gj<C-e>
+noremap <C-k> gk<C-y>
+
+" Left / right
+noremap <C-h> h
+noremap <C-l> l
+
+" Insert mode
+inoremap <C-k> <Up>
+inoremap <C-j> <Down>
+inoremap <C-l> <Right>
+inoremap <C-h> <Left>
+
+" Home row beginning / end of line
+noremap H ^
+noremap L $
+
+
+" Previous / next word
+noremap k #
+noremap j *
+
+" ============================================================================
+" Editing
+" ============================================================================
+
+" Escape
+inoremap jk <Esc>`^
+inoremap fd <Esc>`^
+inoremap <C-q> <Esc>`^
+noremap <C-q> <Esc>
+vnoremap <C-q> <Esc>
+cmap <C-q> <C-c>
+
+" Moving blocks of text in visual mode
+vnoremap < <gv
+vnoremap > >gv
+
+" Select all text
+map <Leader>A ggVG
+
+" Copy until the end of the line
+noremap Y y$
+
+" Indent everything
+noremap <Leader>I ggvG=
+
+" Indent the current line
+noremap <Leader>i v=
+
+" Change current word - kill
+noremap K ciw
+
+" Change in double quotes
+noremap C ci"
+
+" Join lines
+nnoremap <Leader>J J
+
+" code refactoring
+nnoremap <Leader>rr :action RenameElement<cr>
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => VIM user interface
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Set 7 lines to the cursor - when moving vertically using j/k
+set so=7
+set nu
+set relativenumber
+
+" Turn on the WiLd menu
+set wildmenu
+
+" Ignore compiled files
+set wildignore=*.o,*~,*.pyc
+if has("win16") || has("win32")
+    set wildignore+=*/.git/*,*/.hg/*,*/.svn/*,*/.DS_Store
+else
+    set wildignore+=.git\*,.hg\*,.svn\*
+endif
+
+"Always show current position
+set ruler
+
+" Height of the command bar
+set cmdheight=2
+
+" A buffer becomes hidden when it is abandoned
+set hid
+
+" Configure backLeader so it acts as it should act
+set backLeader=eol,start,indent
+set whichwrap+=<,>,h,l
+
+" Ignore case when searching
+set ignorecase
+
+" When searching try to be smart about cases
+set smartcase
+
+" Highlight search results
+set hlsearch
+
+" Makes search act like search in modern browsers
+set incsearch
+
+" Don't redraw while executing macros (good performance config)
+set lazyredraw
+
+" For regular expressions turn magic on
+set magic
+
+" Show matching brackets when text indicator is over them
+set showmatch
+
+" How many tenths of a second to blink when matching brackets
+set mat=2
+
+" No annoying sound on errors
+set noerrorbells
+set novisualbell
+set tm=500
+
+" Add a bit extra margin to the left
+set foldcolumn=1
+
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Moving around, tabs, windows and buffers
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Treat long lines as break lines (useful when moving around in them)
+map j gj
+map k gk
+
+
+" Disable highlight when <Space><cr> is pressed
+map <silent> <Space><cr> :noh<cr>
+
+" Smart way to move between windows
+map <C-j> <C-W>j
+map <C-k> <C-W>k
+map <C-h> <C-W>h
+map <C-l> <C-W>l
+
+" Return to last edit position when opening files (You want this!)
+autocmd BufReadPost *
+     \ if line("'\"") > 0 && line("'\"") <= line("$") |
+     \   exe "normal! g`\"" |
+     \ endif
+
+" Remember info about open buffers on close
+set viminfo^=%
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Editing mappings
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Remap VIM 0 to first non-blank character
+map 0 ^

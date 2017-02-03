@@ -1,0 +1,153 @@
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" XVim config.
+" Author: eggcaker
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+inoremap jk <Esc>
+
+set timeoutlen=1000
+set hlsearch
+set ignorecase
+set smartcase
+set foldenable
+set pasteboard
+
+set viminfo='100,\"100,:20,%,n~/.xviminfo
+
+inoremap <C-e> <C-o>$
+
+nmap ,w :w<cr>
+nmap ,r :run<cr>
+
+"""""""""""""""""""""""""""""""""""""""""
+" assistant editor and jump between Frame
+"""""""""""""""""""""""""""""""""""""""""
+" show assistant editor (then add is enable)
+" show standard editor to close assistant editor
+map ,sa :xccmd changeToGeniusEditor<CR>
+" add new assistant editor
+    "map ,aa :xccmd addAssistantEditor<CR>
+" del one assistant editor
+    "map ,da :xccmd removeAssistantEditor<CR>
+
+" move between windows
+map <C-j> <C-w>j<CR>
+map <C-k> <C-w>k<CR>
+map <C-h> <C-w>h<CR>
+map <C-l> <C-w>l<CR>
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""
+" tab
+" note: if tabprevious and tabnext lost editor focus,
+"       try :xccmd.
+""""""""""""""""""""""""""""""""""""""""""""""""""""
+" tab new
+map tn :xccmd newTab<CR>
+" tab close
+"map tc :xccmd closeCurrentTab<CR>
+map tc :tabclose<CR>
+" tab pre
+"map tj :xccmd selectPreviousTab<CR>
+map tj :tabprevious<CR>
+" tab next
+"map tk :xccmd selectNextTab<CR>
+map tk :tabnext<CR>
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""
+" View
+" Note: standard editor shortkey is convenient
+"""""""""""""""""""""""""""""""""""""""""""""""""""
+" toggle navigator, debug area, utilities, ToolBar
+" l-left, b-bottom, r-right, t-top or toolbar
+map ,tl :xccmd toggleNavigatorsVisibility<CR>
+map ,tb :xccmd toggleDebuggerVisibility<CR>
+map ,tr :xccmd toggleUtilitiesVisibility<CR>
+map ,tt :xccmd toggleToolbarShown<CR>
+
+""""""""""""""""""""""""""""""""""""""""""""""""""
+" Navigating
+""""""""""""""""""""""""""""""""""""""""""""""""""
+" dc-debug console
+map ,dc :xcmenucmd activateConsole<CR>
+
+map gf  :xccmd goForwardInHistoryByCommand<CR>
+map gb  :xccmd goBackInHistoryByCommand<CR>
+map gn  :xccmd jumpToNextCounterpart<CR>
+map gN  :xccmd jumpToPreviousCounterpart<CR>
+
+" open current file in selected editor
+    "map ,oi :xcmenucmd Open in…<CR>
+" ctrl+i/o maybe better
+    "map ,jd :xcmenucmd Jump to Definition<CR> " vim cmd:gd
+    map ,jn :xcmenucmd Jump to Next Issue<CR>
+    "map ,ni :xcmenucmd Fix Next Issue<CR>
+    map ,jp :xcmenucmd Jump to Previous Issue<CR>
+    "map ,pi :xcmenucmd Fix Previous Issue<CR>
+
+" Fold
+nmap ,zf :xccmd fold<CR>
+nmap ,zu :xccmd unfold<CR>
+map ,fa :xccmd foldAllMethods<CR>
+map ,ua :xccmd unfoldAllMethods<CR>
+map ,fc :xccmd foldAllComments<CR>
+map ,uc :xccmd unfoldAllComments<CR>
+
+
+""""""""""""""""""""""""""""""""""""""""""""""""""
+" Project
+""""""""""""""""""""""""""""""""""""""""""""""""""
+map ,r  :run<CR>
+map ,bp  :xcmenucmd Build<CR>
+map ,cp  :xcmenucmd Clean<CR>
+
+" search the string cursor points to. Very Usefull.
+map ,s viw:xccmd findSelectedTextInWorkspace<CR>
+vmap ,s :xccmd findSelectedTextInWorkspace<CR>
+
+" Filter file (view menus achieve the goal too)
+map ,fn :menucmd Title:Filter in Navigator<CR>
+map ,fl :menucmd Title:Filter in Library<CR>
+
+" Close Window
+map ,cw  :xccmd performClose<CR>
+" close current file
+map ,q  :xccmd closeDocument<CR>
+" show in Finder
+map ,in  :xccmd showInFinder<CR>
+
+" Commenting
+map ,c  :xccmd commentAndUncommentCurrentLines<CR>
+
+" View current file in ...
+map ,vp  :xccmd revealInProjectNavigator<CR>
+map ,vs  :xccmd revealInSymbolNavigator<CR>
+map ,vf  :xccmd showInFinder<CR>
+
+" Debugging
+map ,k  :xccmd toggleBreakpointAtCurrentLine<CR>
+map ,K  :xccmd toggleBreakpoints<CR>
+map ,j  :xccmd stepOver<CR>
+map ,i  :xccmd stepInto<CR>
+map ,o  :xccmd stepOut<CR>
+map ,t  :xccmd pauseOrContinue<CR>
+
+nnoremap <space> :xccmd openQuickly<CR>
+
+map <Left> :echo "noway!!"<CR>
+map <Right> :echo "noway!"<CR>
+map <Up> :echo "noway!" <CR>
+map <Down> :echo "noway!" <CR>
+
+nmap H :xhelp<cr>
+nmap ,d :xcmd searchDocumentationForSelectedText<CR>
+
+
+" Commenting blocks of code.
+autocmd FileType c,cpp,java,scala let b:comment_leader = '// '
+autocmd FileType sh,ruby,python   let b:comment_leader = '# '
+autocmd FileType conf,fstab       let b:comment_leader = '# '
+autocmd FileType tex              let b:comment_leader = '% '
+autocmd FileType mail             let b:comment_leader = '> '
+autocmd FileType vim              let b:comment_leader = '" '
+noremap <silent> ,cc :<C-B>silent <C-E>s/^/<C-R>=escape(b:comment_leader,'\/')<CR>/<CR>:nohlsearch<CR>
+noremap <silent> ,cu :<C-B>silent <C-E>s/^\V<C-R>=escape(b:comment_leader,'\/')<CR>//e<CR>:nohlsearch<CR>
