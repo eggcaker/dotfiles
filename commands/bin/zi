@@ -4,7 +4,7 @@ require('shelljs/global');
 var figures = require('figures');
 var chalk = require('chalk');
 
-var aliases = require(__dirname +"/../plugins/config/aliases.json");
+var aliases = require(__dirname +"/plugins/config/aliases.json");
 
 function help(cmd) {
     console.log();
@@ -21,12 +21,11 @@ if (!which('zi-' +args[0])) {
     var alias =  aliases[args[0]];
     if (alias != undefined) {
         var full_name = alias['full'];
-        
         if (full_name == null) {
             help();
         } else {
             var commands = full_name.split(" ");
-            var cmd  = which('zi-' + commands[0]); 
+            var cmd  = which('zi-' + commands[0]);
             if (cmd) {
                 args.shift();
                 if (commands.length >0) {

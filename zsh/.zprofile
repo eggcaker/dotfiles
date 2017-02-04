@@ -67,13 +67,15 @@ export GOPATH=~/.go
 export NPM_PACKAGES="${HOME}/.npm-packages"
 export NODE_PATH="${NPM_PACKAGES}/lib/node_modules:${NODE_PATH}"
 export PATH="${NPM_PACKAGES}/bin:${PATH}"
+export N_PREFIX="$HOME/.n"
+export PATH="$N_PREFIX/bin:$PATH"
 
 # Paths
 export MAVEN_HOME="/development/tools/maven"
 export PATH="/usr/local/sbin:$PATH"
 export PATH="$MAVEN_HOME/bin:$PATH"
-export PATH=$HOME"/bin:$PATH"
-export PATH="/usr/local/bin:$PATH"
+export PATH="${HOME}/bin:$PATH"
+export PATH="/usr/local/bin:${HOME}/.dotfiles/commands/bin/plugins:$PATH"
 
 
 # Project

@@ -123,3 +123,6 @@
   required = true
 [pull]
   rebase = true
+[github]
+	user = eggcaker
+	oauth-token = $GITHUB_OAUTH_TOKEN
