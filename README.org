@@ -13,7 +13,8 @@
     #+END_SRC
 
 ** Install
-   - clone the repo
-     #+BEGIN_SRC sh
-     git clone
-     #+END_SRC
+   #+BEGIN_SRC sh
+   git clone https://github.com/eggcaker/dotfiles ~/.dotfiles
+   cd ~/dotfiles
+   make install
+   #+END_SRC
