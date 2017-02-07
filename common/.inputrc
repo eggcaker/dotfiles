@@ -1,9 +1,8 @@
 set completion-ignore-case On
 set bell-style none
-set editing-mode vi
+set editing-mode emacs 
 
 $if mode=vi
-  bindkey -M viins 'jk' vi-cmd-mode
   bindkey -M vicmd 'H' beginning-of-line
   set keymap vi-command
   "gg": beginning-of-history
