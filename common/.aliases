@@ -203,6 +203,8 @@ alias p.backlog='open "https://docs.google.com/spreadsheets/d/1gnnmB42mJ4k1limeY
 alias p.file='open "https://docs.google.com/spreadsheets/d/1gnnmB42mJ4k1limeYZHgv1tjwx9Nplxjf40xXGnj09U/edit#gid=0"'
 alias p.release='open "https://docs.google.com/spreadsheets/d/1As9Cu8elTzPh9lEqYZeqYCRvkbv1LBcRa9scp42ALeg/edit#gid=0"'
 alias okr='open "https://drive.google.com/drive/folders/0BzTBBCzYzHM-Y3B2c0p6Ri1GOTQ"'
+alias p.interview='open  "https://docs.google.com/spreadsheets/d/1RVrRC06Z5D-19aqSNdLGBmofzP_LCEfbFbaEuEx-cKw/edit?usp=drive_web"'
+alias p.calendar='open "https://calendar.google.com/calendar/render#main_7"'
 
 alias colourify="/usr/local/bin/grc -es --colour=auto"
 alias configure='colourify ./configure'
