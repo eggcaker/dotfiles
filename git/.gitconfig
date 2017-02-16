@@ -1,6 +1,7 @@
 [user]
   name = eggcaker
   email = eggcaker@gmail.com
+	signingkey=1E885F0733C682F6
 [author]
   name = eggcaker
   email = eggcaker@gmail.com
@@ -126,3 +127,5 @@
 [github]
 	user = eggcaker
 	oauth-token = $GITHUB_OAUTH_TOKEN
+[commit]
+	gpgsign = true
