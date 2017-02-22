@@ -1,3 +1,0 @@
-#!/usr/bin/env zsh
-
-open /var/**/mojo_weixin_qrcode.png

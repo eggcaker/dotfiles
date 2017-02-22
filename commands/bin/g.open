@@ -1,3 +1,0 @@
-#!/usr/bin/env bash
-
-open "`git remote -v |awk '{print $2}' |head -n 1  |sed -e 's/git:/http:/g'|sed -e 's/\.git//g'`"

@@ -1,4 +1,0 @@
-#!/usr/bin/env zsh
-
-
-/usr/bin/perl -MMojo::Webqq -e 'Mojo::Webqq->new(qq=>$ARGV[0])->login->load(["ShowMsg","IRCShell","StockInfo"])->run()' 3832907

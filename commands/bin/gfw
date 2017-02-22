@@ -1,3 +1,0 @@
-#!/bin/sh
-cd ~/src/apps/goagent/local;
-python proxy.py &  >> /dev/null 2>&1
