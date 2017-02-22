@@ -1,0 +1,7 @@
+#!/usr/bin/env bash 
+
+TIME_ZONE="${1:-Asia/Shanghai}"
+
+adb shell "su -c 'setprop persist.sys.timezone "${TIME_ZONE}"'"                                                                              10:04:10  ☁  master ☂ 𝝙 ✭ 𝝙
+adb shell "su -c 'am broadcast -a android.intent.action.TIMEZONE_CHANGED'"
+
