@@ -1,3 +1,25 @@
-#!/usr/bin/env zsh
+#!/usr/local/bin/zsh
 
-adb shell settings put global auto_time_zone ${1:-1}
+current="`adb shell settings get global auto_time_zone`"
+update=$current;
+if [ "$current" = "0" ]; then
+    update="1";
+else
+    update="0"
+fi
+
+if [ "$1" != "" ]; then
+    update="$1";
+fi
+
+adb shell settings put global auto_time_zone ${update}
+
+new="`adb shell settings get global auto_time_zone`"
+
+if [ "$new" = "1" ]; then
+    echo "auto time zone enabled";
+else
+    echo "auto time zone disabled";
+fi
+
+exit 0;

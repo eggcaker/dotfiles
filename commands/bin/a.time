@@ -5,7 +5,6 @@ const moment = require('moment');
 let current_time =  moment().format('MMDDHHmmYYYY.00');
 let update_date = process.argv[2];
 if (update_date) {
-  console.log(update_date);
   current_time = moment(update_date).format('MMDDHHmmYYYY.00');
 }
 
