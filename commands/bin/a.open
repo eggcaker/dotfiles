@@ -1,0 +1,10 @@
+#!/usr/bin/env zsh
+
+XXXX="$(cat ~/.private|grep PHONE_P|awk -F\" '{print $2}')"
+
+if [ "$(adb shell dumpsys power|grep "Display Power"|awk -F"=" '{print $2}')" = "OFF" ] ; then
+  adb shell input keyevent 26
+fi
+
+adb shell input keyevent 82
+adb shell input text $XXXX && adb shell input keyevent 66
