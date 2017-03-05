@@ -1,4 +1,5 @@
 #!/usr/bin/env zsh
 
 todo="$*";
-emacsclient "org-protocol:/capture:/x/a/c/$todo" > /dev/null 2>&1
+
+echo "** TODO [#C] $*"  >> ~/.org-files/refile.org

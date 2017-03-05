@@ -4,7 +4,7 @@
 # ssh key
 #. ~/.keychain/mac-sh
 
-REPOS=('.org-files' '.spacemacs.d' '.ledger' '.beancount')
+REPOS=('.org-files' '.spacemacs.d' '.dotfiles')
 
 for REPO in $REPOS; do
     echo "Repository: $REPO"
@@ -13,7 +13,7 @@ for REPO in $REPOS; do
     git ls-files --deleted -z | xargs -0 git rm >/dev/null 2>&1
     # Add new files
     git add . >/dev/null 2>&1
-    git commit -m "$(date) auto commit"
+    git commit -m "$(date +'%Y-%m-%d') auto commit"
     git push origin master
 done
 
