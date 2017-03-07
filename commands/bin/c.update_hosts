@@ -5,7 +5,7 @@
 #HOST="https://raw.githubusercontent.com/highsea/Hosts/master/hosts"
 #HOST="https://raw.githubusercontent.com/liuker0x007/hosts/master/hosts"
 HOST="https://raw.githubusercontent.com/racaljk/hosts/master/hosts"
-#HOST="https://raw.githubusercontent.com/sy618/hosts/master/ADFQ"
+HOST="https://raw.githubusercontent.com/sy618/hosts/master/ADFQ"
 
 curl $HOST > hosts; 
 sudo mv hosts /etc/hosts

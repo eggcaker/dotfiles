@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+
+
+curl https://raw.githubusercontent.com/vokins/yhosts/master/hosts > 1;
+curl https://raw.githubusercontent.com/racaljk/hosts/master/hosts > 2;
+curl https://raw.githubusercontent.com/sy618/hosts/master/p > 3;
+curl https://raw.githubusercontent.com/sy618/hosts/master/y > 4;
+
+
+cat 1 > hosts
+cat 2 >> hosts
+cat 3 >> hosts
+cat 4 >> hosts
+
+sudo mv hosts /etc/hosts
+rm 1 2 3 4
+sudo killall -HUP mDNSResponder
