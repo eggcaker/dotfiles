@@ -8,7 +8,7 @@ REPOS=('.org-files' '.spacemacs.d' '.dotfiles')
 
 for REPO in $REPOS; do
     echo "Repository: $REPO"
-    cd ~/$REPO
+    cd /Users/eggcaker/$REPO
     #Remove deleted files
     git ls-files --deleted -z | xargs -0 git rm >/dev/null 2>&1
     # Add new files
