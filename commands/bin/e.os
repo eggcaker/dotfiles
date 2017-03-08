@@ -13,7 +13,7 @@ for REPO in $REPOS; do
     git ls-files --deleted -z | xargs -0 git rm >/dev/null 2>&1
     # Add new files
     git add . >/dev/null 2>&1
-    git commit -m "$(date +'%Y-%m-%d') auto commit"
+    git commit -m "$(date +'%Y-%m-%d') auto commit" -a
     git push origin master
 done
 
