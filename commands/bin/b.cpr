@@ -16,7 +16,7 @@ CURRENT_BRANCH="$(git cb)"
 git push  -f origin $CURRENT_BRANCH;
 
 CURRENT_REPO="$(git repo)"
-PR_NAME="$(echo "$CURRENT_BRANCH" | sed 's/.*/\u&/')"
+PR_NAME="$(echo "$CURRENT_BRANCH" | awk '{print toupper(substr($0,1,1))""substr($0,2)}')"
 DESC="$(git log origin/develop..${CURRENT_BRANCH} --pretty=oneline --abbrev-commit|sed -e 's/^/\* /g' |sed -e :a -e '$!N; s/\n/\\n/; ta')"
 
 curl -H "Content-Type: application/json" \
