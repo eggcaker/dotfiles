@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+
+url="http://www.bullion-rates.com/gold/CNY/spot-price.htm";
+
+if [ "$1" != "" ]; then
+    url="http://www.bullion-rates.com/silver/USD/spot-price.htm"
+fi
+
+curl -s  $url > cilver.html
+
+w3m -dump -cols 500 cilver.html > tmp.txt
+cat tmp.txt|head -n 13|tail -n 8 |sed -e 's/\[br_icon\] Bullion Prices//g' | \
+    sed -e 's/\[bullet\]Silver Prices//g' | \
+    sed -e 's/\[bullet\]Gold Prices//g' | \
+    sed -e 's/\[bullet\]Platinum Prices//g' | \
+    sed -e 's/\[bullet\]Palladium Prices//g' | \
+    awk 'NF'
+
+rm cilver.html
+rm -rf tmp.txt

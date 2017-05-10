@@ -76,7 +76,10 @@ export PATH="/usr/local/sbin:$PATH"
 export PATH="$MAVEN_HOME/bin:$PATH"
 export PATH="${HOME}/bin:$PATH"
 export PATH="/usr/local/bin:${HOME}/.dotfiles/commands/bin/plugins:$PATH"
-
+export PATH="/usr/local/opt/sqlite/bin:$PATH"
 
 # Project
 export PACER_SERVER="~/src/work/mandian_server"
+
+#finance 
+export LEDGER_FILE="$HOME/.finance/accounting.journal"

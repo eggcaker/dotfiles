@@ -161,3 +161,4 @@ fi
 zplug load
 source ~/.zshrc.local
 source ~/.private
+source ~/.tmp_alias

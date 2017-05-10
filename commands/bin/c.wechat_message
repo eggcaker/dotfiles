@@ -1,0 +1,23 @@
+#!/usr/bin/env node
+
+const PRIVATE_KEY = require('/usr/local/config.json').private_key; 
+const md5 = require('md5');
+const moment = require('moment');
+const request = require('request');
+
+let msg = process.argv.slice(2).join(' ');
+let nounce = moment().format('X');
+let token = md5(PRIVATE_KEY + msg);
+
+request({
+           method: 'POST',
+           url: 'http://messages.dongdong51.com/messages',
+           json: { message: msg, token: token}
+       },
+        function (error, response, body) {
+            if (error) {
+              console.log(error);
+            } else {
+              console.log("done");
+            }
+        });

@@ -6,6 +6,9 @@ alias .....="cd ../../../.."
 alias ~="cd ~" # `cd` is probably faster to type though
 alias -- -="cd -"
 
+# common aliases
+alias make="mmake"
+
 alias -g L='| less'
 alias -g M='| more'
 alias -g H='| head'
@@ -19,10 +22,6 @@ alias d="cd ~/Documents/Dropbox"
 alias dl="cd ~/Downloads"
 alias dt="cd ~/Desktop"
 alias p="cd ~/projects"
-#alias g="git"
-alias h="history"
-alias j="jobs"
-
 # Detect which `ls` flavor is in use
 if ls --color > /dev/null 2>&1; then # GNU `ls`
   colorflag="--color"
@@ -166,6 +165,9 @@ alias nl="npm list --depth=0 2>/dev/null"     # local
 alias pj="cd ~/src/work/mandian_server/server/"
 alias pg="cd ~/src/work/pacer_groups/"
 alias pa="cd ~/src/work/pacer_android/app/"
+alias c.update_dongdong_web_bundle='cd ~/src/work/pacer_groups;PRODUCT=dongdong_android make prod-android-bundle; echo "Updated dongdong web bundle @$(git log --pretty=format:'%h' -n 1)"|pbcopy; cd ~/src/work/pacer_android; ./scripts/update_dongdng_web_bundle.sh'
+alias c.update_pacer_web_bundle='cd ~/src/work/pacer_groups;PRODUCT=pacer_android make prod-android-bundle;  echo "Updated pacer web bundle @$(git log --pretty=format:'%h' -n 1)"|pbcopy; cd ~/src/work/pacer_android; ./scripts/update_pacer_web_bundle.sh'
+
 # ec2 instances
 alias ec2web="open http://859974941675.signin.aws.amazon.com/console"
 alias ec2a="ssh ubuntu@staging.dongdong51.com"
@@ -209,7 +211,7 @@ alias p.calendar='open "https://calendar.google.com/calendar/render#main_7"'
 alias colourify="/usr/local/bin/grc -es --colour=auto"
 alias configure='colourify ./configure'
 alias diff='colourify diff'
-alias make='colourify make'
+alias make='colourify mmake'
 alias gcc='colourify gcc'
 alias g++='colourify g++'
 alias as='colourify as'
@@ -232,3 +234,9 @@ alias eg='emacsclient -n'
 alias e.kill="pkill -SIGUSR2 -i Emacs"
 alias adbs="adb shell /data/home/bin/termux.sh"
 alias ssh-add='ssh-add -t 403200m'
+
+# git
+alias gap="git add .; git ci -m 'auto daily comit' -a; git push"
+
+#finance
+alias f="hledger"
