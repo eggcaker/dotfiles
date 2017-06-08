@@ -1,0 +1,56 @@
+#!/usr/bin/env bash
+
+API_TOKEN="`echo $JS_MAP_API_KEY`";
+FIRST_POINT="$(cat $1| grep 0|head -n 1 |awk -F"," '{ print "{lat:"$1",lng:"$2"}"}')"
+# html header
+
+cat<<EOF
+<html>
+  <head> <title>Gps line demo</title>
+  <style>
+    #map {
+      height: 100%;
+    }
+    /* Optional: Makes the sample page fill the window. */
+    html, body {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+    }
+  </style>
+ </head>
+ <body>
+
+<div id="map"></div>
+<script async defer
+src="https://maps.googleapis.com/maps/api/js?key=${API_TOKEN}&callback=initMap">
+</script>
+<script>
+function initMap() {
+  var map = new google.maps.Map(document.getElementById('map'), {
+    zoom: 17,
+    center: ${FIRST_POINT},
+    mapTypeId: 'terrain'
+  });
+
+  var flightPlanCoordinates = [
+EOF
+cat $1|grep 0|
+    awk -F"," 'NR > 1 { printf(", ") } {  print "{lat:"$1",lng:"$2"}"}'
+cat<<EOF
+  ];
+  var flightPath = new google.maps.Polyline({
+    path: flightPlanCoordinates,
+    geodesic: true,
+    strokeColor: '#328fde',
+    strokeOpacity: 1.0,
+    strokeWeight:4
+  });
+
+  flightPath.setMap(map);
+}
+
+</script>
+</body>
+</html>
+EOF

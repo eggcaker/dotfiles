@@ -30,30 +30,31 @@ nnoremap <a-h> gT
 nnoremap <a-l> gt
 
 " intellij actions
-nnoremap <Leader>a :action ResourceBundleEditorShowIntentions<cr>
-nnoremap <Leader>a :action ShowIntentionActions<cr>
-nnoremap <Leader>q :action CloseContent<cr>
-nnoremap <Leader>Q :action ReopenClosedTab<cr>
-nnoremap <Leader>j :action EditorJoinLines<cr>
-nnoremap <Leader><Leader> :action VimFilePrevious<cr>
-nnoremap <Leader>e :action GotoFile<cr>
-nnoremap <Leader>E :action Switcher<cr>
-nnoremap <Leader>T :action FileStructure<cr>
-map <Leader>f :action GotoFile<CR>
+nnoremap <Leader>a :        action ResourceBundleEditorShowIntentions<cr>
+nnoremap <Leader>a :        action ShowIntentionActions<cr>
+nnoremap <Leader>q :        action CloseContent<cr>
+nnoremap <Leader>Q :        action ReopenClosedTab<cr>
+nnoremap <Leader>j :        action EditorJoinLines<cr>
+nnoremap <Leader><Leader> : action VimFilePrevious<cr>
+nnoremap <Leader>e :        action GotoFile<cr>
+nnoremap <Leader>E :        action Switcher<cr>
+nnoremap <Leader>T :        action FileStructurePopup<cr>
+nnoremap mm   :             action FileStructurePopup<cr>
+map <Leader>f :             action GotoFile<CR>
 
 " code navigation
-nnoremap <Leader>u :action FindUsages<cr>
-nnoremap [] :action MethodUp<cr>
-nnoremap ][ :action MethodDown<cr>
-nnoremap <Leader>n :action GotoNextError<cr>
-nnoremap <Leader>p :action GotoPreviousError<cr>
-nnoremap <Leader>mi :action ImplementMethods<cr>
-nnoremap <Leader>mo :action OverrideMethods<cr>
-nnoremap <Leader>gc :action GotoClass<cr>
-nnoremap <Leader>gs :action GotoSymbol<cr>
-nnoremap <Leader>gi :action GotoImplementation<cr>
-nnoremap <Leader>gp :action GotoSuperMethod<cr>
-nnoremap <Leader>ga :action GotoAction<cr>
+nnoremap <Leader>u :  action FindUsages<cr>
+nnoremap [] :         action MethodUp<cr>
+nnoremap ][ :         action MethodDown<cr>
+nnoremap <Leader>n :  action GotoNextError<cr>
+nnoremap <Leader>p :  action GotoPreviousError<cr>
+nnoremap <Leader>mi : action ImplementMethods<cr>
+nnoremap <Leader>mo : action OverrideMethods<cr>
+nnoremap <Leader>gc : action GotoClass<cr>
+nnoremap <Leader>gs : action GotoSymbol<cr>
+nnoremap <Leader>gi : action GotoImplementation<cr>
+nnoremap <Leader>gp : action GotoSuperMethod<cr>
+nnoremap <Leader>ga : action GotoAction<cr>
 
 " Android actions
 nnoremap <Leader>as :action Android.SyncProject<cr>

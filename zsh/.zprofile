@@ -48,6 +48,7 @@ export PATH=/usr/local/infer-osx-v0.1.0/infer/infer/bin:$PATH
 export PATH=~/src/apps/stetho/scripts:$PATH
 export PATH=/usr/local/Cellar/coreutils/8.23_1/bin:$PATH
 export ANDROID_HOME="/usr/local/Cellar/android-sdk/24.4.1_1"
+export ANDROID_NDK="/usr/local/opt/android-ndk/android-ndk-r14b"
 export PATH="$ANDROID_HOME/tools:$PATH"
 export PATH="/usr/local/opt/android-sdk/platform-tools:$PATH"
 export PATH="/usr/local/opt/android-sdk/tools/proguard/bin:$PATH"
@@ -59,7 +60,7 @@ export PATH="${NPM_PACKAGES}/bin:${PATH}"
 export PATH="/usr/local/sbin:$PATH"
 export PATH="$MAVEN_HOME/bin:$PATH"
 export PATH=$HOME"/bin:$PATH"
-export PATH="/usr/local/bin:$PATH"
+export PATH="$ANDROID_NDK:/usr/local/bin:$PATH"
 export PATH=$ANDROID_HOME/build-tools/24.0.3:$ANROID_HOME/platform-tools:$PATH
 export GOPATH=~/.go
 
