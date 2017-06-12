@@ -1,0 +1,25 @@
+#!/usr/bin/env bash
+LINE="$1"
+
+
+cat MDData.db.json |jq '.["MDData.db"].dailyActivityLog' > daily.json;
+
+CODE=$(cat <<EOF
+var moment = require('moment');
+var logs = require('./daily.json');
+var endIndex = 0;
+if (logs.length >= ${LINE}) {
+  endIndex = logs.length - ${LINE} -1;
+}
+
+for (var i=logs.length-1; i>endIndex; i--) {
+  var log = logs[i];
+  var date = moment(log.recordedForDate*1000).format('YYYY-MM-DD h:mm:ss');
+  console.log(date, "\tsteps:", log.steps, "\tcalories:",log.calories, "\tactiveTime:", parseInt(log.activeTimeInSeconds/60)+ "分钟","\t");
+}
+EOF
+)
+
+node -e "${CODE}"
+
+rm daily.json

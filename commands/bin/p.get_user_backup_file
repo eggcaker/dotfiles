@@ -1,0 +1,35 @@
+#!/usr/local/bin/zsh -f
+
+if [[ "$1" == "" ]]; then
+    echo 'Usage: $0 <account_id>'
+    exit 0;
+fi
+
+mysql --host="$dbhost" --user="${dbuser}" --password="${dbpassword}" --database="${database}" -e "select provider, file_name from  pw_health_data_backup_info where account_id = $1 order by id desc limit 1\G;" > /tmp/back_info
+
+PROVIDER="$( cat /tmp/back_info|grep provider |awk -F":" '{print $2}'|xargs)"
+FILE="$( cat /tmp/back_info|grep file_name |awk -F":" '{print $2}'|xargs)"
+echo $PROVIDER;
+echo $FILE;
+
+echo -n "Do you want download the file? (y/n) "
+read yesno < /dev/tty
+
+if [ "x$yesno" = "xy" ];then
+    if [[ "$PROVIDER" == "oss" ]]; then
+        ossutil cp oss://pacer-data-backup/$FILE .
+    elif [[ "$PROVIDER" == "s3" ]]; then
+        aws s3 cp s3://pacer-data-backup/$FILE .
+    fi
+else
+    echo "Bye";
+fi
+
+
+
+#+name: my-query
+#+header: :engine mysql
+#+header: :dbhost pacerdb-analytics-auto-backup.cmd7nqtaffk4.us-east-1.rds.amazonaws.com
+#+header: :dbuser pwdbroot
+#+header: :dbpassword wabjtam1234
+#+header: :database pacerdb
