@@ -184,12 +184,9 @@ alias ec2y="ssh ubuntu@ec2-52-90-235-73.compute-1.amazonaws.com"
 alias ec2z="ssh ubuntu@ec2-54-89-42-103.compute-1.amazonaws.com"
 
 alias dev="ssh ubuntu@dev.dongdong51.com"
-alias dev_ops="ssh ubuntu@do.dongdong51.com"
+alias ci="ssh ubuntu@do.dongdong51.com"
 alias watson="ssh ubuntu@watson.dongdong17.com"
-alias ci="ssh werun@123.56.115.57"
 alias wx="ssh ubuntu@182.92.204.83"
-alias jp1="ssh -i ~/.ssh/mandiankey_02.pem ubuntu@54.248.219.219"
-alias jp2="ssh -i ~/.ssh/mandiankey_02.pem ubuntu@54.248.112.26"
 alias rdstest="mysql -h pacerfacebooktest.cmd7nqtaffk4.us-east-1.rds.amazonaws.com -upwdbroot -p pacerdb -A"
 alias rdsprod="mysql -h pacerdbprod.cmd7nqtaffk4.us-east-1.rds.amazonaws.com -upwdbroot -p pacerdb -A"
 alias coach="ssh ubuntu@52.2.87.138"
@@ -240,3 +237,9 @@ alias gap="git add .; git ci -m 'auto daily comit' -a; git push"
 
 #finance
 alias f="hledger"
+
+alias 1s="adb -s 87218f2b shell"
+alias ms="adb -s f363ba96 shell"
+
+# python
+alias tensorflow="source $HOME/.py3/bin/activate"

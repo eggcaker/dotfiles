@@ -12,7 +12,7 @@
 error_reporting(E_ERROR);
 
 $stocks = array(
-     '000951'=>array('price'=>14.849,'amount'=>13100),
+     '000951'=>array('price'=>14.619,'amount'=>13100),
      //'002116'=>array('price'=>14.221,'amount'=>15400),
      '000762'=>array('price'=>18.698,'amount'=>4000),
      //'600595' => array('price' => 6.502, 'amount' => 25100),

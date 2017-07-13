@@ -5,7 +5,7 @@ if [[ "$1" == "" ]]; then
     exit 0;
 fi
 
-mysql --host="$dbhost" --user="${dbuser}" --password="${dbpassword}" --database="${database}" -e "select provider, file_name from  pw_health_data_backup_info where account_id = $1 order by id desc limit 1\G;" > /tmp/back_info
+mysql --host="$dbhost" --user="${dbuser}" --password="${dbpassword}" --database="${database}" -e "select provider, file_name from  pw_health_data_backup_info where account_id = $1 order by id desc limit 1\G;" 2>&1 |grep "Using a password" > /tmp/back_info
 
 PROVIDER="$( cat /tmp/back_info|grep provider |awk -F":" '{print $2}'|xargs)"
 FILE="$( cat /tmp/back_info|grep file_name |awk -F":" '{print $2}'|xargs)"
@@ -25,11 +25,4 @@ else
     echo "Bye";
 fi
 
-
-
-#+name: my-query
-#+header: :engine mysql
-#+header: :dbhost pacerdb-analytics-auto-backup.cmd7nqtaffk4.us-east-1.rds.amazonaws.com
-#+header: :dbuser pwdbroot
-#+header: :dbpassword wabjtam1234
-#+header: :database pacerdb
+rm /tmp/back_info

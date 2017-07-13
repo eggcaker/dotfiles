@@ -1,6 +1,6 @@
 #!/bin/bash
-mkdir $1; 
-cd $1; 
+mkdir $1;
+cd $1;
 mkdir -p src/main/java/com/yep8;
 touch build.gradle
 echo "apply plugin: 'java'" >> build.gradle
@@ -29,6 +29,10 @@ echo "import org.joda.time.*;" >> SandBox.java;
 echo "
 
 public class SandBox {
+  pubic static void l(Object o) {
+    System.out.print(o.toString());
+  }
+
   public static void main(String[] args) {
     TestClass tc = new TestClass();
     System.out.println(tc.sayHello());
