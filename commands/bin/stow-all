@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-PROGRAMS=(ack commands common git node ruby tig tmux vim zsh)
+PROGRAMS=(ack commands common git node ruby tig tmux vim zsh xonsh)
 
 for program in ${PROGRAMS[@]}; do
   stow -R $program

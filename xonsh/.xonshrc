@@ -1,0 +1,33 @@
+$PATH.insert(0, '/usr/local/bin')
+$PATH.insert(1, '~/bin')
+
+$XONSH_HISTORY_BACKEND = 'sqlite'
+$XONSH_HISTORY_SQLITE_FILE = "~/.xonsh.d/xonsh_history.sqlite"
+$XONSHCONFIG = "~/.xonsh.d/config.json"
+
+aliases['rm'] = 'trash'
+aliases['python'] = 'python3'
+aliases['pip'] = 'pip3'
+aliases['l'] = 'ls -lash'
+aliases['downloads'] = 'cd ~/Downloads'
+
+
+prompt = '{CYAN}{user}@mac{BLUE} {cwd}\n{CYAN}{prompt_end} {NO_COLOR}'
+right_prompt = '{env_name} {gitstatus}'
+$PROMPT = prompt
+$RIGHT_PROMPT = right_prompt
+
+
+def _upgradeallpip(args, stdin, stdout, stderr):
+    import pip
+    import subprocess
+
+    for dist in pip.get_installed_distributions():
+        call_str = "/usr/local/bin/pip3 install --upgrade {0}".format(
+            dist.project_name)
+        print()
+        print("Upgrading {}".format(dist.project_name))
+        subprocess.call(call_str, shell=True)
+
+
+aliases['upgradeallpip'] = _upgradeallpip
