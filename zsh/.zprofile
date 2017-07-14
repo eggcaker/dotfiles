@@ -84,7 +84,3 @@ export PACER_SERVER="~/src/work/mandian_server"
 
 #finance 
 export LEDGER_FILE="$HOME/.finance/accounting.journal"
-
-# python 
-source ~/.py3/bin/activate
-export TF_CPP_MIN_LOG_LEVEL=2
