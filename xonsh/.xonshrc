@@ -12,22 +12,15 @@ aliases['l'] = 'ls -lash'
 aliases['downloads'] = 'cd ~/Downloads'
 
 
-prompt = '{CYAN}{user}@mac{BLUE} {cwd}\n{CYAN}{prompt_end} {NO_COLOR}'
-right_prompt = '{env_name} {gitstatus}'
-$PROMPT = prompt
-$RIGHT_PROMPT = right_prompt
+$PROMPT = "{CYAN}{user}@mac{BLUE} {cwd}\n{CYAN}{prompt_end} {NO_COLOR}"
+$RIGHT_PROMPT = "{env_name} {gitstatus}"
 
 
-def _upgradeallpip(args, stdin, stdout, stderr):
-    import pip
-    import subprocess
-
-    for dist in pip.get_installed_distributions():
-        call_str = "/usr/local/bin/pip3 install --upgrade {0}".format(
-            dist.project_name)
-        print()
-        print("Upgrading {}".format(dist.project_name))
-        subprocess.call(call_str, shell=True)
-
-
-aliases['upgradeallpip'] = _upgradeallpip
+xontrib load z
+xontrib load coreutils
+xontrib load coreutils
+xontrib load vox vox_tabcomplete
+xontrib load vox
+xontrib load vox_tabcomplete
+xontrib load vox_tabcomplete
+xontrib load fzf-widgets

@@ -5,10 +5,8 @@
   }
  ],
  "xontribs": [
-  "coreutils",
   "distributed",
   "coreutils",
-  "distributed",
   "vox",
   "z",
   "fzf-widgets"
