@@ -1,10 +1,9 @@
 #!/bin/zsh
-# Add org file changes to the repository
-#
-# ssh key
-#. ~/.keychain/mac-sh
 
 REPOS=('.org-files' '.spacemacs.d' '.dotfiles')
+
+ssh-add ~/.ssh/gitlab_rsa
+ssh-add ~/.ssh/github_rsa
 
 for REPO in $REPOS; do
     echo "Repository: $REPO"
