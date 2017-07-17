@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+
+rm gb
+echo "#!/system/bin/sh" > gb
+echo "source /data/data/com.termux/files/home/bin/termux-shell.sh" >> gb
+
+adb shell "su -c 'mount -o rw,remount /system'"
+adb push  gb /mnt/sdcard/
+adb shell "su -c 'mv /mnt/sdcard/gb /system/xbin/gb'"
+adb shell "su -c 'chmod 777 /system/xbin/gb'"
+adb shell "su -c 'mount -o ro,remount /system'"
+adb shell "rm /mnt/sdcard/gb"
+rm gb

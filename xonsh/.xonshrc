@@ -1,11 +1,12 @@
+import pendulum as pt
+now = pt.now()
+
 $PATH.insert(0, '/usr/local/bin')
 $PATH.insert(1, '~/bin')
 
 $XONSH_HISTORY_BACKEND = 'sqlite'
-$XONSH_HISTORY_SQLITE_FILE = "~/.xonsh.d/xonsh_history.sqlite"
-$XONSHCONFIG = "~/.xonsh.d/config.json"
+$XONSH_HISTORY_SQLITE_FILE = "~/.config/xonsh/xonsh_history.sqlite"
 
-aliases['rm'] = 'trash'
 aliases['python'] = 'python3'
 aliases['pip'] = 'pip3'
 aliases['l'] = 'ls -lash'
@@ -18,9 +19,8 @@ $RIGHT_PROMPT = "{env_name} {gitstatus}"
 
 xontrib load z
 xontrib load coreutils
-xontrib load coreutils
-xontrib load vox vox_tabcomplete
-xontrib load vox
-xontrib load vox_tabcomplete
-xontrib load vox_tabcomplete
+# xontrib load vox vox_tabcomplete
+# xontrib load vox
+# xontrib load vox_tabcomplete
+# xontrib load vox_tabcomplete
 xontrib load fzf-widgets
