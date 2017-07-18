@@ -1,4 +1,6 @@
 import pendulum as pt
+import sys
+
 now = pt.now()
 
 $PATH.insert(0, '/usr/local/bin')
@@ -23,4 +25,5 @@ xontrib load coreutils
 # xontrib load vox
 # xontrib load vox_tabcomplete
 # xontrib load vox_tabcomplete
+xontrib load jj
 xontrib load fzf-widgets

@@ -1,14 +1,15 @@
 {
- "foreign_shells": [
-  {
-   "shell": "zsh"
-  }
- ],
- "xontribs": [
-  "distributed",
-  "coreutils",
-  "vox",
-  "z",
-  "fzf-widgets"
- ]
+	"foreign_shells": [
+		{
+			"shell": "zsh"
+		}
+	],
+	"xontribs": [
+		"distributed",
+		"coreutils",
+		"vox",
+		"z",
+		"fzf-widgets",
+    "xontrib-jj"
+	]
 }

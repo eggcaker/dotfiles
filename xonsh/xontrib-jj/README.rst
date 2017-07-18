@@ -1,4 +1,4 @@
-xontrib-ec
+xontrib-jj
 ===============================
 
 version number: 0.1.0
@@ -14,13 +14,13 @@ Installation / Usage
 
 To install use pip:
 
-    $ xip install xontrib-xontrib-ec
+    $ xip install xontrib-jj
 
 
 Or clone the repo:
 
-    $ git clone https://github.com/eggcaker/xontrib-ec.git
-    $ xip install ./xontrib-ec
+    $ git clone https://github.com/eggcaker/xontrib-jj.git
+    $ xip install ./xontrib-jj
 
 Contributing
 ------------
@@ -37,5 +37,5 @@ Credits
 
 This package was created with cookiecutter_ and the xontrib_ template.
 
-.. _cookiecutter: https://github.com/audreyr/cookiecutter
+.. _cookijjutter: https://github.com/audreyr/cookiecutter
 .. _xontrib: https://github.com/laerus/cookiecutter-xontrib
