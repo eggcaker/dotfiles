@@ -6,5 +6,9 @@ def jj():
     print("jj help")
 
 
+def stock():
+    print("stock query")
+
+
 aliases['jj'] = jj
-aliases['j'] = jj
+aliases['js'] = stock

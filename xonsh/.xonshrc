@@ -25,5 +25,5 @@ xontrib load coreutils
 # xontrib load vox
 # xontrib load vox_tabcomplete
 # xontrib load vox_tabcomplete
-xontrib load jj
+xontrib load xontrib-jj
 xontrib load fzf-widgets
