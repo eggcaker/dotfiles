@@ -1,7 +1,6 @@
 #!/usr/bin/env xonsh
 
 from os.path import expanduser
-from string import Template
 import requests
 import math
 import json
@@ -20,7 +19,8 @@ def jj():
 
 def stock(argv, stdin=None):
     code = "sh000001"
-    length = len(argv[0])
+    length = len(argv[0]) if len(argv) > 0 else 0
+
     if (length == 8):
         code = argv[0]
     elif (length == 6):
@@ -53,7 +53,7 @@ def fetch_stock_data(code):
     elif (p == 0):
         p = "\033[37m {0}%\033[0m".format(p)
     elif (p < 0):
-        p = "\033[32m -{0}%\033[0m".format(p)
+        p = "\033[32m {0}%\033[0m".format(p)
 
     myprice_data = ''
 

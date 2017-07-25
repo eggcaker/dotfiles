@@ -236,7 +236,7 @@ alias adbs="adb shell /data/home/bin/termux.sh"
 alias ssh-add='ssh-add -t 403200m'
 
 # git
-alias gap="git add .; git ci -m 'auto daily comit' -a; git push"
+alias gap="git add .; git commit -m '\"auto daily comit\"' -a; git push"
 
 #finance
 alias f="hledger"
