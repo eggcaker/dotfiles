@@ -1,7 +1,7 @@
 from setuptools import setup
 
 setup(
-    name='xontrib-jj',
+    name='jj',
     version='0.1.0',
     url='https://github.com/eggcaker/xontrib-jj',
     license='MIT',

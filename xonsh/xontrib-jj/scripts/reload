@@ -1,0 +1,4 @@
+#!/usr/bin/env xonsh
+
+xip install --upgrade .
+xontrib load jj
