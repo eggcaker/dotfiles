@@ -64,7 +64,7 @@ def fetch_stock_data(code):
         p3 = (int)(cfg[ncode]['amount'] * ((float)(data[3]) - myprice))
         p4 = (int)((float)(data[3]) * (float)(cfg[ncode]['amount']))
         p5 = cfg[ncode]['amount']
-        myprice_data = " 我的成本  {0} myprice {1} {2}(元) {3}(元)".format(p5, p2, p3, p4)
+        myprice_data = " 我的成本  {0} {1} {2} {3}(元) {4}(元)".format(p5, myprice, p2, p3, p4)
 
     result = "\n\n{0}\n 当前走势  {1} {2}\n".format(data[0], data[3], p)
     result += myprice_data + "\n"

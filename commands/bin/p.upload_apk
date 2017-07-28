@@ -1,0 +1,10 @@
+#!/usr/bin/env zsh
+
+scp $1 ubuntu@dev.dongdong51.com:/var/www/$1
+
+URL="http://114.215.118.226/${1}"
+
+SHORT_URL="$( curl -s "http://50r.cn/urls/add.json?url=${URL}"|awk -F'"' '{print $6}')"
+
+echo $SHORT_URL |pbcopy
+echo $SHORT_URL

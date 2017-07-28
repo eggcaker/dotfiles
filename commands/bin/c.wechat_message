@@ -1,23 +1,21 @@
-#!/usr/bin/env node
+#!/usr/bin/env python3
 
-const PRIVATE_KEY = require('/usr/local/config.json').private_key; 
-const md5 = require('md5');
-const moment = require('moment');
-const request = require('request');
+import sys
+import json
+import hashlib
+import requests
 
-let msg = process.argv.slice(2).join(' ');
-let nounce = moment().format('X');
-let token = md5(PRIVATE_KEY + msg);
+md5 = hashlib.md5()
 
-request({
-           method: 'POST',
-           url: 'http://messages.dongdong51.com/messages',
-           json: { message: msg, token: token}
-       },
-        function (error, response, body) {
-            if (error) {
-              console.log(error);
-            } else {
-              console.log("done");
-            }
-        });
+with open('/usr/local/config.json') as json_data:
+    data = json.load(json_data)
+    PRIVATE_KEY = data['private_key']
+
+msg = " ".join(sys.argv[1:])
+raw = PRIVATE_KEY + msg
+md5.update(raw.encode('utf-8'))
+token = md5.hexdigest()
+json_data = {'message': msg, 'token': token}
+
+r = requests.post('http://messages.dongdong51.com/messages', json=json_data)
+print(r)
