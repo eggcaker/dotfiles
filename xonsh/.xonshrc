@@ -6,6 +6,9 @@ now = pt.now()
 $PATH.insert(0, '/usr/local/bin')
 $PATH.insert(1, '~/bin')
 
+$ESHELL='/usr/local/bin/bash'
+
+
 $XONSH_HISTORY_BACKEND = 'sqlite'
 $XONSH_HISTORY_SQLITE_FILE = "~/.config/xonsh/xonsh_history.sqlite"
 

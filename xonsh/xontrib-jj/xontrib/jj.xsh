@@ -39,13 +39,16 @@ def stock(argv, stdin=None):
     else:
         code = "sh000001"
 
+    print(code)
     fetch_stock_data(code)
 
 
 def fetch_stock_data(code):
+    print(code)
     url = "http://hq.sinajs.cn/list={0}".format(code)
     r = requests.get(url)
     data = r.text.split('"')[1].split(",")
+    print(data)
     ncode = code[2:]
     p = math.floor(((float)(data[3]) - (float)(data[2])) * 100 * 100 / (float)(data[2])) / 100
     if (p > 0):

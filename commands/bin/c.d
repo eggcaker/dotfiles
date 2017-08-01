@@ -1,16 +1,16 @@
-#!/usr/bin/env node 
+#!/usr/bin/env python3
 
-var moment = require('moment');
+import pendulum as pt
+import sys
 
-var time_stamp = process.argv[2];
+now = pt.now()
 
-if (time_stamp) {
-  if(time_stamp > 6489546000) {
-    time_stamp /= 1000;
-  }
-
-  console.log(moment.unix(time_stamp).toString());
-} else {
-    console.log(moment().unix());
-}
-
+if (len(sys.argv) == 1):
+    print(int(now.timestamp()))
+else:
+    if (sys.argv[1].isdigit()):
+        time_stamp = int(sys.argv[1])
+        time_stamp = time_stamp if time_stamp < 6489546000 else time_stamp / 1000
+        print(now.fromtimestamp(time_stamp))
+    else:
+        print(int(now.timestamp()))
