@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+
+ssh -p 8022  -i ~/.ssh/oneplus_rsa u0_a101@10.1.13.18

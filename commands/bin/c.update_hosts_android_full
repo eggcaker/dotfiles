@@ -1,20 +1,18 @@
 #!/usr/bin/env bash
 
+# AD(vokins)
 curl https://raw.githubusercontent.com/vokins/yhosts/master/hosts > 1;
+#fq(racaljk)：
 curl https://raw.githubusercontent.com/racaljk/hosts/master/hosts > 2;
-curl https://raw.githubusercontent.com/sy618/hosts/master/p > 3;
-curl https://raw.githubusercontent.com/sy618/hosts/master/y > 4;
 
 
 cat 1 > hosts
 cat 2 >> hosts
-cat 3 >> hosts
-cat 4 >> hosts
 
 adb shell "su -c 'mount -o rw,remount /system'"
 adb push  hosts /mnt/sdcard/
 adb shell "su -c 'mv /mnt/sdcard/hosts /system/etc/hosts'"
 adb shell "su -c 'mount -o ro,remount /system'"
-rm 1 2 3 4
+rm 1 2
 rm hosts
 echo "done!"

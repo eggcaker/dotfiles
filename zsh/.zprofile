@@ -80,7 +80,7 @@ export PATH="/usr/local/bin:${HOME}/.dotfiles/commands/bin/plugins:$PATH"
 export PATH="/usr/local/opt/sqlite/bin:$PATH"
 
 # Project
-export PACER_SERVER="~/src/work/mandian_server"
+export PACER_SERVER="~/src/work/pacer_server"
 
-#finance 
+#finance
 export LEDGER_FILE="$HOME/.finance/accounting.journal"
