@@ -1,5 +1,6 @@
 package config
 package foreign-env
+package hash
 package nodenv
 package z
 theme default
