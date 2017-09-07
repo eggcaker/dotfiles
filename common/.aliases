@@ -29,7 +29,7 @@ alias urlencode='python -c "import sys, urllib as ul; print ul.quote_plus(sys.ar
 # Project related
 alias pj="cd ~/src/work/mandian_server/server/"
 alias pg="cd ~/src/work/pacer_groups/"
-alias pa="cd ~/src/work/pacer_android/app/"
+alias pa="cd ~/src/work/pacer_android/"
 # alias c.update_dongdong_web_bundle='cd ~/src/work/pacer_groups;PRODUCT=dongdong_android make prod-android-bundle; echo "Updated dongdong web bundle @$(git log --pretty=format:'%h' -n 1)"|pbcopy; cd ~/src/work/pacer_android; ./scripts/update_dongdng_web_bundle.sh'
 # alias c.update_pacer_web_bundle='cd ~/src/work/pacer_groups;PRODUCT=pacer_android make prod-android-bundle;  echo "Updated pacer web bundle @$(git log --pretty=format:'%h' -n 1)"|pbcopy; cd ~/src/work/pacer_android; ./scripts/update_pacer_web_bundle.sh'
 
@@ -37,6 +37,7 @@ alias pa="cd ~/src/work/pacer_android/app/"
 alias ec2web="open http://859974941675.signin.aws.amazon.com/console"
 alias ec2a="ssh ubuntu@staging.dongdong51.com"
 
+alias read_db="ssh ubuntu@ec2-54-81-98-51.compute-1.amazonaws.com"
 alias ec2p="ssh ubuntu@ec2-54-208-157-80.compute-1.amazonaws.com"
 alias ec2q="ssh ubuntu@ec2-52-91-142-114.compute-1.amazonaws.com"
 alias ec2r="ssh ubuntu@ec2-52-91-81-215.compute-1.amazonaws.com"
