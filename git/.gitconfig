@@ -124,6 +124,10 @@
   required = true
 [pull]
   rebase = true
+
+[rebase]
+    instructionFormat = %s [%an]
+
 [github]
 	user = eggcaker
 	oauth-token = $GITHUB_OAUTH_TOKEN

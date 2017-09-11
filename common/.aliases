@@ -80,3 +80,5 @@ alias eg='emacsclient -n'
 alias e.kill="pkill -SIGUSR2 -i Emacs"
 alias adbs="adb shell /data/home/bin/termux.sh"
 alias ssh-add='ssh-add -t 403200m'
+
+alias ale="adb logcat -s EB"
