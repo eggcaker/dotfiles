@@ -133,3 +133,5 @@
 	oauth-token = $GITHUB_OAUTH_TOKEN
 [commit]
 	gpgsign = true
+[magit]
+	hideCampaign = true

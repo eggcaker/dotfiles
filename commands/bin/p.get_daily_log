@@ -5,7 +5,7 @@ LINE="$1"
 cat MDData.db.json |jq '.["MDData.db"].dailyActivityLog' > daily.json;
 
 CODE=$(cat <<EOF
-var moment = require('moment');
+var moment = require('moment-timezone');
 var logs = require('./daily.json');
 var endIndex = 0;
 if (logs.length >= ${LINE}) {
@@ -14,8 +14,8 @@ if (logs.length >= ${LINE}) {
 
 for (var i=logs.length-1; i>endIndex; i--) {
   var log = logs[i];
-  var date = moment(log.recordedForDate*1000).format('YYYY-MM-DD h:mm:ss');
-  console.log(date, "\ttype:", log.activityType, "\tsteps:", log.steps, "\tcalories:",log.calories, "\tactiveTime:", parseInt(log.activeTimeInSeconds/60)+ "分钟","\t");
+  var date = moment.tz(log.recordedForDate*1000, 'Europe/London').format('YYYY-MM-DD h:mm:ss');
+  console.log(date, "\tdistance: ",  log.distanceInMeters, "\ttype:", log.activityType, "\tsteps:", log.steps, "\tcalories:",log.calories, "\tactiveTime:", parseInt(log.activeTimeInSeconds/60)+ "分钟","\t");
 }
 EOF
 )

@@ -15,10 +15,13 @@ if (logs.length >= ${LINE}) {
 for (var i=logs.length-1; i>endIndex; i--) {
   var log = logs[i];
   var date = moment(log.recordedForDate*1000).format('YYYY-MM-DD H:mm:ss');
-  console.log(date, "\tsteps:", log.steps, "\tcalories:",log.calories, "\tactiveTime:", log.activetime,"\t");
+  console.log(date, "\tlastSeenStepCounterReading: ", log.lastSeenStepCounterReading,  "\tsteps:", log.steps, "\tcalories:",log.calories, "\tactiveTime:", log.activetime,"\t");
 }
 EOF
 )
+
+#┆   : "-12345",
+#498     ┆   "lastSeenStepCounterTimeStamp": "-12345",
 
 node -e "${CODE}"
 rm minutely.json;
