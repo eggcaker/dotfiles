@@ -4,7 +4,7 @@ source ~/.fishrc.local
 
 # bin
 set -gx PATH $PATH ~/bin
-set -gx ANDROID_HOME  /usr/local/Cellar/android-sdk/24.4.1_1
+set -gx ANDROID_HOME cd /usr/local/Caskroom/android-sdk/3859397,26.0.1/
 set -gx ANDROID_BIN  $ANDROID_HOME/platform-tools $ANDROID_HOME/tools/
 set -gx PATH $PATH $ANDROID_BIN
 set -gx NODE_PATH  "/Users/eggcaker/.nodenv/versions/8.3.0/lib/node_modules"
