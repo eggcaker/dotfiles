@@ -1,14 +1,15 @@
 #!/usr/bin/env bash
 
 # AD(vokins)
-curl https://raw.githubusercontent.com/vokins/yhosts/master/hosts > 1;
+#curl https://raw.githubusercontent.com/vokins/yhosts/master/hosts > 1;
 #fq(racaljk)：
-curl https://raw.githubusercontent.com/racaljk/hosts/master/hosts > 2;
+#curl https://raw.githubusercontent.com/racaljk/hosts/master/hosts > 2;
+# cat 1 > hosts
+# cat 2 >> hosts
+# sudo mv hosts /etc/hosts
+#rm 1 2
 
-cat 1 > hosts
-cat 2 >> hosts
 
+curl https://raw.githubusercontent.com/StevenBlack/hosts/master/alternates/fakenews-gambling-porn-social/hosts > hosts 
 sudo mv hosts /etc/hosts
-rm 1 2
-
-sudo killall -HUP mDNSResponder
+sudo dscacheutil -flushcache;sudo killall -HUP mDNSResponder

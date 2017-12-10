@@ -14,7 +14,7 @@ if (logs.length >= ${LINE}) {
 
 for (var i=logs.length-1; i>endIndex; i--) {
   var log = logs[i];
-  var date = moment.tz(log.recordedForDate*1000, 'Europe/London').format('YYYY-MM-DD h:mm:ss');
+  var date = moment.tz(log.recordedForDate*1000, 'Asia/Shanghai').format('YYYY-MM-DD h:mm:ss');
   console.log(date, "\tdistance: ",  log.distanceInMeters, "\ttype:", log.activityType, "\tsteps:", log.steps, "\tcalories:",log.calories, "\tactiveTime:", parseInt(log.activeTimeInSeconds/60)+ "分钟","\t");
 }
 EOF

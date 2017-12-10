@@ -37,6 +37,7 @@ alias pa="cd ~/src/work/pacer_android/"
 alias ec2web="open http://859974941675.signin.aws.amazon.com/console"
 alias ec2a="ssh ubuntu@staging.dongdong51.com"
 
+alias ana_db='ssh ubuntu@ec2-52-54-224-59.compute-1.amazonaws.com'
 alias read_db="ssh ubuntu@ec2-54-81-98-51.compute-1.amazonaws.com"
 alias ec2p="ssh ubuntu@ec2-54-208-157-80.compute-1.amazonaws.com"
 alias ec2q="ssh ubuntu@ec2-52-91-142-114.compute-1.amazonaws.com"
@@ -65,7 +66,6 @@ alias s3='open https://859974941675.signin.aws.amazon.com/console'
 alias a.pr="open https://bitbucket.org/pacerhealth/pacer_android/pull-requests/"
 alias a.stop_pacer='adb shell am force-stop cc.pacer.androidapp'
 alias a.stop_dongdong='adb shell am force-stop com.mandian.android.dongdong'
-
 alias p.estimate='open "https://docs.google.com/spreadsheets/d/127iuLOG0B3Ukydv-VsA2WIPVaJzKpYBEF6OOLyXFlGc/edit#gid=1265009236"'
 alias p.backlog='open "https://docs.google.com/spreadsheets/d/1gnnmB42mJ4k1limeYZHgv1tjwx9Nplxjf40xXGnj09U/edit#gid=0"'
 alias p.file='open "https://docs.google.com/spreadsheets/d/1gnnmB42mJ4k1limeYZHgv1tjwx9Nplxjf40xXGnj09U/edit#gid=0"'
@@ -82,3 +82,4 @@ alias adbs="adb shell /data/home/bin/termux.sh"
 alias ssh-add='ssh-add -t 403200m'
 
 alias ale="adb logcat -s EB"
+alias a.top_activity="adb shell dumpsys window windows | grep -E 'mCurrentFocus|mFocusedApp'"

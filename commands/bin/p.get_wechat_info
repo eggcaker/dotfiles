@@ -5,7 +5,7 @@ if [[ "$1" == "" ]]; then
     exit 0;
 fi
 source ~/.aliases;
-AT="$(wx "cat ~/src/werun/log/access_token.json"|awk  -F'"' '{print $4}')"
+CAT="$(wx "cat ~/src/werun/log/access_token.json"|awk  -F'"' '{print $4}')"
 
-curl https://api.weixin.qq.com/cgi-bin/userinfo?access
-echo $AT;
+#curl https://api.weixin.qq.com/cgi-bin/userinfo?access
+echo $CAT;
