@@ -1,0 +1,4 @@
+#!/usr/bin/env bash 
+
+adb shell am force-stop com.mandian.android.dongdong
+adb shell am force-stop com.mandian.android.dongdong.debug

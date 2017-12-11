@@ -1,0 +1,3 @@
+[submodule "commands/elbin"]
+	path = commands/elbin
+	url = git://github.com/eggcaker/elbin.git

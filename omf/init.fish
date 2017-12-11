@@ -4,6 +4,7 @@ source ~/.fishrc.local
 
 # bin
 set -gx PATH $PATH ~/bin
+set -gx PATH $PATH ~/.dotfiles/commands/elbin
 set -gx PATH $PATH /Users/eggcaker/Library/Python/3.6/bin
 set -gx ANDROID_SDK_ROOT /usr/local/share/android-sdk
 set -gx ANDROID_HOME /usr/local/share/android-sdk/
