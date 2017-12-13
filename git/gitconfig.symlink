@@ -1,7 +1,6 @@
 [user]
   name = eggcaker
   email = eggcaker@gmail.com
-	signingkey=1E885F0733C682F6
 [author]
   name = eggcaker
   email = eggcaker@gmail.com
@@ -132,6 +131,8 @@
 	user = eggcaker
 	oauth-token = $GITHUB_OAUTH_TOKEN
 [commit]
-	gpgsign = true
+	gpgsign = false
 [magit]
 	hideCampaign = true
+[dotfiles]
+	lastupdate = 201712130959
