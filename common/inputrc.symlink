@@ -1,6 +1,6 @@
 set completion-ignore-case On
 set bell-style none
-set editing-mode emacs 
+set editing-mode vi
 
 $if mode=vi
   bindkey -M vicmd 'H' beginning-of-line
@@ -10,7 +10,7 @@ $if mode=vi
   "H": beginning-of-line
   "L": end-of-line
   set keymap vi-insert
-  "jj": vi-movement-mode
+  "fd": vi-movement-mode
   "\C-p": history-search-backward
   "\C-l": clear-screen
 
