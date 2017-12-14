@@ -1,7 +1,0 @@
-" MyConf
-let g:snips_author = "eggcaker"
-let g:snips_author_email="eggcaker@gmail.com"
-
-autocmd filetype crontab setlocal nobackup nowritebackup
-
-
