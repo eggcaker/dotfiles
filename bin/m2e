@@ -1,4 +1,0 @@
-#!/usr/bin/env bash
-
-adb pull /mnt/sdcard/org-files/Emacs.org  /tmp/mobileorg.org
-mv /tmp/mobileorg.org ~/.org-files/mobileorg.org

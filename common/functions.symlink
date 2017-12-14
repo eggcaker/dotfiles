@@ -8,10 +8,6 @@ curl -X POST -H "Content-Type: application/json" -u $BB_USER:$BB_PWD https://bit
 
 }
 
-function command_not_found_handler() {
-  zi-cnf $*
-}
-
 function p.android_web_prod_bundle() {
   cd ~/src/work/pacer_groups/;
   PRODUCT=pacer_android  make prod-bundle

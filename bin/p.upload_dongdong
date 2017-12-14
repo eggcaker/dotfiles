@@ -1,0 +1,4 @@
+#!/usr/bin/env zsh
+
+cp ~/src/work/pacer_android/app/build/outputs/apk/qq/release/app-qq-release.apk /tmp/pacer.apk
+curl -F "file=@/tmp/pacer.apk" -F "uKey=${PGY_UID}" -F "_api_key=${PGY_PID}" https://qiniu-storage.pgyer.com/apiv1/app/upload
