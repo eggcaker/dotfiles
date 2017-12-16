@@ -66,6 +66,8 @@ export PATH=$HOME"/bin:$PATH"
 export PATH="$ANDROID_NDK:/usr/local/bin:$PATH"
 export PATH=$ANDROID_HOME/build-tools/24.0.3:$ANROID_HOME/platform-tools:$PATH
 export GOPATH=~/.go
+export PRODUCT_RELEASE=1
+
 
 # Node
 export NPM_PACKAGES="${HOME}/.npm-packages"

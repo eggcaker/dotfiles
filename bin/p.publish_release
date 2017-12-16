@@ -1,0 +1,20 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+
+import os
+import sys
+import oss2
+
+
+access_key_id = os.getenv('RELEASE_UPLOADER_AID', 'test')
+access_key_secret = os.getenv('RELEASE_UPLOADER_SID', 'test')
+
+localfile = sys.argv[1]
+remotefile = sys.argv[2]
+print("upload local file '%s' to '%s'" % (localfile, remotefile))
+
+auth = oss2.Auth(access_key_id, access_key_secret)
+service = oss2.Service(auth, 'http://oss-cn-qingdao.aliyuncs.com')
+bucket = oss2.Bucket(auth, 'http://oss-cn-qingdao.aliyuncs.com', 'cdn-dongdong17-com/releases')
+
+bucket.put_object_from_file(remotefile, localfile)
