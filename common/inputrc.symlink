@@ -1,19 +1,16 @@
-set completion-ignore-case On
-set bell-style none
 set editing-mode vi
 
-$if mode=vi
-  bindkey -M vicmd 'H' beginning-of-line
-  set keymap vi-command
-  "gg": beginning-of-history
-  "G": end-of-history
-  "H": beginning-of-line
-  "L": end-of-line
-  set keymap vi-insert
-  "fd": vi-movement-mode
-  "\C-p": history-search-backward
-  "\C-l": clear-screen
+$if mode=vi 
+set keymap vi-command
+"gg": beginning-of-history
+"G": end-of-history
 
+
+set keymap vi-insert
+"fd": vi-movement-mode
+"\C-p": history-search-backward
+"\C-l": clear-screen
+$endif
 
 # Make Tab autocomplete regardless of filename case
 set completion-ignore-case on
@@ -51,5 +48,5 @@ set input-meta on
 set output-meta on
 set convert-meta off
 
-# disable the beep
+set completion-ignore-case On
 set bell-style none
