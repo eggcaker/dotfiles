@@ -51,7 +51,6 @@ bindkey '^[[5C' end-of-line
 bindkey '^[[3~' delete-char
 bindkey '^?' backward-delete-char
 
-bindkey -v  # instead of set -o vi
+bindkey -v # instead of set -o vi
 bindkey fd vi-cmd-mode
 bindkey jk vi-cmd-mode
-

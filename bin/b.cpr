@@ -25,7 +25,8 @@ curl -H "Content-Type: application/json" \
 --user "$BB_USER:$BB_PWD" \
  https://bitbucket.org/api/2.0/repositories/${CURRENT_REPO}/pullrequests > /tmp/pr_result
 
+
 URL=$(cat /tmp/pr_result|jq '.links.html.href'|sed -e 's/"//g')
-rm /tmp/pr_result;
+#rm /tmp/pr_result;
 echo $URL
 open $URL

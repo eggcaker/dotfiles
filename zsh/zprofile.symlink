@@ -58,6 +58,7 @@ export PATH="/usr/local/opt/android-sdk/tools/proguard/bin:$PATH"
 export PATH="$N_PREFIX/bin:$PATH"
 export PATH="/Users/eggcaker/.go/bin:$PATH"
 export NODE_PATH="$HOME/.n/lib/node_modules:$NODE_PATH"
+export NODE_PATH="/usr/local/lib/node_modules:$NODE_PATH"
 export PATH="~/.bin/:$PATH"
 export PATH="${NPM_PACKAGES}/bin:${PATH}"
 export PATH="/usr/local/sbin:$PATH"
@@ -68,6 +69,8 @@ export PATH=$ANDROID_HOME/build-tools/24.0.3:$ANROID_HOME/platform-tools:$PATH
 export GOPATH=~/.go
 export PRODUCT_RELEASE=1
 
+# Python
+export PATH=~/Library/Python/3.6/bin:$PATH
 
 # Node
 export NPM_PACKAGES="${HOME}/.npm-packages"

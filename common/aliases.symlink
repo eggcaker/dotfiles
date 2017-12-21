@@ -83,3 +83,4 @@ alias ssh-add='ssh-add -t 403200m'
 
 alias ale="adb logcat -s EB"
 alias a.top_activity="adb shell dumpsys window windows | grep -E 'mCurrentFocus|mFocusedApp'"
+alias a.pc="adb shell pm clear cc.pacer.androidapp"

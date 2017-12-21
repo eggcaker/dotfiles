@@ -1,0 +1,6 @@
+#!/usr/bin/env bash 
+
+GET http://api.flurry.com/appMetrics/METRIC_NAME?apiAccessCode=APIACCESSCODE&apiKey=APIKEY&startDate=STARTDATE&endDate=ENDDATE&country=COUNTRY&versionName=VERSIONNAME&groupBy=GROUPBY
+POST https://jira.atlassian.com/rest/api/2/search
+Content-Type: application/json
+eyJhbGciOiJIUzI1NiIsImtpZCI6ImZsdXJyeS56dXVsLnByb2Qua2V5c3RvcmUua2V5LjIifQ.eyJpc3MiOiJodHRwczovL3p1dWwuZmx1cnJ5LmNvbTo0NDMvdG9rZW4iLCJpYXQiOjE1MTM4NTM0MDksImV4cCI6MzMwNzA3NjIyMDksInN1YiI6IjQxMTI5NiIsImF1ZCI6IjQiLCJ0eXBlIjo0LCJqdGkiOiIzMDQ4In0.D_61Sbqyu0aTHb0-U-zUDQzEcO_F7xAFY7dufuzX9Wg

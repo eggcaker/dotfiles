@@ -1,0 +1,48 @@
+#!/usr/bin/env bash
+
+cd ~/Desktop;
+mkdir -p pixel
+cd pixel;
+
+adb pull /mnt/sdcard/Android/data/cc.pacer.androidapp.flurry_test/files/Download . 
+mv Download logs
+
+rg FLURRY|grep Service_Process_Started |awk -F"csv:" '{print $2}'| awk -F',' '{print $1}' > service.log
+rg FLURRY|grep To_Background|awk -F"csv:" '{print $2}'| awk -F',' '{print $1}' > background.log
+rg FLURRY|grep To_Foreground|awk -F"csv:" '{print $2}'| awk -F',' '{print $1}' > foreground.log
+
+node << EOF
+const fs = require('fs');
+const moment = require('moment');
+let count = new Map();
+const service = fs.readFileSync('./service.log', 'utf8');
+const background = fs.readFileSync('./background.log', 'utf8');
+const foreground = fs.readFileSync('./foreground.log', 'utf8');
+
+function calcCount(data) {
+  const dd = data.split('\n');
+  const service_count = new Map();
+
+  for( let i of dd) {
+    const day = parseInt(i/1000) - parseInt(i/1000) % 86400;
+    const key = moment(day*1000).format('YYYY-MM-DD');
+    if(service_count.has(key)) {
+      service_count.set(key, service_count.get(key) +1);
+    } else {
+      if (day > 0) {
+        service_count.set(key, 1);
+      }
+    }
+  }
+
+  return service_count;
+}
+count.set("service_count", calcCount(service));
+count.set("background_count", calcCount(background));
+count.set("foreground_count", calcCount(foreground));
+
+console.log(count);
+EOF
+
+
+rm -rf ~/Desktop/pixel
