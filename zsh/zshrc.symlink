@@ -52,6 +52,7 @@ fi
 source ~/.aliases
 source ~/.functions
 
+
 # some private file loading
 [ -f ~/.localrc ] && . ~/.localrc
 [ -f ~/.private ] && . ~/.private

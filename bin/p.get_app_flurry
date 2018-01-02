@@ -4,12 +4,12 @@ cd ~/Desktop;
 mkdir -p pixel
 cd pixel;
 
-adb pull /mnt/sdcard/Android/data/cc.pacer.androidapp.flurry_test/files/Download . 
+adb pull /mnt/sdcard/Android/data/cc.pacer.androidapp/files/Download . 
 mv Download logs
 
 rg FLURRY|grep Service_Process_Started |awk -F"csv:" '{print $2}'| awk -F',' '{print $1}' > service.log
 rg FLURRY|grep To_Background|awk -F"csv:" '{print $2}'| awk -F',' '{print $1}' > background.log
-rg FLURRY|grep To_Foreground|awk -F"csv:" '{print $2}'| awk -F',' '{print $1}' > foreground.log
+rg FLURRY|grep app_in_foreground|awk -F"csv:" '{print $2}'| awk -F',' '{print $1}' > foreground.log
 
 node << EOF
 const fs = require('fs');

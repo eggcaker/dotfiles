@@ -68,6 +68,8 @@ export PATH="$ANDROID_NDK:/usr/local/bin:$PATH"
 export PATH=$ANDROID_HOME/build-tools/24.0.3:$ANROID_HOME/platform-tools:$PATH
 export GOPATH=~/.go
 export PRODUCT_RELEASE=1
+export ANDROID_VIEW_CLIENT_HOME=$HOME/src/apps/AndroidViewClient
+
 
 # Python
 export PATH=~/Library/Python/3.6/bin:$PATH
@@ -92,3 +94,7 @@ export PACER_SERVER="~/src/work/pacer_server"
 
 #finance
 export LEDGER_FILE="$HOME/.finance/accounting.journal"
+
+
+
+export JAVA_HOME="/Library/Java/JavaVirtualMachines/jdk1.8.0_141.jdk/Contents/Home"
