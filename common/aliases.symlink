@@ -84,6 +84,7 @@ alias ssh-add='ssh-add -t 403200m'
 alias ale="adb logcat -s EB"
 alias a.top_activity="adb shell dumpsys window windows | grep -E 'mCurrentFocus|mFocusedApp'"
 alias a.pc="adb shell pm clear cc.pacer.androidapp"
+alias a.dc="adb shell pm clear com.mandian.android.dongdong"
 alias a.plog="adb pull /mnt/sdcard/Android/data/cc.pacer.androidapp/files/Download/xlog ."
 
 alias java9="jhome -v 9.0.1"
