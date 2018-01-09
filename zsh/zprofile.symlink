@@ -71,9 +71,6 @@ export PRODUCT_RELEASE=1
 export ANDROID_VIEW_CLIENT_HOME=$HOME/src/apps/AndroidViewClient
 
 
-# Python
-export PATH=~/Library/Python/3.6/bin:$PATH
-
 # Node
 export NPM_PACKAGES="${HOME}/.npm-packages"
 export NODE_PATH="${NPM_PACKAGES}/lib/node_modules:${NODE_PATH}"
@@ -96,5 +93,9 @@ export PACER_SERVER="~/src/work/pacer_server"
 export LEDGER_FILE="$HOME/.finance/accounting.journal"
 
 
+# Python
+export PATH=~/.pyenv/shims:~/Library/Python/3.6/bin:$PATH
+
 
 export JAVA_HOME="/Library/Java/JavaVirtualMachines/jdk1.8.0_141.jdk/Contents/Home"
+export CLASSPATH="/opt/java-libs"
