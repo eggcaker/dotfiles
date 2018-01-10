@@ -67,19 +67,22 @@
   #whitespace = space-before-tab,indent-with-non-tab,trailing-space
   quotepath = false
   editor = vim
+	pager = diff-so-fancy | less --tabs=4 -RFX
 
 [color]
   # Use colors in Git commands that are capable of colored output when outputting to the terminal
-  ui = auto
+	ui = true
 [color "branch"]
   current = yellow reverse
   local = yellow
   remote = green
 [color "diff"]
-  meta = yellow bold
-  frag = magenta bold
-  old = red bold
-  new = green bold
+	meta = yellow
+	frag = magenta bold
+	old = red bold
+	new = green bold
+	commit = yellow bold
+	whitespace = red reverse
 [color "status"]
   added = yellow
   changed = green
@@ -136,3 +139,13 @@
 	hideCampaign = true
 [dotfiles]
 	lastupdate = 201712181548
+[color "diff-highlight"]
+	oldNormal = red bold
+	oldHighlight = red bold 52
+	newNormal = green bold
+	newHighlight = green bold 22
+[diff-so-fancy]
+	markEmptyLines = false
+	changeHunkIndicators = false
+	stripLeadingSymbols = false
+	useUnicodeRuler = false
