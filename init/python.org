@@ -1,0 +1,12 @@
+I start python with 3.6.4 as default and use pyenv for 2.7.* some time must be.
+
+** Modules 
+   #+BEGIN_SRC sh
+     pip install pandas  
+     pip install -U statsmodels
+     pip install -U sqlalchemy
+     pip install plotly
+     pip install bokeh
+   #+END_SRC
+** Tools 
+   -[[https://plot.ly/free-sql-client-download/][ Falcon SQL Client]] query database to render a chart
