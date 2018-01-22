@@ -15,7 +15,7 @@ if (logs.length >= ${LINE}) {
 for (var i=logs.length-1; i>endIndex; i--) {
   var log = logs[i];
   var date = moment(log.recordedForDate*1000).format('YYYY-MM-DD H:mm:ss');
-  console.log(date, "\tlastSeenStepCounterReading: ", log.lastSeenStepCounterReading,  "\tsteps:", log.steps, "\tcalories:",log.calories, "\tactiveTime:", log.activetime,"\t");
+  console.log(date, "recordedType: ", log.recordType, "\tlastSeenStepCounterReading: ", log.lastSeenStepCounterReading,  "\tsteps:", log.steps, "\tcalories:",log.calories, "\tactiveTime:", log.activetime,"\t");
 }
 EOF
 )
