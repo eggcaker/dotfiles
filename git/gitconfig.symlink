@@ -134,7 +134,7 @@
 	user = eggcaker
 	oauth-token = $GITHUB_OAUTH_TOKEN
 [commit]
-	gpgsign = false
+	gpgsign = true
 [magit]
 	hideCampaign = true
 [dotfiles]
@@ -149,3 +149,5 @@
 	changeHunkIndicators = false
 	stripLeadingSymbols = false
 	useUnicodeRuler = false
+[gpg]
+	program = /usr/local/bin/gpg
