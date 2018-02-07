@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+adb shell am startservice -a com.orgzly.intent.action.SYNC_START com.orgzly/com.orgzly.android.sync.SyncService
+sleep 3
+adb pull  /mnt/sdcard/orgzly/MobileOrg.org /tmp/Emacs.org 
+cp /tmp/Emacs.org  ~/.org-files/mobileorg.org
+rm /tmp/Emacs.org

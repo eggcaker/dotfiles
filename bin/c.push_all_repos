@@ -1,5 +1,6 @@
 #!/bin/zsh
 
+export PATH="/Users/eggcaker/.dotfiles/bin:$PATH"
 REPOS=('.org-files' '.spacemacs.d' '.dotfiles')
 
 ssh-add ~/.ssh/gitlab_rsa
@@ -13,6 +14,6 @@ for REPO in $REPOS; do
     # Add new files
     git add . >/dev/null 2>&1
     git commit -m "$(date +'%Y-%m-%d') auto commit" -a
-    git push origin master
+    git push origin "$(git cb)"
 done
 

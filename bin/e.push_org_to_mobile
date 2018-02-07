@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
 
 cp  ~/.org-files/mobileorg.org /tmp/Emacs.org
-adb push  /tmp/Emacs.org  /mnt/sdcard/org-files/Emacs.org
+adb push  /tmp/Emacs.org  /mnt/sdcard/orgzly/MobileOrg.org
 rm /tmp/Emacs.org

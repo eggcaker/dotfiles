@@ -2,4 +2,4 @@
 
 todo="$*";
 
-echo "** TODO [#C] $*"  >> ~/.org-files/refile.org
+echo "** TODO [#C] $*"  >> ~/.org-files/inbox.org

@@ -1,0 +1,4 @@
+autocmd filetype crontab setlocal nobackup nowritebackup
+set backupskip=/tmp/*,/private/tmp/*
+
+
