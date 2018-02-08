@@ -86,7 +86,8 @@ export PATH="/usr/local/opt/sqlite/bin:$PATH"
 export PATH="/usr/local/texlive/2017/bin/x86_64-darwin:$PATH"
 
 # Project
-export PACER_SERVER="~/src/work/pacer_server"
+export PACER_SERVER="$HOME/src/work/pacer_server"
+export WORK_NOTE_PATH="$HOME/src/work/working-notes"
 
 #finance
 export LEDGER_FILE="$HOME/.org-files/finance.ldg"

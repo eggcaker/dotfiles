@@ -91,3 +91,12 @@ function jhome () {
     echo "java -version:"
     java -version
 }
+
+
+function wn() {
+    if [[ "$1" == "" ]]; then
+        p.work_notebook $1 && cd $HOME/Desktop/lab/sandbox && ls
+    else
+        p.work_notebook $1 && cd $WORK_NOTE_PATH/$1 && ls
+    fi
+}
