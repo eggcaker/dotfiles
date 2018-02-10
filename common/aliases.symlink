@@ -1,8 +1,12 @@
+# ;; -*- mode: sh -*-
+
 # Easier navigation: .., ..., ...., ....., ~ and -
 alias ..="cd .."
 alias ...="cd ../.."
 alias ....="cd ../../.."
 alias .....="cd ../../../.."
+
+alias ls="ls --color=auto"
 
 # common aliases
 #alias make="mmake"
