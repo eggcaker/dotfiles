@@ -1,3 +1,5 @@
+# ; -*- mode: sh; -*-
+
 function a.ssh() {
   ssh -p 8022  -i ~/.ssh/oneplus_rsa u0_a108@$(a.ip)
 }

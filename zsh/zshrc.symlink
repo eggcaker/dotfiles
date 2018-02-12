@@ -52,8 +52,7 @@ fi
 source ~/.aliases
 source ~/.functions
 
-export JULIA_HOME="/Applications/Julia-0.6.app/Contents/Resources/julia/lib/"
-
+export JULIA_HOME="/Applications/Julia-0.6.app/Contents/Resources/julia/bin/"
 # some private file loading
 [ -f ~/.localrc ] && . ~/.localrc
 [ -f ~/.private ] && . ~/.private
