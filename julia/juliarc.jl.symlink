@@ -4,3 +4,4 @@ if isdir(Pkg.dir("OhMyREPL"))
 else
     warn("OhMyREPL not installed")
 end
+using JuliaRC

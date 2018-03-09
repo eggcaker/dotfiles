@@ -1,14 +1,15 @@
 #!/usr/bin/env python3
 
-from os.path import expanduser
-import requests
-import math
 import json
+import math
+from os.path import expanduser
+
+import requests
 
 __all__ = ()
 __version__ = '0.1.0'
 
-config_file = expanduser("~/.jj_config.json")
+config_file = expanduser("~/.stock.json")
 with open(config_file, "r") as json_file:
     cfg = json.load(json_file)
 
@@ -46,7 +47,8 @@ def fetch_stock_data(code):
     r = requests.get(url)
     data = r.text.split('"')[1].split(",")
     ncode = code[2:]
-    p = math.floor(((float)(data[3]) - (float)(data[2])) * 100 * 100 / (float)(data[2])) / 100
+    p = math.floor(((float)(data[3]) - (float)(data[2])) * 100 * 100 /
+                   (float)(data[2])) / 100
     if (p > 0):
         p = "\033[31m +{0}%\033[0m".format(p)
     elif (p == 0):
@@ -58,12 +60,15 @@ def fetch_stock_data(code):
 
     if (ncode in cfg):
         myprice = cfg[ncode]['price']
-        p2 = str(math.floor(((float)(data[3]) - myprice) * 100 * 100 / myprice) / 100)
+        p2 = str(
+            math.floor(
+                ((float)(data[3]) - myprice) * 100 * 100 / myprice) / 100)
         p2 += '%'
         p3 = (int)(cfg[ncode]['amount'] * ((float)(data[3]) - myprice))
         p4 = (int)((float)(data[3]) * (float)(cfg[ncode]['amount']))
         p5 = cfg[ncode]['amount']
-        myprice_data = " 我的成本  {0} {1} {2} {3}(元) {4}(元)".format(p5, myprice, p2, p3, p4)
+        myprice_data = " 我的成本  {0} {1} {2} {3}(元) {4}(元)".format(
+            p5, myprice, p2, p3, p4)
 
     result = "\n\n{0}\n 当前走势  {1} {2}\n".format(data[0], data[3], p)
     result += myprice_data + "\n"
@@ -74,19 +79,30 @@ def fetch_stock_data(code):
 
     if (code != 'sh000001'):
         result += "\n 五档盘口\n\n"
-        result += " 卖5\t"+str((int)((float)(data[28])/100))+"\t" + data[29]+"\n"
-        result += " 卖4\t"+str((int)((float)(data[26])/100))+"\t" + data[27]+"\n"
-        result += " 卖3\t"+str((int)((float)(data[24])/100))+"\t" + data[25]+"\n"
-        result += " 卖2\t"+str((int)((float)(data[22])/100))+"\t" + data[23]+"\n"
-        result += " 卖1\t"+str((int)((float)(data[20])/100))+"\t" + data[21]+"\n\n"
-        result += " 买1\t"+str((int)((float)(data[10])/100))+"\t" + data[11]+"\n"
-        result += " 买2\t"+str((int)((float)(data[12])/100))+"\t" + data[13]+"\n"
-        result += " 买3\t"+str((int)((float)(data[14])/100))+"\t" + data[15]+"\n"
-        result += " 买4\t"+str((int)((float)(data[16])/100))+"\t" + data[17]+"\n"
-        result += " 买5\t"+str((int)((float)(data[18])/100))+"\t" + data[19]+"\n\n"
+        result += " 卖5\t" + str(
+            (int)((float)(data[28]) / 100)) + "\t" + data[29] + "\n"
+        result += " 卖4\t" + str(
+            (int)((float)(data[26]) / 100)) + "\t" + data[27] + "\n"
+        result += " 卖3\t" + str(
+            (int)((float)(data[24]) / 100)) + "\t" + data[25] + "\n"
+        result += " 卖2\t" + str(
+            (int)((float)(data[22]) / 100)) + "\t" + data[23] + "\n"
+        result += " 卖1\t" + str(
+            (int)((float)(data[20]) / 100)) + "\t" + data[21] + "\n\n"
+        result += " 买1\t" + str(
+            (int)((float)(data[10]) / 100)) + "\t" + data[11] + "\n"
+        result += " 买2\t" + str(
+            (int)((float)(data[12]) / 100)) + "\t" + data[13] + "\n"
+        result += " 买3\t" + str(
+            (int)((float)(data[14]) / 100)) + "\t" + data[15] + "\n"
+        result += " 买4\t" + str(
+            (int)((float)(data[16]) / 100)) + "\t" + data[17] + "\n"
+        result += " 买5\t" + str(
+            (int)((float)(data[18]) / 100)) + "\t" + data[19] + "\n\n"
 
     print(result)
 
+
 if __name__ == "__main__":
-	import sys
-	stock(sys.argv)
+    import sys
+    stock(sys.argv)

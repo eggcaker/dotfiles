@@ -94,8 +94,10 @@ export LEDGER_FILE="$HOME/.org-files/finance.ldg"
 
 
 # Python
-export PATH=~/.pyenv/shims:~/Library/Python/3.6/bin:$PATH
+# NOTE: must place the pyenv config after the anacoda3 to
+#       make the pyenv works
 export PATH=/usr/local/anaconda3/bin:$PATH
+export PATH=~/.pyenv/shims:~/Library/Python/3.6/bin:$PATH
 
 # Julia
 export PATH=/Applications/Julia-0.6.app/Contents/Resources/julia/bin:$PATH
