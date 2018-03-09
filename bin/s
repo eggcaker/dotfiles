@@ -9,30 +9,29 @@ import requests
 __all__ = ()
 __version__ = '0.1.0'
 
-config_file = expanduser("~/.stock.json")
-with open(config_file, "r") as json_file:
-    cfg = json.load(json_file)
+CONFIG_FILE = expanduser("~/.stock.json")
+with open(CONFIG_FILE, "r") as json_file:
+    CONFIG = json.load(json_file)
 
 
-def stock(argv, stdin=None):
+def stock(argv):
+    """ format stock code """
     code = "sh000001"
     argv[0] = argv[1]
     length = len(argv[1])
 
-    if (length == 8):
+    if length == 8:
         code = argv[0]
-    elif (length == 6):
-        print(argv)
+    elif length == 6:
         if (int(argv[0][0]) in [1, 3, 0]):
             code = "sz" + argv[0]
         else:
             code = "sh" + argv[0]
-        print(code)
-    elif (length == 4 or length == 3 or length == 2):
-        for c in cfg:
-            if argv[0] in c:
-                code = c
-        if (len(code) == 6 and code[0] == 6):
+    elif length == 4 or length == 3 or length == 2:
+        for tempc in CONFIG:
+            if argv[0] in tempc:
+                code = tempc
+        if len(code) == 6 and code[0] == "6":
             code = 'sh' + code
         else:
             code = 'sz' + code
@@ -43,41 +42,42 @@ def stock(argv, stdin=None):
 
 
 def fetch_stock_data(code):
+    """ fetch csv format info of stock with `code` """
     url = "http://hq.sinajs.cn/list={0}".format(code)
-    r = requests.get(url)
-    data = r.text.split('"')[1].split(",")
+    req = requests.get(url)
+    data = req.text.split('"')[1].split(",")
     ncode = code[2:]
-    p = math.floor(((float)(data[3]) - (float)(data[2])) * 100 * 100 /
-                   (float)(data[2])) / 100
-    if (p > 0):
-        p = "\033[31m +{0}%\033[0m".format(p)
-    elif (p == 0):
-        p = "\033[37m {0}%\033[0m".format(p)
-    elif (p < 0):
-        p = "\033[32m {0}%\033[0m".format(p)
+    price = math.floor(((float)(data[3]) - (float)(data[2])) * 100 * 100 /
+                       (float)(data[2])) / 100
+    if price > 0:
+        price = "\033[31m +{0}%\033[0m".format(price)
+    elif price == 0:
+        price = "\033[37m {0}%\033[0m".format(price)
+    elif price < 0:
+        price = "\033[32m {0}%\033[0m".format(price)
 
     myprice_data = ''
 
-    if (ncode in cfg):
-        myprice = cfg[ncode]['price']
-        p2 = str(
+    if ncode in CONFIG:
+        myprice = CONFIG[ncode]['price']
+        price2 = str(
             math.floor(
                 ((float)(data[3]) - myprice) * 100 * 100 / myprice) / 100)
-        p2 += '%'
-        p3 = (int)(cfg[ncode]['amount'] * ((float)(data[3]) - myprice))
-        p4 = (int)((float)(data[3]) * (float)(cfg[ncode]['amount']))
-        p5 = cfg[ncode]['amount']
+        price2 += '%'
+        price3 = (int)(CONFIG[ncode]['amount'] * ((float)(data[3]) - myprice))
+        price4 = (int)((float)(data[3]) * (float)(CONFIG[ncode]['amount']))
+        price5 = CONFIG[ncode]['amount']
         myprice_data = " 我的成本  {0} {1} {2} {3}(元) {4}(元)".format(
-            p5, myprice, p2, p3, p4)
+            price5, myprice, price2, price3, price4)
 
-    result = "\n\n{0}\n 当前走势  {1} {2}\n".format(data[0], data[3], p)
+    result = "\n\n{0}\n 当前走势  {1} {2}\n".format(data[0], data[3], price)
     result += myprice_data + "\n"
     result += " 昨日收盘  {0}\n".format(data[2])
     result += " 今日开盘  {0}\n".format(data[1])
     result += " 今日最高  {0}\n".format(data[4])
     result += " 今日最低  {0}\n".format(data[5])
 
-    if (code != 'sh000001'):
+    if code != 'sh000001':
         result += "\n 五档盘口\n\n"
         result += " 卖5\t" + str(
             (int)((float)(data[28]) / 100)) + "\t" + data[29] + "\n"
