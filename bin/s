@@ -17,8 +17,12 @@ with open(CONFIG_FILE, "r") as json_file:
 def stock(argv):
     """ format stock code """
     code = "sh000001"
-    argv[0] = argv[1]
+    alen = len(argv)
+    if alen == 1:
+        return code
+
     length = len(argv[1])
+    argv[0] = argv[1]
 
     if length == 8:
         code = argv[0]
@@ -38,7 +42,7 @@ def stock(argv):
     else:
         code = "sh000001"
 
-    fetch_stock_data(code)
+    return code
 
 
 def fetch_stock_data(code):
@@ -105,4 +109,5 @@ def fetch_stock_data(code):
 
 if __name__ == "__main__":
     import sys
-    stock(sys.argv)
+    C = stock(sys.argv)
+    fetch_stock_data(C)
