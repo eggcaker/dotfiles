@@ -5,11 +5,15 @@ export LC_CTYPE="en_GB.UTF-8"
 export LC_ALL="en_GB.UTF-8"
 export TERM="xterm-256color"
 
+
+export LESSOPEN='|pygmentize -g %s'
+
 # shortcut to this dotfiles path is $DOTFILES
 export DOTFILES="$HOME/.dotfiles"
 
 # kitty configuration
 export KITTY_CONFIG_DIRECTORY="$HOME/.dotfiles/kitty"
+
 
 # my project folder that we can `c [tab]` to
 export PROJECTS="$HOME/src"
