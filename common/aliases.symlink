@@ -15,7 +15,6 @@ alias ls="ls --color=auto"
 alias dl="cd ~/Downloads"
 alias dt="cd ~/Desktop"
 
-# Note: `GREP_OPTIONS="--color=auto"` is deprecated, hence the alias usage.
 alias grep='grep --color=auto'
 alias fgrep='fgrep --color=auto'
 alias egrep='egrep --color=auto'
@@ -31,11 +30,9 @@ alias cleanup="find . -type f -name '*.DS_Store' -ls -delete"
 alias urlencode='python -c "import sys, urllib as ul; print ul.quote_plus(sys.argv[1]);"'
 
 # Project related
-alias pj="cd ~/src/work/mandian_server/server/"
+alias pi="cd ~/src/work/mandian_server/server/"
 alias pg="cd ~/src/work/pacer_groups/"
 alias pa="cd ~/src/work/pacer_android/"
-# alias c.update_dongdong_web_bundle='cd ~/src/work/pacer_groups;PRODUCT=dongdong_android make prod-android-bundle; echo "Updated dongdong web bundle @$(git log --pretty=format:'%h' -n 1)"|pbcopy; cd ~/src/work/pacer_android; ./scripts/update_dongdng_web_bundle.sh'
-# alias c.update_pacer_web_bundle='cd ~/src/work/pacer_groups;PRODUCT=pacer_android make prod-android-bundle;  echo "Updated pacer web bundle @$(git log --pretty=format:'%h' -n 1)"|pbcopy; cd ~/src/work/pacer_android; ./scripts/update_pacer_web_bundle.sh'
 
 # ec2 instances
 alias ec2web="open http://859974941675.signin.aws.amazon.com/console"
@@ -55,9 +52,8 @@ alias ec2y="ssh ubuntu@ec2-52-90-235-73.compute-1.amazonaws.com"
 alias ec2z="ssh ubuntu@ec2-54-89-42-103.compute-1.amazonaws.com"
 
 alias dev="ssh ubuntu@dev.dongdong51.com"
-alias dev_ops="ssh ubuntu@do.dongdong51.com"
+alias ci="ssh ubuntu@do.dongdong51.com"
 alias watson="ssh ubuntu@watson.dongdong17.com"
-alias ci="ssh werun@123.56.115.57"
 alias wx="ssh ubuntu@47.95.13.171"
 alias jp1="ssh -i ~/.ssh/mandiankey_02.pem ubuntu@54.248.219.219"
 alias jp2="ssh -i ~/.ssh/mandiankey_02.pem ubuntu@54.248.112.26"

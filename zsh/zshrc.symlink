@@ -8,6 +8,9 @@ export TERM="xterm-256color"
 # shortcut to this dotfiles path is $DOTFILES
 export DOTFILES="$HOME/.dotfiles"
 
+# kitty configuration
+export KITTY_CONFIG_DIRECTORY="$HOME/.dotfiles/kitty"
+
 # my project folder that we can `c [tab]` to
 export PROJECTS="$HOME/src"
 

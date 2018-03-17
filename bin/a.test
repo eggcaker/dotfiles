@@ -1,4 +1,0 @@
-#!/usr/bin/env zsh
-
-adb shell am instrument -w -r -e debug false -e class cc.pacer.androidapp.suite.PacerAndroidTestSuite cc.pacer.androidapp.debug.test/android.support.test.runner.AndroidJUnitRunner
-
