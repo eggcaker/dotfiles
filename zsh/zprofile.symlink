@@ -43,6 +43,9 @@ export PATH=~/.dotfiles/bin:$PATH;
 
 # added some bins from source compiled
 export PATH=~/src/apps/bin:$PATH
+export PATH=~/src/apps/flutter/bin:$PATH
+export PATH=~/.pub-cache/bin:$PATH
+export PATH="$PATH":"~/.pub-cache/bin"
 export PATH=/usr/local/vert.x/bin:$PATH
 export PATH=/usr/local/infer-osx-v0.1.0/infer/infer/bin:$PATH
 export PATH=~/src/apps/stetho/scripts:$PATH

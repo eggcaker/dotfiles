@@ -153,3 +153,5 @@
 	useUnicodeRuler = false
 [gpg]
 	program = /usr/local/bin/gpg
+[cola]
+	spellcheck = false
