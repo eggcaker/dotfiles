@@ -20,7 +20,6 @@ elif len(ARGS_JOINED) == 10 and re.match(r'^1[45]', ARGS_JOINED):
     call_shell('c.d {0}'.format(ARGS_JOINED))
 elif re.match(r'[x0-9\+\-\*/ \^]', ARGS_JOINED):
     try:
-        print(ARGS_JOINED)
         print(eval(ARGS_JOINED.replace('x', '*')))
     except:
         print('Cannot parse the formula')
