@@ -106,8 +106,11 @@ def fetch_stock_data(code):
 
     print(result)
 
+def display_image(code):
+    print(code)
 
 if __name__ == "__main__":
     import sys
     C = stock(sys.argv)
+    display_image(C)
     fetch_stock_data(C)

@@ -1,16 +1,13 @@
-#!/usr/bin/env emacs --script
+#!/usr/bin/env python3
 
-;;; Commentary:
+import json
+import os
+import sys
 
-;;; Code:
-(load "~/.emacs.config" t t)
+import pendulum as p
 
-
-(defvar el/tt (string-to-number (car argv)))
-
-(if (or (= 0 (length argv)) (<= el/tt 0))
-    (message (number-to-string (float-time)))
-  (let ((seconds (if (> el/tt 6489546000 )  (/ el/tt 1000.0) el/tt )))
-    (message (format-time-string
-              "%Y-%m-%d %H:%M:%S"
-              (seconds-to-time  seconds )))))
+if len(sys.argv) == 2:
+    DATE_TIME_IN_SECONDS = int(sys.argv[1])
+    print(p.from_timestamp(DATE_TIME_IN_SECONDS).strftime('%Y-%m-%d %H:%M:%S'))
+else:
+    print(p.now().int_timestamp)
