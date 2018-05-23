@@ -2,17 +2,21 @@
 
 import argparse
 import builtins
-import os
 
-# import pandas as pd
-import numpy as np
-import pendulum as p
+# import pendulum as p
 from prompt_toolkit.filters import ViInsertMode
 from prompt_toolkit.key_binding.vi_state import InputMode
 
+# import os
+
+
 $LS_COLORS='rs=0:di=01;36:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:'
 
-$PATH=["~/.pyenv/shims","~/.pyenv/bin","/usr/local/bin","/usr/bin","/bin", "~/.dotfiles/bin", "/usr/sbin","/sbin","/Applications/VMware Fusion.app/Contents/Public","/Library/TeX/texbin","/usr/local/MacGPG2/bin","/opt/X11/bin"]
+$PATH=["/usr/local/bin","/usr/bin","/bin", "~/.dotfiles/bin", "/usr/sbin",
+       "/sbin","/Library/TeX/texbin","/usr/local/MacGPG2/bin","/opt/X11/bin"
+       "/usr/local/share/android-sdk/tools",
+       "/usr/local/opt/android-sdk/platform-tools",
+       "/usr/local/opt/android-sdk/tools/proguard/bin"]
 
 $LANG = "en_US.UTF-8"
 $LANGUAGE = "en_US.UTF-8"
@@ -28,6 +32,17 @@ $AUTO_PUSHD = True
 $XONSH_HISTORY_SIZE = (10000, 'commands')
 $XONSH_HISTORY_BACKEND = 'sqlite'
 $HISTCONTROL = 'ignoredups'
+
+$WORK_NOTE_PATH="$HOME/src/work/working-notes"
+
+$JAVA_HOME="/Library/Java/JavaVirtualMachines/jdk1.8.0_141.jdk/Contents/Home"
+
+$ANDROID_SDK_ROOT="/usr/local/share/android-sdk"
+$ANDROID_HOME="/usr/local/share/android-sdk"
+$ANDROID_NDK="/usr/local/opt/android-ndk/android-ndk-r14b"
+
+$PRODUCT_RELEASE=True
+
 
 aliases['.'] =['cd', '..']
 aliases['..'] =['cd', '../..']
@@ -93,6 +108,7 @@ aliases['p.backlog'] = ['open','https://docs.google.com/spreadsheets/d/1gnnmB42m
 aliases['p.file'] = ['open','https://docs.google.com/spreadsheets/d/1gnnmB42mJ4k1limeYZHgv1tjwx9Nplxjf40xXGnj09U/edit#gid=0']
 aliases['p.release'] = ['open','https://docs.google.com/spreadsheets/d/1As9Cu8elTzPh9lEqYZeqYCRvkbv1LBcRa9scp42ALeg/edit#gid=0']
 aliases['p.interview'] = ['open','https://docs.google.com/spreadsheets/d/1RVrRC06Z5D-19aqSNdLGBmofzP_LCEfbFbaEuEx-cKw/edit?usp=drive_web']
+aliases['p.weekly_report'] = ['open', 'https://docs.google.com/spreadsheets/d/1YOEGiku_5X8C65KJ14tWvn-M_Mdt6dxe8npiyDUMdN4/edit#gid=0']
 
 #Emacs
 aliases['e'] = ['emacsclient','-nw']
@@ -144,7 +160,7 @@ $PROMPT = '{env_name:{} }{BOLD_BLUE} {cwd}{branch_color}{curr_branch: {}}{NO_COL
 #$PROMPT.replace('INTENSE_','').replace('CYAN','BLUE')
 $INTENSIFY_COLORS_ON_WIN = False
 
-
+# vox_tabcomplete
 # XONSH WIZARD START
-xontrib load autoxsh coreutils mpl z
+xontrib load coreutils vox z
 # XONSH WIZARD END

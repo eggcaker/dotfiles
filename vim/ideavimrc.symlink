@@ -25,9 +25,7 @@ set clipboard+=unnamed
 
 " easy window navigation
 nnoremap <c-l> <c-w>l
-nnoremap <c-j> <c-w>j
 nnoremap <c-h> <c-w>h
-nnoremap <c-k> <c-w>k
 nnoremap <a-h> gT
 nnoremap <a-l> gt
 
@@ -63,6 +61,8 @@ nnoremap <Leader>gs : action GotoSymbol<cr>
 nnoremap <Leader>gi : action GotoImplementation<cr>
 nnoremap <Leader>gp : action GotoSuperMethod<cr>
 nnoremap <Leader>ga : action GotoAction<cr>
+nnoremap <c-j>      : action VcsShowNextChangeMarker<cr>
+nnoremap <c-k>      : action VcsShowPrevChangeMarker<cr>  
 
 
 " intellij options
