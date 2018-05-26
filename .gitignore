@@ -2,3 +2,5 @@ node_modules
 .DS_Store
 __pycache__
 .ipynb*
+.ropeproject
+.mypy_cache

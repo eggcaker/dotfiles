@@ -10,10 +10,10 @@ from prompt_toolkit.key_binding.vi_state import InputMode
 # import os
 
 
-$LS_COLORS='rs=0:di=01;36:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:'
+$LS_COLORS = 'rs=0:di=01;36:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:'
 
-$PATH=["/usr/local/bin","/usr/bin","/bin", "~/.dotfiles/bin", "/usr/sbin",
-       "/sbin","/Library/TeX/texbin","/usr/local/MacGPG2/bin","/opt/X11/bin"
+$PATH= ["/usr/local/bin", "/usr/bin", "/bin", "~/.dotfiles/bin", "/usr/sbin", 
+       "/sbin", "/Library/TeX/texbin", "/usr/local/MacGPG2/bin", "/opt/X11/bin"
        "/usr/local/share/android-sdk/tools",
        "/usr/local/opt/android-sdk/platform-tools",
        "/usr/local/opt/android-sdk/tools/proguard/bin"]
@@ -23,7 +23,7 @@ $LANGUAGE = "en_US.UTF-8"
 $LC_ALL = "en_US.UTF-8"
 $LC_CTYPE = "en_US.UTF-8"
 
-$XONSH_COLOR_STYLE="monokai"
+$XONSH_COLOR_STYLE = "monokai"
 $SUPPRESS_BRANCH_TIMEOUT_MESSAGE = True
 $WIN_UNICODE_CONSOLE = False
 $UPDATE_COMPLETIONS_ON_KEYPRES = True
@@ -33,19 +33,17 @@ $XONSH_HISTORY_SIZE = (10000, 'commands')
 $XONSH_HISTORY_BACKEND = 'sqlite'
 $HISTCONTROL = 'ignoredups'
 
-$WORK_NOTE_PATH="$HOME/src/work/working-notes"
+$WORK_NOTE_PATH = "$HOME/src/work/working-notes"
+$JAVA_HOME = "/Library/Java/JavaVirtualMachines/jdk1.8.0_141.jdk/Contents/Home"
+$ANDROID_SDK_ROOT = "/usr/local/share/android-sdk"
+$ANDROID_HOME = "/usr/local/share/android-sdk"
+$ANDROID_NDK = "/usr/local/opt/android-ndk/android-ndk-r14b"
 
-$JAVA_HOME="/Library/Java/JavaVirtualMachines/jdk1.8.0_141.jdk/Contents/Home"
-
-$ANDROID_SDK_ROOT="/usr/local/share/android-sdk"
-$ANDROID_HOME="/usr/local/share/android-sdk"
-$ANDROID_NDK="/usr/local/opt/android-ndk/android-ndk-r14b"
-
-$PRODUCT_RELEASE=True
+$PRODUCT_RELEASE = True
 
 
-aliases['.'] =['cd', '..']
-aliases['..'] =['cd', '../..']
+aliases['.'] = ['cd', '..']
+aliases['..'] = ['cd', '../..']
 aliases['...'] = ['cd' '../../..']
 aliases['....'] = ['cd' '../../../..']
 
@@ -54,10 +52,9 @@ aliases['mkdir'] = 'mkdir -p'
 aliases['l'] = ['ls', '-G']
 aliases['ll'] = ['ls', '-lh', '-F', '-G', '-v']
 
-##git aliases
+#git aliases
 aliases['gc'] = 'git commit -v'
-aliases['gl'] = ['git', 'log', '--oneline', '--all' ,'--graph' ,'--decorate' , '--color']
-aliases['unpushed'] = ['git', 'log', '--branches', '--not', '--remotes', '--simplify-by-decoration', '--decorate', '--oneline']
+aliases['gl'] = ['git', 'log', '--oneline', '--all', '--graph', '--decorate', '--color']
 aliases['it'] = 'git'
 aliases['gi'] = 'git'
 aliases['tit'] = 'git'
@@ -66,71 +63,74 @@ aliases['last'] = ['git', 'log', '--pretty=format:"%C(yellow)%h%x09%Creset%an%x0
 aliases['graph'] = "git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)%Creset' --abbrev-commit --all"
 aliases['graph2'] = "git log --graph --all --format=format:'%C(bold yellow)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset)%C(bold yellow)%d%C(reset)%n'' %C(white)%s%C(reset) %C(bold white)- %an%C(reset)' --abbrev-commit"
 
-# Project','related
-aliases['pi'] = ['cd','~/src/work/mandian_server/server/']
-aliases['pg'] = ['cd','~/src/work/pacer_groups/']
-aliases['pa'] = ['cd','~/src/work/pacer_android/']
+# Project', 'related
+aliases['pi'] = ['cd', '~/src/work/mandian_server/server/']
+aliases['pg'] = ['cd', '~/src/work/pacer_groups/']
+aliases['pa'] = ['cd', '~/src/work/pacer_android/']
 
 # ec2 instances
-aliases['ec2web'] = ['open','http://859974941675.signin.aws.amazon.com/console']
-aliases['staging'] = ['ssh','ubuntu@staging.dongdong51.com']
+aliases['ec2web'] = ['open', 'http://859974941675.signin.aws.amazon.com/console']
+aliases['staging'] = ['ssh', 'ubuntu@staging.dongdong51.com']
 
-aliases['ana_db'] = ['ssh','ubuntu@ec2-52-54-224-59.compute-1.amazonaws.com']
-aliases['read_db'] = ['ssh','ubuntu@ec2-54-81-98-51.compute-1.amazonaws.com']
-aliases['ec2p'] = ['ssh','ubuntu@ec2-54-208-157-80.compute-1.amazonaws.com']
-aliases['ec2q'] = ['ssh','ubuntu@ec2-52-91-142-114.compute-1.amazonaws.com']
-aliases['ec2r'] = ['ssh','ubuntu@ec2-52-91-81-215.compute-1.amazonaws.com']
-aliases['ec2t'] = ['ssh','ubuntu@ec2-52-91-155-158.compute-1.amazonaws.com']
-aliases['ec2u'] = ['ssh','ubuntu@ec2-52-90-162-162.compute-1.amazonaws.com']
-aliases['ec2v'] = ['ssh','ubuntu@ec2-52-90-224-198.compute-1.amazonaws.com']
-aliases['ec2w'] = ['ssh','ubuntu@ec2-54-88-3-9.compute-1.amazonaws.com']
-aliases['ec2x'] = ['ssh','ubuntu@ec2-54-174-221-101.compute-1.amazonaws.com']
-aliases['ec2y'] = ['ssh','ubuntu@ec2-52-90-235-73.compute-1.amazonaws.com']
-aliases['ec2z'] = ['ssh','ubuntu@ec2-54-89-42-103.compute-1.amazonaws.com']
+aliases['ana_db'] = ['ssh', 'ubuntu@ec2-52-54-224-59.compute-1.amazonaws.com']
+aliases['read_db'] = ['ssh', 'ubuntu@ec2-54-81-98-51.compute-1.amazonaws.com']
+aliases['ec2p'] = ['ssh', 'ubuntu@ec2-54-208-157-80.compute-1.amazonaws.com']
+aliases['ec2q'] = ['ssh', 'ubuntu@ec2-52-91-142-114.compute-1.amazonaws.com']
+aliases['ec2r'] = ['ssh', 'ubuntu@ec2-52-91-81-215.compute-1.amazonaws.com']
+aliases['ec2t'] = ['ssh', 'ubuntu@ec2-52-91-155-158.compute-1.amazonaws.com']
+aliases['ec2u'] = ['ssh', 'ubuntu@ec2-52-90-162-162.compute-1.amazonaws.com']
+aliases['ec2v'] = ['ssh', 'ubuntu@ec2-52-90-224-198.compute-1.amazonaws.com']
+aliases['ec2w'] = ['ssh', 'ubuntu@ec2-54-88-3-9.compute-1.amazonaws.com']
+aliases['ec2x'] = ['ssh', 'ubuntu@ec2-54-174-221-101.compute-1.amazonaws.com']
+aliases['ec2y'] = ['ssh', 'ubuntu@ec2-52-90-235-73.compute-1.amazonaws.com']
+aliases['ec2z'] = ['ssh', 'ubuntu@ec2-54-89-42-103.compute-1.amazonaws.com']
 
-aliases['dev'] = ['ssh','ubuntu@dev.dongdong51.com']
-aliases['ci'] = ['ssh','ubuntu@do.dongdong51.com']
-aliases['watson'] = ['ssh','ubuntu@watson.dongdong17.com']
-aliases['wx'] = ['ssh','ubuntu@47.95.13.171']
-aliases['jp1'] = ['ssh','-i','~/.ssh/mandiankey_02.pem','ubuntu@54.248.219.219']
-aliases['jp2'] = ['ssh','-i','~/.ssh/mandiankey_02.pem','ubuntu@54.248.112.26']
-aliases['rdstest'] = ['mysql','-h','pacerfacebooktest.cmd7nqtaffk4.us-east-1.rds.amazonaws.com','-upwdbroot','-p','pacerdb','-A']
-aliases['rdsprod'] = ['mysql','-h','pacerdbprod.cmd7nqtaffk4.us-east-1.rds.amazonaws.com','-upwdbroot','-p','pacerdb','-A']
-aliases['coach'] = ['ssh','ubuntu@52.2.87.138']
-aliases['pgp'] = ['open','https://play.google.com/apps/publish']
-aliases['aliyun'] = ['open','http://signin.aliyun.com/1689961257397308/login.htm']
-aliases['s3'] = ['open','https://859974941675.signin.aws.amazon.com/console']
-aliases['a.pr'] = ['open','https://bitbucket.org/pacerhealth/pacer_android/pull-requests/']
-aliases['a.stop_pacer'] = ['adb','shell','am','force-stop','cc.pacer.androidapp']
-aliases['a.stop_dongdong'] = ['adb','shell','am','force-stop','com.mandian.android.dongdong']
-aliases['p.estimate'] = ['open','https://docs.google.com/spreadsheets/d/127iuLOG0B3Ukydv-VsA2WIPVaJzKpYBEF6OOLyXFlGc/edit#gid=1265009236']
-aliases['p.backlog'] = ['open','https://docs.google.com/spreadsheets/d/1gnnmB42mJ4k1limeYZHgv1tjwx9Nplxjf40xXGnj09U/edit#gid=0']
-aliases['p.file'] = ['open','https://docs.google.com/spreadsheets/d/1gnnmB42mJ4k1limeYZHgv1tjwx9Nplxjf40xXGnj09U/edit#gid=0']
-aliases['p.release'] = ['open','https://docs.google.com/spreadsheets/d/1As9Cu8elTzPh9lEqYZeqYCRvkbv1LBcRa9scp42ALeg/edit#gid=0']
-aliases['p.interview'] = ['open','https://docs.google.com/spreadsheets/d/1RVrRC06Z5D-19aqSNdLGBmofzP_LCEfbFbaEuEx-cKw/edit?usp=drive_web']
+aliases['dev'] = ['ssh', 'ubuntu@dev.dongdong51.com']
+aliases['ci'] = ['ssh', 'ubuntu@do.dongdong51.com']
+aliases['watson'] = ['ssh', 'ubuntu@watson.dongdong17.com']
+aliases['wx'] = ['ssh', 'ubuntu@47.95.13.171']
+aliases['jp1'] = ['ssh', '-i', '~/.ssh/mandiankey_02.pem', 'ubuntu@54.248.219.219']
+aliases['jp2'] = ['ssh', '-i', '~/.ssh/mandiankey_02.pem', 'ubuntu@54.248.112.26']
+aliases['rdstest'] = ['mysql', '-h', 'pacerfacebooktest.cmd7nqtaffk4.us-east-1.rds.amazonaws.com', '-upwdbroot', '-p', 'pacerdb', '-A']
+aliases['rdsprod'] = ['mysql', '-h', 'pacerdbprod.cmd7nqtaffk4.us-east-1.rds.amazonaws.com', '-upwdbroot', '-p', 'pacerdb', '-A']
+aliases['coach'] = ['ssh', 'ubuntu@52.2.87.138']
+aliases['pgp'] = ['open', 'https://play.google.com/apps/publish']
+aliases['aliyun'] = ['open', 'http://signin.aliyun.com/1689961257397308/login.htm']
+aliases['s3'] = ['open', 'https://859974941675.signin.aws.amazon.com/console']
+aliases['a.pr'] = ['open', 'https://bitbucket.org/pacerhealth/pacer_android/pull-requests/']
+aliases['a.stop_pacer'] = ['adb', 'shell', 'am', 'force-stop', 'cc.pacer.androidapp']
+aliases['a.stop_dongdong'] = ['adb', 'shell', 'am', 'force-stop', 'com.mandian.android.dongdong']
+aliases['p.estimate'] = ['open', 'https://docs.google.com/spreadsheets/d/127iuLOG0B3Ukydv-VsA2WIPVaJzKpYBEF6OOLyXFlGc/edit#gid=1265009236']
+aliases['p.backlog'] = ['open', 'https://docs.google.com/spreadsheets/d/1gnnmB42mJ4k1limeYZHgv1tjwx9Nplxjf40xXGnj09U/edit#gid=0']
+aliases['p.file'] = ['open', 'https://docs.google.com/spreadsheets/d/1gnnmB42mJ4k1limeYZHgv1tjwx9Nplxjf40xXGnj09U/edit#gid=0']
+aliases['p.release'] = ['open', 'https://docs.google.com/spreadsheets/d/1As9Cu8elTzPh9lEqYZeqYCRvkbv1LBcRa9scp42ALeg/edit#gid=0']
+aliases['p.interview'] = ['open', 'https://docs.google.com/spreadsheets/d/1RVrRC06Z5D-19aqSNdLGBmofzP_LCEfbFbaEuEx-cKw/edit?usp=drive_web']
 aliases['p.weekly_report'] = ['open', 'https://docs.google.com/spreadsheets/d/1YOEGiku_5X8C65KJ14tWvn-M_Mdt6dxe8npiyDUMdN4/edit#gid=0']
 
-#Emacs
-aliases['e'] = ['emacsclient','-nw']
-aliases['eg'] = ['emacsclient','-n']
-aliases['e.kill'] = ['pkill','-SIGUSR2 -i','Emacs']
-aliases['adbs'] = ['adb','shell','/data/home/bin/termux.sh']
-aliases['ssh-add'] = ['ssh-add','-t','403200m']
+# Emacs
+aliases['e'] = ['emacsclient', '-nw']
+aliases['eg'] = ['emacsclient', '-n']
+aliases['e.kill'] = ['pkill', '-SIGUSR2 -i', 'Emacs']
+aliases['adbs'] = ['adb', 'shell', '/data/home/bin/termux.sh']
+aliases['ssh-add'] = ['ssh-add', '-t', '403200m']
 
-aliases['ale'] = ['adb','logcat','-s','EB']
-aliases['a.top_activity'] = ['adb','shell','dumpsys','window','windows','| grep','-E','mCurrentFocus|mFocusedApp']
-aliases['a.pc'] = ['adb','shell','pm','clear','cc.pacer.androidapp']
-aliases['a.dc'] = ['adb','shell','pm','clear','com.mandian.android.dongdong']
-aliases['a.plog'] = ['adb','pull','/mnt/sdcard/Android/data/cc.pacer.androidapp/files/Download/xlog','.']
+aliases['ale'] = ['adb', 'logcat', '-s', 'EB']
+def _android_top_activity():
+   print($(adb shell dumpsys window windows |rg "mCurrentFocus|mFocusedApp"))
 
-aliases['java9'] = ['jhome','-v','9.0.1']
-aliases['java8'] = ['jhome','-v','1.8.0_141']
-aliases['js'] = ['java','-jar','/opt/java-libs/try-artifact-0.3.0.jar']
+aliases['a.top_activity'] = _android_top_activity
+aliases['a.pc'] = ['adb', 'shell', 'pm', 'clear', 'cc.pacer.androidapp']
+aliases['a.dc'] = ['adb', 'shell', 'pm', 'clear', 'com.mandian.android.dongdong']
+aliases['a.plog'] = ['adb', 'pull', '/mnt/sdcard/Android/data/cc.pacer.androidapp/files/Download/xlog', '.']
+
+aliases['java9'] = ['jhome', '-v', '9.0.1']
+aliases['java8'] = ['jhome', '-v', '1.8.0_141']
+aliases['js'] = ['java', '-jar', '/opt/java-libs/try-artifact-0.3.0.jar']
 
 # python chart
-aliases['imcat'] = lambda args,stdin: print('\033]1337;File=inline=1;height=80%%:%s\a\n' % stdin)
+aliases['imcat'] = lambda args, stdin: print('\033]1337;File=inline=1;height=80%%:%s\a\n' % stdin)
 
-$SHELL_TYPE='prompt_toolkit'
+$SHELL_TYPE = 'prompt_toolkit'
 
 $VI_MODE = True
 
@@ -150,17 +150,19 @@ def show_style(stylename='default'):
     from xonsh.xonfig import _tok_colors
 
     oldstyle, $XONSH_COLOR_STYLE = $XONSH_COLOR_STYLE, stylename
-    s =  builtins.__xonsh_shell__.shell.styler._smap
-    print_color(_tok_colors(s,100))
-    $XONSH_COLOR_STYLE  = oldstyle
+    s = builtins.__xonsh_shell__.shell.styler._smap
+    print_color(_tok_colors(s, 100))
+    $XONSH_COLOR_STYLE = oldstyle
 
-$PROMPT_FIELDS['prompt_end'] = lambda : '{RED}$ ' if __xonsh_history__.last_cmd_rtn else '{BLUE}$ '
+
+$PROMPT_FIELDS['prompt_end'] = lambda: '{RED}$ ' if __xonsh_history__.last_cmd_rtn else '{BLUE}$ '
 $XONSH_SHOW_TRACEBACK = False
 $PROMPT = '{env_name:{} }{BOLD_BLUE} {cwd}{branch_color}{curr_branch: {}}{NO_COLOR} {BOLD_BLUE}{prompt_end}{NO_COLOR}'
-#$PROMPT.replace('INTENSE_','').replace('CYAN','BLUE')
+#$PROMPT.replace('INTENSE_', '').replace('CYAN', 'BLUE')
 $INTENSIFY_COLORS_ON_WIN = False
 
-# vox_tabcomplete
+source-bash ~/.private
+
 # XONSH WIZARD START
 xontrib load coreutils vox z
 # XONSH WIZARD END
