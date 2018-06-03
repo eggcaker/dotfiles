@@ -2,26 +2,29 @@
 
 import argparse
 import builtins
+import sys
 
-# import pendulum as p
-from prompt_toolkit.filters import ViInsertMode
-from prompt_toolkit.key_binding.vi_state import InputMode
-
-# import os
-
-
-$LS_COLORS = 'rs=0:di=01;36:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:'
-
-$PATH= ["/usr/local/bin", "/usr/bin", "/bin", "~/.dotfiles/bin", "/usr/sbin", 
-       "/sbin", "/Library/TeX/texbin", "/usr/local/MacGPG2/bin", "/opt/X11/bin"
-       "/usr/local/share/android-sdk/tools",
-       "/usr/local/opt/android-sdk/platform-tools",
-       "/usr/local/opt/android-sdk/tools/proguard/bin"]
+sys.path.append('/usr/local/lib/python3.6/site-packages')
 
 $LANG = "en_US.UTF-8"
 $LANGUAGE = "en_US.UTF-8"
 $LC_ALL = "en_US.UTF-8"
 $LC_CTYPE = "en_US.UTF-8"
+
+
+$LS_COLORS = 'rs=0:di=01;36:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:'
+
+$PATH = ["/usr/local/bin", "/usr/bin", "/bin", "~/.dotfiles/bin", "/usr/sbin",
+         "/sbin", "/Library/TeX/texbin", "/usr/local/MacGPG2/bin", "/opt/X11/bin",
+         "/usr/local/share/android-sdk/tools",
+         "/usr/local/opt/android-sdk/platform-tools",
+         "/usr/local/opt/android-sdk/tools/proguard/bin"]
+
+$PYTHONPATH = ['/usr/local/Cellar/python/3.6.5/Frameworks/Python.framework/Versions/3.6/lib/python36.zip',
+               '/usr/local/Cellar/python/3.6.5/Frameworks/Python.framework/Versions/3.6/lib/python3.6',
+               '/usr/local/Cellar/python/3.6.5/Frameworks/Python.framework/Versions/3.6/lib/python3.6/lib-dynload',
+               '/Users/eggcaker/Library/Python/3.6/lib/python/site-packages',
+               '/usr/local/lib/python3.6/site-packages']
 
 $XONSH_COLOR_STYLE = "monokai"
 $SUPPRESS_BRANCH_TIMEOUT_MESSAGE = True
@@ -52,7 +55,7 @@ aliases['mkdir'] = 'mkdir -p'
 aliases['l'] = ['ls', '-G']
 aliases['ll'] = ['ls', '-lh', '-F', '-G', '-v']
 
-#git aliases
+# git aliases
 aliases['gc'] = 'git commit -v'
 aliases['gl'] = ['git', 'log', '--oneline', '--all', '--graph', '--decorate', '--color']
 aliases['it'] = 'git'
@@ -113,12 +116,15 @@ aliases['eg'] = ['emacsclient', '-n']
 aliases['e.kill'] = ['pkill', '-SIGUSR2 -i', 'Emacs']
 aliases['adbs'] = ['adb', 'shell', '/data/home/bin/termux.sh']
 aliases['ssh-add'] = ['ssh-add', '-t', '403200m']
-
 aliases['ale'] = ['adb', 'logcat', '-s', 'EB']
+
+
 def _android_top_activity():
-   print($(adb shell dumpsys window windows |rg "mCurrentFocus|mFocusedApp"))
+    print($(adb shell dumpsys window windows | rg "mCurrentFocus|mFocusedApp"))
+
 
 aliases['a.top_activity'] = _android_top_activity
+
 aliases['a.pc'] = ['adb', 'shell', 'pm', 'clear', 'cc.pacer.androidapp']
 aliases['a.dc'] = ['adb', 'shell', 'pm', 'clear', 'com.mandian.android.dongdong']
 aliases['a.plog'] = ['adb', 'pull', '/mnt/sdcard/Android/data/cc.pacer.androidapp/files/Download/xlog', '.']
@@ -133,6 +139,9 @@ aliases['imcat'] = lambda args, stdin: print('\033]1337;File=inline=1;height=80%
 $SHELL_TYPE = 'prompt_toolkit'
 
 $VI_MODE = True
+
+from prompt_toolkit.filters import ViInsertMode
+from prompt_toolkit.key_binding.vi_state import InputMode
 
 
 @events.on_ptk_create
@@ -158,10 +167,19 @@ def show_style(stylename='default'):
 $PROMPT_FIELDS['prompt_end'] = lambda: '{RED}$ ' if __xonsh_history__.last_cmd_rtn else '{BLUE}$ '
 $XONSH_SHOW_TRACEBACK = False
 $PROMPT = '{env_name:{} }{BOLD_BLUE} {cwd}{branch_color}{curr_branch: {}}{NO_COLOR} {BOLD_BLUE}{prompt_end}{NO_COLOR}'
-#$PROMPT.replace('INTENSE_', '').replace('CYAN', 'BLUE')
 $INTENSIFY_COLORS_ON_WIN = False
 
 source-bash ~/.private
+
+# Coloured man page support
+# using 'less' env vars (format is '\E[<brightness>;<colour>m')
+$LESS_TERMCAP_mb = "\033[01;31m"     # begin blinking
+$LESS_TERMCAP_md = "\033[01;31m"     # begin bold
+$LESS_TERMCAP_me = "\033[0m"         # end mode
+$LESS_TERMCAP_so = "\033[01;44;36m"  # begin standout-mode (bottom of screen)
+$LESS_TERMCAP_se = "\033[0m"         # end standout-mode
+$LESS_TERMCAP_us = "\033[00;36m"     # begin underline
+$LESS_TERMCAP_ue = "\033[0m"         # end underline
 
 # XONSH WIZARD START
 xontrib load coreutils vox z
