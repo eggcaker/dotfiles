@@ -101,6 +101,7 @@ export LEDGER_FILE="$HOME/.org-files/finance.ldg"
 #       make the pyenv works
 export PATH=/usr/local/anaconda3/bin:$PATH
 export PATH=~/.pyenv/shims:~/Library/Python/3.6/bin:$PATH
+export PYTHONPATH=/usr/local/Cellar/python/3.6.5/Frameworks/Python.framework/Versions/3.6/lib/python36.zip:/usr/local/Cellar/python/3.6.5/Frameworks/Python.framework/Versions/3.6/lib/python3.6:/usr/local/Cellar/python/3.6.5/Frameworks/Python.framework/Versions/3.6/lib/python3.6/lib-dynload:/Users/eggcaker/Library/Python/3.6/lib/python/site-packages:/usr/local/lib/python3.6/site-packages:/usr/local/Cellar/xonsh/0.6.5/libexec/bin:/usr/local/Cellar/xonsh/0.6.5/libexec/lib/python36.zip:/usr/local/Cellar/xonsh/0.6.5/libexec/lib/python3.6:/usr/local/Cellar/xonsh/0.6.5/libexec/lib/python3.6/lib-dynload:/usr/local/opt/python/Frameworks/Python.framework/Versions/3.6/lib/python3.6:/usr/local/Cellar/xonsh/0.6.5/libexec/lib/python3.6/site-packages
 
 # Julia
 export PATH=/Applications/Julia-0.6.app/Contents/Resources/julia/bin:$PATH

@@ -1,4 +1,4 @@
-#!/usr/bin/env python2
+#!/usr/bin/env python2.7
 
 import binascii
 import glob
@@ -60,8 +60,9 @@ def IsGoodLogBuffer(_buffer, _offset, count):
     elif MAGIC_COMPRESS_START2 == magic_start or MAGIC_NO_COMPRESS_START1 == magic_start or MAGIC_NO_COMPRESS_NO_CRYPT_START == magic_start or MAGIC_COMPRESS_NO_CRYPT_START == magic_start:
         crypt_key_len = 64
     else:
-        return (False, '_buffer[%d]:%d != MAGIC_NUM_START' %
-                (_offset, _buffer[_offset]))
+        return (
+            False,
+            '_buffer[%d]:%d != MAGIC_NUM_START' % (_offset, _buffer[_offset]))
 
     headerLen = 1 + 2 + 1 + 1 + 4 + crypt_key_len
 
@@ -184,8 +185,8 @@ def DecodeBuffer(_buffer, _offset, _outbuffer):
             # _outbuffer.extend('seq:%d, hour:%d-%d len:%d decompress:%d\n' %(seq, ord(begin_hour), ord(end_hour), length, len(tmpbuffer)))
     except Exception as e:
         traceback.print_exc()
-        _outbuffer.extend(
-            "[F]decode_log_file.py decompress err, " + str(e) + "\n")
+        _outbuffer.extend("[F]decode_log_file.py decompress err, " + str(e) +
+                          "\n")
         return _offset + headerLen + length + 1
 
     _outbuffer.extend(tmpbuffer)

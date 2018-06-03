@@ -1,0 +1,7 @@
+#!/usr/bin/env xonsh
+
+import sys
+$DEBUG_TYPE = sys.argv[1] if len(sys.argv) == 2 else ''
+
+cp ~/src/work/pacer_android/app/build/outputs/apk/qq$DEBUG_TYPE/release/app-qq$DEBUG_TYPE-release.apk /tmp/qq.apk
+curl -F "file=@/tmp/qq.apk" -F "uKey=$PGY_UID" -F "_api_key=$PGY_PID" https://qiniu-storage.pgyer.com/apiv1/app/upload
