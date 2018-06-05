@@ -47,9 +47,9 @@ $PRODUCT_RELEASE = True
 
 aliases['.'] = ['cd', '..']
 aliases['..'] = ['cd', '../..']
-aliases['...'] = ['cd' '../../..']
-aliases['....'] = ['cd' '../../../..']
-
+aliases['...'] = ['cd', '../../..']
+aliases['....'] = ['cd', '../../../..']
+aliases['a'] = ['cd', '~/Desktop/lab']
 aliases['grep'] = 'grep -i --color=always'
 aliases['mkdir'] = 'mkdir -p'
 aliases['l'] = ['ls', '-G']
