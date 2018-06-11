@@ -1,0 +1,30 @@
+* google sheet raad & write 
+** create a new google sheet 
+** share the document to awesome-cli@awesome-cli-206409.iam.gserviceaccount.com
+** example code  
+#+BEGIN_SRC python
+
+  from pathlib import Path
+
+  import gspread
+  from oauth2client.service_account import ServiceAccountCredentials
+
+  from print import pprint
+
+  scope = [
+      'https://spreadsheets.google.com/feeds',
+      'https://www.googleapis.com/auth/drive'
+  ]
+
+  credentials = ServiceAccountCredentials.from_json_keyfile_name(
+      str(Path.home()) + '/.awesome-cli.json', scope)
+
+  gc = gspread.authorize(credentials)
+
+  wks = gc.open("hello-awesome-cli").sheet1
+
+  cell_list = wks.range('A1:B7')
+
+  pprint(cell_list)
+
+#+END_SRC

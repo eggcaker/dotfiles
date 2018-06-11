@@ -118,13 +118,18 @@ aliases['adbs'] = ['adb', 'shell', '/data/home/bin/termux.sh']
 aliases['ssh-add'] = ['ssh-add', '-t', '403200m']
 aliases['ale'] = ['adb', 'logcat', '-s', 'EB']
 
+def pt(data):
+    from tabulate import tabulate
+    print(tabulate(data[1:], headers= data[0], tablefmt='orgtbl'))
 
 def _android_top_activity():
     print($(adb shell dumpsys window windows | rg "mCurrentFocus|mFocusedApp"))
 
+def _pd():
+  docker run  -v $PWD:/tmp/xlog  -ti xlog  /usr/bin/p.decode_log_crypt  /tmp/xlog/
 
+aliases['p.dl'] = _pd
 aliases['a.top_activity'] = _android_top_activity
-
 aliases['a.pc'] = ['adb', 'shell', 'pm', 'clear', 'cc.pacer.androidapp']
 aliases['a.dc'] = ['adb', 'shell', 'pm', 'clear', 'com.mandian.android.dongdong']
 aliases['a.plog'] = ['adb', 'pull', '/mnt/sdcard/Android/data/cc.pacer.androidapp/files/Download/xlog', '.']

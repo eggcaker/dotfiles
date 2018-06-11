@@ -1,0 +1,28 @@
+* Create a new docker file
+  #+BEGIN_SRC docker :tangle Dockerfile
+  from jfloff/alpine-python:2.7
+  RUN apk add --no-cache openssl openssl-dev
+  RUN pip install  pyelliptic==1.5.7
+  COPY p.decode_log_crypt /usr/bin/ 
+  #+END_SRC
+
+* Build the docker 
+  #+BEGIN_SRC sh
+  cp ~/.dotfiles/bin/p.decode_log_crypt
+  docker build . 
+  #+END_SRC
+  
+* Create a alias
+**  with bash like
+  #+BEGIN_SRC sh
+  alias p.dl = "docker run  -v $PWD:/tmp/xlog  -ti xlog  /usr/bin/p.decode_log_crypt  /tmp/xlog/"
+  #+END_SRC
+** with xonsh 
+  #+BEGIN_SRC sh
+  def _pd():
+      docker run  -v $PWD:/tmp/xlog  -ti xlog  /usr/bin/p.decode_log_crypt  /tmp/xlog/
+
+  aliases['p.dl'] = _pd
+  #+END_SRC
+
+ 
