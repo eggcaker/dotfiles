@@ -109,6 +109,7 @@ aliases['p.file'] = ['open', 'https://docs.google.com/spreadsheets/d/1gnnmB42mJ4
 aliases['p.release'] = ['open', 'https://docs.google.com/spreadsheets/d/1As9Cu8elTzPh9lEqYZeqYCRvkbv1LBcRa9scp42ALeg/edit#gid=0']
 aliases['p.interview'] = ['open', 'https://docs.google.com/spreadsheets/d/1RVrRC06Z5D-19aqSNdLGBmofzP_LCEfbFbaEuEx-cKw/edit?usp=drive_web']
 aliases['p.weekly_report'] = ['open', 'https://docs.google.com/spreadsheets/d/1YOEGiku_5X8C65KJ14tWvn-M_Mdt6dxe8npiyDUMdN4/edit#gid=0']
+aliases['z0'] = ['open', 'https://drive.google.com/drive/folders/1ZuuBYIntK_YOdWtr5aOKKHKduVUjr9SQ']
 
 # Emacs
 aliases['e'] = ['emacsclient', '-nw']
@@ -190,5 +191,5 @@ $LESS_TERMCAP_us = "\033[00;36m"     # begin underline
 $LESS_TERMCAP_ue = "\033[0m"         # end underline
 
 # XONSH WIZARD START
-xontrib load coreutils vox z
+xontrib load coreutils vox z mpl
 # XONSH WIZARD END
