@@ -1,4 +1,4 @@
-#!/bin/zsh
+#!/usr/bin/env zsh
 
 function push_changes()  {
   echo "started push the files of $1 ...";
@@ -20,16 +20,7 @@ function push_changes()  {
 
 #push file to remote repo
 push_changes ~/.org-files;
-push_changes ~/.zprezto;
-#push_changes ~/.task;
+push_changes ~/.dotfiles;
 push_changes ~/.spacemacs.d;
 
-#kill apps
-echo "kill IMs if any ..."
-killall QQ
-#killall Adium
-
-echo "--------------------------------------------------------------------------------";
-
-echo "Everythings done! go home !!!!!"
 
