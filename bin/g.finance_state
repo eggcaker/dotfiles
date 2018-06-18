@@ -1,0 +1,30 @@
+#!/usr/bin/env python3
+
+from pathlib import Path
+
+import gspread
+import tushare as ts
+from oauth2client.service_account import ServiceAccountCredentials
+
+scope = [
+    'https://spreadsheets.google.com/feeds',
+    'https://www.googleapis.com/auth/drive'
+]
+
+credentials = ServiceAccountCredentials.from_json_keyfile_name(
+    str(Path.home()) + '/.awesome-cli.json', scope)
+
+gc = gspread.authorize(credentials)
+
+wks = gc.open("Finance Report").sheet1
+
+# Update stock price
+codes = wks.range('K11:K20')
+
+for idx, code in enumerate(codes):
+    if code and len(code.value) == 6:
+        df = ts.get_realtime_quotes(code.value)
+        if str(code.value) == '300146':  # stoped cannot get price hacked it
+            wks.update_acell('I{0}'.format(idx + 11), 16.60)
+        else:
+            wks.update_acell('I{0}'.format(idx + 11), float(df['price']))
