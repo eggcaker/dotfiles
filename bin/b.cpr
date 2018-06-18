@@ -27,6 +27,5 @@ curl -H "Content-Type: application/json" \
 
 
 URL=$(cat /tmp/pr_result|jq '.links.html.href'|sed -e 's/"//g')
-#rm /tmp/pr_result;
-echo $URL
+rm /tmp/pr_result;
 open $URL
