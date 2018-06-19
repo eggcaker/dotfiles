@@ -1,0 +1,43 @@
+#!/usr/bin/env python
+
+# 纪律:
+# 1. 永远不要满仓
+# 2. 及时止损、止赢
+# 3. 大部分时间应该是空仓
+# 4. 卖出跌势已经形成的股票
+# 5. 不买下跌途中的股票
+# 6. 做股票不能拧，顺势而为
+# 6. 永远不要以为自己能赚所有的利润
+# 7. 严格按照纪律执行
+
+import sys
+from pathlib import Path
+
+import gspread
+import pendulum as p
+from oauth2client.service_account import ServiceAccountCredentials
+
+scope = [
+    'https://spreadsheets.google.com/feeds',
+    'https://www.googleapis.com/auth/drive'
+]
+
+credentials = ServiceAccountCredentials.from_json_keyfile_name(
+    str(Path.home()) + '/.awesome-cli.json', scope)
+
+gc = gspread.authorize(credentials)
+
+trans_sheet = gc.open("Finance Report").worksheet('Transactions')
+rules_sheet = gc.open("Finance Report").worksheet('Rules')
+
+rules = rules_sheet.range('A1:A9')
+if len(sys.argv) < 2:
+    for rule in rules:
+        print(rule.value)
+else:
+    action = sys.argv[1]
+    result = sys.argv[2]
+    notes = sys.argv[3:]
+    trans_sheet.append_row(
+        [p.now().format('MM/DD/YYYY'), action,
+         float(result), ' '.join(notes)])
