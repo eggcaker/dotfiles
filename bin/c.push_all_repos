@@ -1,4 +1,4 @@
-#!/bin/zsh
+#!/usr/bin/env zsh
 
 export PATH="/Users/eggcaker/.dotfiles/bin:$PATH"
 REPOS=('.org-files' '.spacemacs.d' '.dotfiles')

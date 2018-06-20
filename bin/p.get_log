@@ -1,0 +1,49 @@
+#!/usr/bin/env python
+
+import json
+import re
+import sys
+
+import pendulum as p
+from tabulate import tabulate
+
+rows = 10
+if len(sys.argv) > 1:
+    rows = int(re.findall(r'\d+', sys.argv[1])[0])
+else:
+    rows = 10
+
+with open('./MDData.db.json') as db:
+    db = json.load(db)
+    dailyLogs = db["MDData.db"]["dailyActivityLog"]
+    minutelyLogs = db["MDData.db"]["minutelyActivityLog"]
+
+dailyLogs = list(reversed(dailyLogs))
+minutelyLogs = list(reversed(minutelyLogs))
+logType = sys.argv[1].replace(str(rows), '')
+
+if logType == 'd':
+    display_data = [[
+        p.from_timestamp(
+            int(log['recordedForDate']),
+            tz=int(log['recordedTimezoneOffsetInMinutes']) /
+            60).format('YYYY-MM-DD HH:mm:ss'), log['distanceInMeters'],
+        log['activityType'], log['steps'], log['calories'],
+        log['activeTimeInSeconds']
+    ] for log in dailyLogs[-rows:]]
+else:
+    display_data = [[
+        p.from_timestamp(
+            int(log['recordedForDate']),
+            tz=int(log['recordedForDateTimezoneOffset']) /
+            60).format('YYYY-MM-DD HH:mm:ss'), log['distanceInMeters'],
+        log['activityType'], log['steps'], log['calories'], log['activetime']
+    ] for log in minutelyLogs[-rows:]]
+
+print(
+    tabulate(
+        display_data,
+        headers=[
+            "date", "distance", "type", "steps", "calories", "activeTime"
+        ],
+        tablefmt='orgtbl'))
