@@ -5,6 +5,7 @@ import builtins
 import sys
 
 sys.path.append('/usr/local/lib/python3.6/site-packages')
+del(aliases['ls'])
 
 $LANG = "en_US.UTF-8"
 $LANGUAGE = "en_US.UTF-8"
