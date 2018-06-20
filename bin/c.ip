@@ -1,6 +1,0 @@
-#!/usr/bin/env bash
-
-
-IP="`ifconfig|grep inet|grep netmask|grep broadcast|awk '{print $2}'|awk -F'.' '{print $1"."$2"."$3"."$4}'`"
-
-  echo $IP;

@@ -1,7 +1,0 @@
-#!/usr/bin/env zsh
-
-alrams="$(adb shell dumpsys alarm stats |rg cc.pacer|rg wakeups |rg  "\s+.*? (.*?)? .*?, (.*?)? .*" --replace '$1,$2')"
-
-TIME="$( date +'%H:%M:%S')"
-
-echo "${TIME},${alrams}" >> ~/Desktop/alrams.csv

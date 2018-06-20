@@ -1,4 +1,0 @@
-
-PROJECT="/Users/eggcaker/src/work/pacer_android/app/src/main"
-for file in $(ls -l $PROJECT/res/drawable | awk '{ print $9}' | sed 's/\..\+//g'); do count=0; for SRCFILE in `find $PROJECT -name "*.xml" -print 2> /dev/null`; do let "count+=$(grep -c @drawable/$file $SRCFILE)"; done; for SRCFILE in `find $PROJECT -name "*.java" -print 2> /dev/null`; do let "count+=$(grep -c R.drawable.$file $SRCFILE)"; done; if [ $count -lt 1 ]; then echo -e "$file not used"; else echo -e "$file used"; fi; done;
-

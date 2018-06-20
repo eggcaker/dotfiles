@@ -1,9 +1,0 @@
-#!/usr/bin/env bash
-
-
-url="https://cn.investing.com/currencies/usd-cny";
-wget -nv  -O usd.html $url;
-w3m -dump -cols 100 usd.html |rg -A 3 -B 0 近期报价|rg 人民币|awk '{print $2}'|tail -n 1 > price
-cat price
-rm price
-rm usd.html
