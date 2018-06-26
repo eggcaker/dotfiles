@@ -18,6 +18,7 @@ $PATH = ["/usr/local/bin", "/usr/bin", "/bin", "~/.dotfiles/bin", "/usr/sbin",
          "/sbin", "/Library/TeX/texbin", "/usr/local/MacGPG2/bin", "/opt/X11/bin",
          "/usr/local/share/android-sdk/tools",
          "/usr/local/opt/android-sdk/platform-tools",
+         "~/src/tools/flutter/bin",
          "/usr/local/opt/android-sdk/tools/proguard/bin"]
 
 $PYTHONPATH = ['/usr/local/Cellar/python/3.6.5/Frameworks/Python.framework/Versions/3.6/lib/python36.zip',
@@ -119,18 +120,22 @@ aliases['adbs'] = ['adb', 'shell', '/data/home/bin/termux.sh']
 aliases['ssh-add'] = ['ssh-add', '-t', '403200m']
 aliases['ale'] = ['adb', 'logcat', '-s', 'EB']
 
+
 def pt(data):
     """Print the tablify data as a orgtabl format."""
     from tabulate import tabulate
-    print(tabulate(data[1:], headers= data[0], tablefmt='orgtbl'))
+    print(tabulate(data[1:], headers=data[0], tablefmt='orgtbl'))
+
 
 def _a_top_activity():
     """Get the top activity on connected android device."""
     print($(adb shell dumpsys window windows | rg "mCurrentFocus|mFocusedApp"))
 
+
 def _p_dl():
     """Decrypt the xlog file with python2 inside docker image"""
     docker run  -v $PWD:/tmp/xlog  -ti xlog  /usr/bin/p.decode_log_crypt  /tmp/xlog/
+
 
 aliases['p.dl'] = _p_dl
 aliases['a.top_activity'] = _a_top_activity
@@ -146,7 +151,6 @@ aliases['js'] = ['java', '-jar', '/opt/java-libs/try-artifact-0.3.0.jar']
 aliases['imcat'] = lambda args, stdin: print('\033]1337;File=inline=1;height=80%%:%s\a\n' % stdin)
 
 $SHELL_TYPE = 'prompt_toolkit'
-
 $VI_MODE = True
 
 from prompt_toolkit.filters import ViInsertMode
