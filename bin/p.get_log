@@ -24,12 +24,10 @@ logType = sys.argv[1].replace(str(rows), '')
 
 if logType == 'd':
     display_data = [[
-        p.from_timestamp(
-            int(log['recordedForDate']),
-            tz=int(log['recordedTimezoneOffsetInMinutes']) /
-            60).format('YYYY-MM-DD HH:mm:ss'), log['distanceInMeters'],
-        log['activityType'], log['steps'], log['calories'],
-        log['activeTimeInSeconds']
+        p.from_timestamp(int(log['recordedForDate']),
+                         tz=int(0) / 60).format('YYYY-MM-DD HH:mm:ss'),
+        log['distanceInMeters'], log['activityType'], log['steps'],
+        log['calories'], log['activeTimeInSeconds']
     ] for log in dailyLogs[-rows:]]
 else:
     display_data = [[
