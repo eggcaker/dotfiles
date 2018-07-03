@@ -141,6 +141,14 @@ aliases['java9'] = ['jhome', '-v', '9.0.1']
 aliases['java8'] = ['jhome', '-v', '1.8.0_141']
 aliases['js'] = ['java', '-jar', '/opt/java-libs/try-artifact-0.3.0.jar']
 
+
+def _jshell():
+    """ Run the java shell with some external library"""
+    docker run -v /opt/java-libs:/tmp -it openjdk:9-jdk bin/jshell --class-path /tmp/joda-time-2.10.jar
+
+
+aliases['jshell'] = _jshell
+
 # python chart
 aliases['imcat'] = lambda args, stdin: print('\033]1337;File=inline=1;height=80%%:%s\a\n' % stdin)
 

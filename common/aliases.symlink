@@ -85,4 +85,4 @@ alias a.plog="adb pull /mnt/sdcard/Android/data/cc.pacer.androidapp/files/Downlo
 
 alias java9="jhome -v 9.0.1"
 alias java8="jhome -v 1.8.0_141"
-alias js='java -jar /opt/java-libs/try-artifact-0.3.0.jar'
+alias jshell='docker run -it openjdk:9-jdk /bin/jshell'
