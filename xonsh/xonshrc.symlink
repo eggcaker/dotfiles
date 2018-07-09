@@ -38,7 +38,7 @@ $ANDROID_HOME = "/usr/local/share/android-sdk"
 $ANDROID_NDK = "/usr/local/opt/android-ndk/android-ndk-r14b"
 
 $PRODUCT_RELEASE = True
-
+$PLAY_RELEASE = True
 
 aliases['.'] = ['cd', '..']
 aliases['..'] = ['cd', '../..']
