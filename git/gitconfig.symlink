@@ -136,7 +136,7 @@
 	user = eggcaker
 	oauth-token = $GITHUB_OAUTH_TOKEN
 [commit]
-	gpgsign = true
+	gpgsign = false #true
 [magit]
 	hideCampaign = true
 [dotfiles]
