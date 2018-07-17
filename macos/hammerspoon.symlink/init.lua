@@ -42,7 +42,6 @@ if not hspoon_list then
         "ClipShow",
         "CountDown",
         "HCalendar",
-        "HSaria2",
         "HSearch",
         "SpeedMenu",
         "WinWin",
@@ -177,20 +176,6 @@ if spoon.ClipShow then
                 spoon.ModalMgr:activate({"clipshowM"})
             end
         end)
-    end
-end
-
-----------------------------------------------------------------------------------------------------
--- Register HSaria2
-if spoon.HSaria2 then
-    -- First we need to connect to aria2 rpc host
-    hsaria2_host = hsaria2_host or "http://localhost:6800/jsonrpc"
-    hsaria2_secret = hsaria2_secret or "token"
-    spoon.HSaria2:connectToHost(hsaria2_host, hsaria2_secret)
-
-    hsaria2_keys = hsaria2_keys or {"alt", "D"}
-    if string.len(hsaria2_keys[2]) > 0 then
-        spoon.ModalMgr.supervisor:bind(hsaria2_keys[1], hsaria2_keys[2], 'Toggle aria2 Panel', function() spoon.HSaria2:togglePanel() end)
     end
 end
 
