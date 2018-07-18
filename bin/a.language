@@ -1,0 +1,6 @@
+#!/usr/bin/env xonsh 
+
+import sys 
+
+lang= sys.argv
+adb shell "su -u setprop persist.sys.language fr; setprop persist.sys.country CA; setprop ctl.restart zygote"
