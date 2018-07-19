@@ -4,7 +4,7 @@ hspoon_list = {
     --"BingDaily",
     -- "Calendar",
     "CircleClock",
-    "ClipShow",
+    -- "ClipShow",
     --"CountDown",
     -- "FnMate",
     "HCalendar",
@@ -68,10 +68,10 @@ hsman_keys = {"alt", "H"}
 hscountdM_keys = {"alt", "I"}
 
 -- Lock computer's screen
-hslock_keys = {"alt", "L"}
+hslock_keys = {"cmd", "alt", "L"}
 
 -- resizeM environment keybinding: Windows manipulation
-hsresizeM_keys = {"alt", "R"}
+hsresizeM_keys = {"cmd", "space"}
 
 -- cheatsheetM environment keybinding: Cheatsheet copycat
 hscheats_keys = {"alt", "S"}
