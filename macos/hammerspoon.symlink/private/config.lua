@@ -1,6 +1,6 @@
 -- Specify Spoons which will be loaded
 hspoon_list = {
-    "AClock",
+    -- "AClock",
     --"BingDaily",
     -- "Calendar",
     "CircleClock",
@@ -8,7 +8,7 @@ hspoon_list = {
     --"CountDown",
     -- "FnMate",
     "HCalendar",
-    "HSearch",
+    -- "HSearch",
     -- "KSheet",
     -- "SpeedMenu",
     -- "TimeFlow",
@@ -20,20 +20,12 @@ hspoon_list = {
 hsapp_list = {
     {key = 'a', name = 'Android Studio 3.2 Preview'},
     {key = 'c', id = 'com.google.Chrome'},
-    {key = 'd', name = 'ShadowsocksX'},
     {key = 'e', name = 'Emacs'},
     {key = 'f', name = 'Finder'},
-    {key = 'i', name = 'iTerm'},
-    {key = 'k', name = 'KeyCastr'},
-    {key = 'l', name = 'Sublime Text'},
-    {key = 'm', name = 'MacVim'},
-    {key = 'o', name = 'LibreOffice'},
-    {key = 'p', name = 'mpv'},
-    {key = 'r', name = 'VimR'},
-    {key = 's', name = 'Safari'},
+    {key = 'v', name = 'Astrill'},
     {key = 't', name = 'iTerm2'},
-    {key = 'v', id = 'com.apple.ActivityMonitor'},
-    {key = 'w', name = 'Mweb'},
+    {key = 'm', id = 'com.apple.ActivityMonitor'},
+    {key = 'w', id = 'WeChat'},
     {key = 'y', id = 'com.apple.systempreferences'},
 }
 
