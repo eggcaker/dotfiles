@@ -1,19 +1,10 @@
 -- Specify Spoons which will be loaded
 hspoon_list = {
-    -- "AClock",
-    --"BingDaily",
-    -- "Calendar",
     "CircleClock",
-    -- "ClipShow",
-    --"CountDown",
-    -- "FnMate",
     "HCalendar",
-    -- "HSearch",
-    -- "KSheet",
-    -- "SpeedMenu",
-    -- "TimeFlow",
-    -- "UnsplashZ",
     "WinWin",
+    "Astrill"
+    -- "MyUtils"
 }
 
 -- appM environment keybindings. Bundle `id` is prefered, but application `name` will be ok.

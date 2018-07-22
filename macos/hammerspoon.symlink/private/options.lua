@@ -1,0 +1,1 @@
+hs.application.enableSpotlightForNameSearches(true)

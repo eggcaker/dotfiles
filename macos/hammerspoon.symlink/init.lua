@@ -3,30 +3,8 @@ hs.hints.showTitleThresh = 0
 hs.window.animationDuration = 0
 
 require("hs.ipc")
-
-
--- Use the standardized config location, if present
-custom_config = hs.fs.pathToAbsolute(os.getenv("HOME") .. '/.config/hammerspoon/private/config.lua')
-if custom_config then
-    print("Loading custom config")
-    dofile( os.getenv("HOME") .. "/.config/hammerspoon/private/config.lua")
-    privatepath = hs.fs.pathToAbsolute(hs.configdir .. '/private/config.lua')
-    if privatepath then
-        hs.alert("You have config in both .config/hammerspoon and .hammerspoon/private.\nThe .config/hammerspoon one will be used.")
-    end
-else
-    -- otherwise fallback to 'classic' location.
-    if not privatepath then
-        privatepath = hs.fs.pathToAbsolute(hs.configdir .. '/private')
-        -- Create `~/.hammerspoon/private` directory if not exists.
-        hs.fs.mkdir(hs.configdir .. '/private')
-    end
-    privateconf = hs.fs.pathToAbsolute(hs.configdir .. '/private/config.lua')
-    if privateconf then
-        -- Load awesomeconfig file if exists
-        require('private/config')
-    end
-end
+require('private/config')
+require('private/options')
 
 hsreload_keys = hsreload_keys or {{"cmd", "shift", "ctrl"}, "R"}
 if string.len(hsreload_keys[2]) > 0 then
@@ -108,7 +86,7 @@ if string.len(hsappM_keys[2]) > 0 then
     spoon.ModalMgr.supervisor:bind(hsappM_keys[1], hsappM_keys[2], "Enter AppM Environment", function()
         spoon.ModalMgr:deactivateAll()
         -- Show the keybindings cheatsheet once appM is activated
-        spoon.ModalMgr:activate({"appM"}, "#FFBD2E", true)
+        spoon.ModalMgr:activate({"appM"}, "#B2B2B2", true)
     end)
 end
 
@@ -332,6 +310,21 @@ if spoon.AClock then
     end
 end
 
+-- Astrill Vpn Toggle
+
+if spoon.Astrill then
+  hsastrill_enable_keys = {{"ctrl","alt"}, "E"}
+  hsastrill_disable_keys = {{"ctrl","alt"}, "D"}
+  spoon.ModalMgr.supervisor:bind(hsastrill_enable_keys[1], hsastrill_enable_keys[2], 'Enable Astrill', function()
+                                   spoon.Astrill:enable()
+  end)
+
+  spoon.ModalMgr.supervisor:bind(hsastrill_disable_keys[1], hsastrill_disable_keys[2], 'Disable Astrill', function()
+                                   spoon.Astrill:disable()
+  end)
+
+
+end
 ----------------------------------------------------------------------------------------------------
 -- Register browser tab typist: Type URL of current tab of running browser in markdown format. i.e. [title](link)
 hstype_keys = hstype_keys or {"alt", "V"}
