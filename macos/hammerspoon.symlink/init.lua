@@ -1,12 +1,22 @@
-hs.hotkey.alertDuration = 0
+hs.hotkey.alertDuration = 0.1
 hs.hints.showTitleThresh = 0
-hs.window.animationDuration = 0
+hs.window.animationDuration = 0.1
 
 require("hs.ipc")
 require('private/config')
 require('private/options')
 
-hsreload_keys = hsreload_keys or {{"cmd", "shift", "ctrl"}, "R"}
+
+hostname = hs.host.localizedName()
+hyper = {"cmd", "alt", "ctrl", "shift"}
+
+
+hs.loadSpoon("Caffeine")
+spoon.Caffeine:bindHotkeys({toggle={hyper, "c"}})
+spoon.Caffeine:start()
+
+
+hsreload_keys = hsreload_keys or {hyper, "R"}
 if string.len(hsreload_keys[2]) > 0 then
     hs.hotkey.bind(hsreload_keys[1], hsreload_keys[2], "Reload Configuration", function() hs.reload() end)
 end
@@ -88,85 +98,6 @@ if string.len(hsappM_keys[2]) > 0 then
         -- Show the keybindings cheatsheet once appM is activated
         spoon.ModalMgr:activate({"appM"}, "#B2B2B2", true)
     end)
-end
-
-----------------------------------------------------------------------------------------------------
--- clipshowM modal environment
-if spoon.ClipShow then
-    spoon.ModalMgr:new("clipshowM")
-    local cmodal = spoon.ModalMgr.modal_list["clipshowM"]
-    cmodal:bind('', 'escape', 'Deactivate clipshowM', function()
-        spoon.ClipShow:toggleShow()
-        spoon.ModalMgr:deactivate({"clipshowM"})
-    end)
-    cmodal:bind('', 'Q', 'Deactivate clipshowM', function()
-        spoon.ClipShow:toggleShow()
-        spoon.ModalMgr:deactivate({"clipshowM"})
-    end)
-    cmodal:bind('', 'N', 'Save this Session', function()
-        spoon.ClipShow:saveToSession()
-    end)
-    cmodal:bind('', 'R', 'Restore last Session', function()
-        spoon.ClipShow:restoreLastSession()
-    end)
-    cmodal:bind('', 'B', 'Open in Browser', function()
-        spoon.ClipShow:openInBrowserWithRef()
-        spoon.ClipShow:toggleShow()
-        spoon.ModalMgr:deactivate({"clipshowM"})
-    end)
-    cmodal:bind('', 'S', 'Search with Bing', function()
-        spoon.ClipShow:openInBrowserWithRef("https://www.bing.com/search?q=")
-        spoon.ClipShow:toggleShow()
-        spoon.ModalMgr:deactivate({"clipshowM"})
-    end)
-    cmodal:bind('', 'M', 'Open in Emacs', function()
-        spoon.ClipShow:openWithCommand("/usr/local/bin/emacsclient -n")
-        spoon.ClipShow:toggleShow()
-        spoon.ModalMgr:deactivate({"clipshowM"})
-    end)
-    cmodal:bind('', 'F', 'Save to Desktop', function()
-        spoon.ClipShow:saveToFile()
-        spoon.ClipShow:toggleShow()
-        spoon.ModalMgr:deactivate({"clipshowM"})
-    end)
-    cmodal:bind('', 'H', 'Search in Github', function()
-        spoon.ClipShow:openInBrowserWithRef("https://github.com/search?q=")
-        spoon.ClipShow:toggleShow()
-        spoon.ModalMgr:deactivate({"clipshowM"})
-    end)
-    cmodal:bind('', 'G', 'Search with Google', function()
-        spoon.ClipShow:openInBrowserWithRef("https://www.google.com/search?q=")
-        spoon.ClipShow:toggleShow()
-        spoon.ModalMgr:deactivate({"clipshowM"})
-    end)
-    cmodal:bind('', 'L', 'Open in Sublime Text', function()
-        spoon.ClipShow:openWithCommand("/usr/local/bin/subl")
-        spoon.ClipShow:toggleShow()
-        spoon.ModalMgr:deactivate({"clipshowM"})
-    end)
-
-    -- Register clipshowM with modal supervisor
-    hsclipsM_keys = hsclipsM_keys or {"alt", "C"}
-    if string.len(hsclipsM_keys[2]) > 0 then
-        spoon.ModalMgr.supervisor:bind(hsclipsM_keys[1], hsclipsM_keys[2], "Enter clipshowM Environment", function()
-            -- We need to take action upon hsclipsM_keys is pressed, since pressing another key to showing ClipShow panel is redundant.
-            spoon.ClipShow:toggleShow()
-            -- Need a little trick here. Since the content type of system clipboard may be "URL", in which case we don't need to activate clipshowM.
-            if spoon.ClipShow.canvas:isShowing() then
-                spoon.ModalMgr:deactivateAll()
-                spoon.ModalMgr:activate({"clipshowM"})
-            end
-        end)
-    end
-end
-
-----------------------------------------------------------------------------------------------------
--- Register Hammerspoon Search
-if spoon.HSearch then
-    hsearch_keys = hsearch_keys or {"alt", "G"}
-    if string.len(hsearch_keys[2]) > 0 then
-        spoon.ModalMgr.supervisor:bind(hsearch_keys[1], hsearch_keys[2], 'Launch Hammerspoon Search', function() spoon.HSearch:toggleShow() end)
-    end
 end
 
 ----------------------------------------------------------------------------------------------------
@@ -313,8 +244,8 @@ end
 -- Astrill Vpn Toggle
 
 if spoon.Astrill then
-  hsastrill_enable_keys = {{"ctrl","alt"}, "E"}
-  hsastrill_disable_keys = {{"ctrl","alt"}, "D"}
+  hsastrill_enable_keys = {hyper, "E"}
+  hsastrill_disable_keys = {hyper, "D"}
   spoon.ModalMgr.supervisor:bind(hsastrill_enable_keys[1], hsastrill_enable_keys[2], 'Enable Astrill', function()
                                    spoon.Astrill:enable()
   end)

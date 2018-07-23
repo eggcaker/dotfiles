@@ -24,7 +24,6 @@ hsapp_list = {
 hsupervisor_keys = {{"cmd", "shift", "ctrl"}, "Q"}
 
 -- Reload Hammerspoon configuration
-hsreload_keys = {{"cmd", "shift", "ctrl"}, "R"}
 
 -- Toggle help panel of this configuration.
 hshelp_keys = {{"alt", "shift"}, "/"}
