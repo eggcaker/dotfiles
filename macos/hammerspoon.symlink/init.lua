@@ -5,7 +5,7 @@ hs.application.enableSpotlightForNameSearches(true)
 hs.ipc.cliInstall()
 
 -- Define monitor names for layout purposes
-display_imac = "Color LCD"
+display_mbp = "Color LCD"
 display_monitor = "SwitchResX4 - DELL P2416D"
 
 hostname = hs.host.localizedName()
@@ -53,17 +53,7 @@ if string.len(hswhints_keys[2]) > 0 then
 end
 
 
--- Register Hammerspoon API manual: Open Hammerspoon manual in default browser
-hsman_keys = {hyper, "H"}
-spoon.ModalMgr.supervisor:bind(hsman_keys[1], hsman_keys[2], "Read Hammerspoon Manual", function()
-                                 hs.doc.hsdocs.forceExternalBrowser(true)
-                                 hs.doc.hsdocs.moduleEntitiesInSidebar(true)
-                                 hs.doc.hsdocs.help()
-end)
 
-
-
-----------------------------------------------------------------------------------------------------
 -- resizeM modal environment
 if spoon.WinWin then
   spoon.ModalMgr:new("resizeM")
@@ -137,4 +127,30 @@ end
 ----------------------------------------------------------------------------------------------------
 -- Finally we initialize ModalMgr supervisor
 spoon.ModalMgr.supervisor:enter()
+
+
+
+-- Defines for screen watcher
+lastNumberOfScreens = #hs.screen.allScreens()
+
+-- Define window layouts
+--   Format reminder:
+--     {"App name", "Window name", "Display Name", "unitrect", "framerect", "fullframerect"},
+dual_display = {
+  {"iTerm2",        nil, display_monitor, hs.geometry.unitrect(0,   0,   1.0,   1.0),  nil, nil},
+  {"Emacs",         nil, display_monitor, hs.geometry.unitrect(0,   0,   1.0,   1.0),  nil, nil},
+  {"Google Chrome", nil, display_monitor, hs.geometry.unitrect(0,   0,   1.0,   1.0),  nil, nil},
+  {"Trello",        nil, display_mbp,    hs.geometry.unitrect(0.5, 0.5, 0.5,   0.5),  nil, nil},
+  {"WeChat",        nil, display_monitor, hs.geometry.unitrect(0,   0,   0.375, 0.25), nil, nil},
+}
+
+-- And now for hotkeys relating to Hyper. First, let's capture all of the functions, then we can just quickly iterate and bind them
+hyperfns = {}
+
+hyperfns['2'] = function() hs.layout.apply(dual_display) end
+
+for _hotkey, _fn in pairs(hyperfns) do
+  hs.hotkey.bind(hyper, _hotkey, _fn)
+end
+
 
