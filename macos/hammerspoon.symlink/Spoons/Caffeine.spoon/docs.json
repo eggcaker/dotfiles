@@ -15,24 +15,24 @@
     "stripped_doc" : [
 
     ],
+    "desc" : "Prevent the screen from going to sleep",
     "Deprecated" : [
 
     ],
     "type" : "Module",
-    "desc" : "Prevent the screen from going to sleep",
     "Constructor" : [
 
     ],
     "doc" : "Prevent the screen from going to sleep",
     "Method" : [
       {
-        "doc" : "Binds hotkeys for Caffeine\n\nParameters:\n * mapping - A table containing hotkey modifier\/key details for the following items:\n  * toggle - This will toggle the state of display sleep prevention, and update the menubar graphic\n\nReturns:\n * The Caffeine object",
-        "def" : "Caffeine:bindHotkeys(mapping)",
         "desc" : "Binds hotkeys for Caffeine",
         "stripped_doc" : [
           "Binds hotkeys for Caffeine",
           ""
         ],
+        "def" : "Caffeine:bindHotkeys(mapping)",
+        "doc" : "Binds hotkeys for Caffeine\n\nParameters:\n * mapping - A table containing hotkey modifier\/key details for the following items:\n  * toggle - This will toggle the state of display sleep prevention, and update the menubar graphic\n\nReturns:\n * The Caffeine object",
         "notes" : [
 
         ],
@@ -49,13 +49,13 @@
         ]
       },
       {
-        "doc" : "Starts Caffeine\n\nParameters:\n * None\n\nReturns:\n * The Caffeine object",
-        "def" : "Caffeine:start()",
         "desc" : "Starts Caffeine",
         "stripped_doc" : [
           "Starts Caffeine",
           ""
         ],
+        "def" : "Caffeine:start()",
+        "doc" : "Starts Caffeine\n\nParameters:\n * None\n\nReturns:\n * The Caffeine object",
         "notes" : [
 
         ],
@@ -71,13 +71,13 @@
         ]
       },
       {
-        "doc" : "Stops Caffeine\n\nParameters:\n * None\n\nReturns:\n * The Caffeine object",
-        "def" : "Caffeine:stop()",
         "desc" : "Stops Caffeine",
         "stripped_doc" : [
           "Stops Caffeine",
           ""
         ],
+        "def" : "Caffeine:stop()",
+        "doc" : "Stops Caffeine\n\nParameters:\n * None\n\nReturns:\n * The Caffeine object",
         "notes" : [
 
         ],
@@ -96,18 +96,15 @@
     "Command" : [
 
     ],
-    "Field" : [
-
-    ],
     "items" : [
       {
-        "doc" : "Binds hotkeys for Caffeine\n\nParameters:\n * mapping - A table containing hotkey modifier\/key details for the following items:\n  * toggle - This will toggle the state of display sleep prevention, and update the menubar graphic\n\nReturns:\n * The Caffeine object",
-        "def" : "Caffeine:bindHotkeys(mapping)",
         "desc" : "Binds hotkeys for Caffeine",
         "stripped_doc" : [
           "Binds hotkeys for Caffeine",
           ""
         ],
+        "def" : "Caffeine:bindHotkeys(mapping)",
+        "doc" : "Binds hotkeys for Caffeine\n\nParameters:\n * mapping - A table containing hotkey modifier\/key details for the following items:\n  * toggle - This will toggle the state of display sleep prevention, and update the menubar graphic\n\nReturns:\n * The Caffeine object",
         "notes" : [
 
         ],
@@ -124,13 +121,13 @@
         ]
       },
       {
-        "doc" : "Starts Caffeine\n\nParameters:\n * None\n\nReturns:\n * The Caffeine object",
-        "def" : "Caffeine:start()",
         "desc" : "Starts Caffeine",
         "stripped_doc" : [
           "Starts Caffeine",
           ""
         ],
+        "def" : "Caffeine:start()",
+        "doc" : "Starts Caffeine\n\nParameters:\n * None\n\nReturns:\n * The Caffeine object",
         "notes" : [
 
         ],
@@ -146,13 +143,13 @@
         ]
       },
       {
-        "doc" : "Stops Caffeine\n\nParameters:\n * None\n\nReturns:\n * The Caffeine object",
-        "def" : "Caffeine:stop()",
         "desc" : "Stops Caffeine",
         "stripped_doc" : [
           "Stops Caffeine",
           ""
         ],
+        "def" : "Caffeine:stop()",
+        "doc" : "Stops Caffeine\n\nParameters:\n * None\n\nReturns:\n * The Caffeine object",
         "notes" : [
 
         ],
@@ -167,6 +164,9 @@
           ""
         ]
       }
+    ],
+    "Field" : [
+
     ],
     "name" : "Caffeine"
   }

@@ -17,6 +17,7 @@ obj.license = "MIT - https://opensource.org/licenses/MIT"
 
 obj.menuBarItem = nil
 obj.hotkeyToggle = nil
+obj.hotkeyLock = nil
 
 -- Internal function used to find our location, so we know where to load files from
 local function script_path()
@@ -42,9 +43,18 @@ function obj:bindHotkeys(mapping)
     if (self.hotkeyToggle) then
         self.hotkeyToggle:delete()
     end
+
     local toggleMods = mapping["toggle"][1]
     local toggleKey = mapping["toggle"][2]
     self.hotkeyToggle = hs.hotkey.new(toggleMods, toggleKey, function() self.clicked() end)
+
+    if (self.hotkeyLock) then
+      self.hotkeyLock:delete()
+    end
+
+    local lockMods = mapping["lock"][1]
+    local lockKey = mapping["lock"][2]
+    self.hotkeyLock= hs.hotkey.new(lockMods, lockKey, function() self.lock() end)
 
     return self
 end
@@ -81,6 +91,10 @@ function obj:stop()
     self.hotkeyToggle:disable()
     self.menuBarItem = nil
     return self
+end
+
+function obj.lock()
+  hs.caffeinate.lockScreen()
 end
 
 function obj.setDisplay(state)
