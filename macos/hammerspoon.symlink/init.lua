@@ -139,8 +139,8 @@ dual_display = {
   {"Emacs",         nil, display_monitor, hs.geometry.unitrect(0,   0,   1.0,   1.0),  nil, nil}, 
   {"Google Chrome", nil, display_monitor, hs.geometry.unitrect(0,   0,   1.0,   1.0),  nil, nil}, 
   {"Trello",        nil, display_mbp,     hs.geometry.unitrect(0.5, 0.5, 0.5,   0.5),  nil, nil}, 
-  {"Preview",       nil, display_mbp,     hs.geometry.unitrect(0,   0,   0.75,   0.75),  nil, nil}, 
-  {"WeChat",        nil, display_monitor, hs.geometry.unitrect(0,   0,   0.375, 0.25), nil, nil}, 
+  {"Preview",       nil, display_mbp,     hs.geometry.unitrect(0,   0,   1.0,   1.0),  nil, nil}, 
+  {"WeChat",        nil, display_monitor, hs.geometry.unitrect(0,   0,   0.5, 0.5), nil, nil}, 
 }
 
 -- And now for hotkeys relating to Hyper. First, let's capture all of the functions, then we can just quickly iterate and bind them
@@ -155,6 +155,6 @@ end
 hs.hotkey.bind(hyper, "R", "Reload Configuration", function() hs.reload() end)
 
 local wfRedshift=hs.window.filter.new({loginwindow={visible=true,allowRoles='*'}},'wf-redshift')
-hs.redshift.start(2000,'20:00','7:00','3h',false,wfRedshift)
+hs.redshift.start(2000,'19:20','7:00','3h',false,wfRedshift)
 
 
