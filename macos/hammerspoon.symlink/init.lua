@@ -12,8 +12,6 @@ hostname = hs.host.localizedName()
 hyper = {"cmd", "alt", "ctrl", "shift"}
 
 
-hs.hotkey.bind(hyper, "R", "Reload Configuration", function() hs.reload() end)
-
 
 hs.loadSpoon("Caffeine")
 spoon.Caffeine:bindHotkeys({
@@ -34,9 +32,10 @@ hs.loadSpoon("ModalMgr")
 hspoon_list = {
   "CircleClock",
   "HCalendar",
+  "UnsplashZ",
   "WinWin",
-  "Astrill"
-  -- "MyUtils"
+  "Astrill",
+  "MyUtils"
 }
 
 -- Load those Spoons
@@ -51,7 +50,6 @@ if string.len(hswhints_keys[2]) > 0 then
                                    hs.hints.windowHints()
   end)
 end
-
 
 
 -- resizeM modal environment
@@ -137,11 +135,12 @@ lastNumberOfScreens = #hs.screen.allScreens()
 --   Format reminder:
 --     {"App name", "Window name", "Display Name", "unitrect", "framerect", "fullframerect"},
 dual_display = {
-  {"iTerm2",        nil, display_monitor, hs.geometry.unitrect(0,   0,   1.0,   1.0),  nil, nil},
-  {"Emacs",         nil, display_monitor, hs.geometry.unitrect(0,   0,   1.0,   1.0),  nil, nil},
-  {"Google Chrome", nil, display_monitor, hs.geometry.unitrect(0,   0,   1.0,   1.0),  nil, nil},
-  {"Trello",        nil, display_mbp,    hs.geometry.unitrect(0.5, 0.5, 0.5,   0.5),  nil, nil},
-  {"WeChat",        nil, display_monitor, hs.geometry.unitrect(0,   0,   0.375, 0.25), nil, nil},
+  {"iTerm2",        nil, display_monitor, hs.geometry.unitrect(0,   0,   1.0,   1.0),  nil, nil}, 
+  {"Emacs",         nil, display_monitor, hs.geometry.unitrect(0,   0,   1.0,   1.0),  nil, nil}, 
+  {"Google Chrome", nil, display_monitor, hs.geometry.unitrect(0,   0,   1.0,   1.0),  nil, nil}, 
+  {"Trello",        nil, display_mbp,     hs.geometry.unitrect(0.5, 0.5, 0.5,   0.5),  nil, nil}, 
+  {"Preview",       nil, display_mbp,     hs.geometry.unitrect(0,   0,   0.75,   0.75),  nil, nil}, 
+  {"WeChat",        nil, display_monitor, hs.geometry.unitrect(0,   0,   0.375, 0.25), nil, nil}, 
 }
 
 -- And now for hotkeys relating to Hyper. First, let's capture all of the functions, then we can just quickly iterate and bind them
@@ -152,5 +151,10 @@ hyperfns['2'] = function() hs.layout.apply(dual_display) end
 for _hotkey, _fn in pairs(hyperfns) do
   hs.hotkey.bind(hyper, _hotkey, _fn)
 end
+
+hs.hotkey.bind(hyper, "R", "Reload Configuration", function() hs.reload() end)
+
+local wfRedshift=hs.window.filter.new({loginwindow={visible=true,allowRoles='*'}},'wf-redshift')
+hs.redshift.start(2000,'20:00','7:00','3h',false,wfRedshift)
 
 

@@ -1,3 +1,3 @@
 #!/usr/bin/env bash
 
-open hammerspoon://disablevpn
+open -g hammerspoon://disablevpn
