@@ -1,5 +1,13 @@
 import json
 with open('./MDData.db.json') as db:
-        data = json.load(db)
-        daily  = data['MDData.db']['dailyActivityLog']
-        minutely = data['MDData.db']['minutelyActivityLog']
+    data = json.load(db)
+    daily  = data['MDData.db']['dailyActivityLog']
+    minutely = data['MDData.db']['minutelyActivityLog']
+    daily_head = {*daily[0]}
+    minutely_head = minutely[0]
+    daily_top_10 = [x for x in reversed(daily)][:10]
+    daily_top_10.insert(0,daily_head)
+    daily_top_50 = [x for x in reversed(daily)][:50]
+    daily_top_50.insert(0,daily_head)
+    daily_top_100 = [x for x in reversed(daily)][:100]
+    daily_top_100.insert(0,daily_head)
