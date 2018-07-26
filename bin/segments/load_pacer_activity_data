@@ -1,0 +1,5 @@
+import json
+with open('./MDData.db.json') as db:
+        data = json.load(db)
+        daily  = data['MDData.db']['dailyActivityLog']
+        minutely = data['MDData.db']['minutelyActivityLog']
