@@ -1,13 +1,71 @@
 import json
+import pendulum as pp
+
+def get_date_string(seconds, offset):
+    return pp.from_timestamp(int(seconds), tz=int(offset) / 60).format('YYYY-MM-DD HH:mm:ss')
+
+
+removed_daily_fields = {
+    'Id',
+    'activityType',
+    'createdDate',
+    'deleted',
+    'endTime',
+    'floors',
+    'met',
+    'mood',
+    'partnerSyncHash',
+    'recordedForDate',
+    'partnerSyncState',
+    'recordedBy',
+    'recordedForDatetimeIso8601',
+    'recordedTimezoneOffsetInMinutes',
+    'recordedUnixtime',
+    'startTime',
+    'sync_activity_id',
+    'sync_activity_state',
+    'user_id',
+    # minutely
+    'endTimeTimezoneOffset',
+    'lastSeenStepCounterReading',
+    'lastSeenStepCounterTimeStamp',
+    'recordType',
+    'startTimeTimezoneOffset',
+    'recordedForDateTimezoneOffset'
+}
+
 with open('./MDData.db.json') as db:
     data = json.load(db)
-    daily  = data['MDData.db']['dailyActivityLog']
-    minutely = data['MDData.db']['minutelyActivityLog']
-    daily_head = {*daily[0]}
-    minutely_head = minutely[0]
-    daily_top_10 = [x for x in reversed(daily)][:10]
-    daily_top_10.insert(0,daily_head)
-    daily_top_50 = [x for x in reversed(daily)][:50]
-    daily_top_50.insert(0,daily_head)
-    daily_top_100 = [x for x in reversed(daily)][:100]
-    daily_top_100.insert(0,daily_head)
+
+daily  = data['MDData.db']['dailyActivityLog']
+for d in daily:
+    d['date'] = get_date_string(d['recordedForDate'], d['recordedTimezoneOffsetInMinutes'])
+    for k in removed_daily_fields:
+        d.pop(k, None)
+
+minutely = data['MDData.db']['minutelyActivityLog']
+print(minutely[1])
+
+for m in minutely:
+    m['date'] = get_date_string(m['recordedForDate'], m['recordedForDateTimezoneOffset'])
+    for k in removed_daily_fields:
+        m.pop(k, None)
+
+daily_head = {x:x for x in daily[0].keys()}
+minutely_head = {x:x for x in minutely[0].keys()}
+
+daily_top_10 = [x for x in reversed(daily)][:10]
+daily_top_50 = [x for x in reversed(daily)][:50]
+daily_top_100 = [x for x in reversed(daily)][:100]
+
+daily_top_10.insert(0,daily_head)
+daily_top_50.insert(0,daily_head)
+daily_top_100.insert(0,daily_head)
+
+minutely_top_10 = [x for x in reversed(minutely)][:10]
+minutely_top_50 = [x for x in reversed(minutely)][:50]
+minutely_top_100 = [x for x in reversed(minutely)][:100]
+
+minutely_top_10.insert(0,minutely_head)
+minutely_top_50.insert(0,minutely_head)
+minutely_top_100.insert(0,minutely_head)

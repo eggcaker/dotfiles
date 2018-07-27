@@ -140,7 +140,7 @@ dual_display = {
   {"Google Chrome", nil, display_monitor, hs.geometry.unitrect(0,   0,   1.0,   1.0),  nil, nil}, 
   {"Trello",        nil, display_mbp,     hs.geometry.unitrect(0.5, 0.5, 0.5,   0.5),  nil, nil}, 
   {"Preview",       nil, display_mbp,     hs.geometry.unitrect(0,   0,   1.0,   1.0),  nil, nil}, 
-  {"WeChat",        nil, display_monitor, hs.geometry.unitrect(0,   0,   0.5, 0.5), nil, nil}, 
+  {"WeChat",        nil, display_mbp, hs.geometry.unitrect(0,   0,   0.5, 0.5), nil, nil}, 
 }
 
 -- And now for hotkeys relating to Hyper. First, let's capture all of the functions, then we can just quickly iterate and bind them
