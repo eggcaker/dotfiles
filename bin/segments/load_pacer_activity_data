@@ -1,11 +1,12 @@
 import json
-import pendulum as pp
+import pendulum
+import pandas
 
 def get_date_string(seconds, offset):
-    return pp.from_timestamp(int(seconds), tz=int(offset) / 60).format('YYYY-MM-DD HH:mm:ss')
+    return pendulum.from_timestamp(int(seconds), tz=int(offset) / 60).format('YYYY-MM-DD HH:mm:ss')
 
 
-removed_daily_fields = {
+removed_daily_fields = [
     'Id',
     'activityType',
     'createdDate',
@@ -15,7 +16,6 @@ removed_daily_fields = {
     'met',
     'mood',
     'partnerSyncHash',
-    'recordedForDate',
     'partnerSyncState',
     'recordedBy',
     'recordedForDatetimeIso8601',
@@ -32,40 +32,39 @@ removed_daily_fields = {
     'recordType',
     'startTimeTimezoneOffset',
     'recordedForDateTimezoneOffset'
-}
+]
 
 with open('./MDData.db.json') as db:
-    data = json.load(db)
+    raw_json = json.load(db)
 
-daily  = data['MDData.db']['dailyActivityLog']
-for d in daily:
-    d['date'] = get_date_string(d['recordedForDate'], d['recordedTimezoneOffsetInMinutes'])
-    for k in removed_daily_fields:
-        d.pop(k, None)
+daily = pandas.DataFrame.from_dict(raw_json['MDData.db']['dailyActivityLog'])
+minutely = pandas.DataFrame.from_dict(raw_json['MDData.db']['minutelyActivityLog'])
 
-minutely = data['MDData.db']['minutelyActivityLog']
-print(minutely[1])
+daily.activeTimeInSeconds = daily.activeTimeInSeconds.astype('int64', copy=False)
+daily.distanceInMeters = daily.distanceInMeters.astype('float', copy=False)
+daily.steps= daily.steps.astype('int64', copy=False)
+daily.recordedForDate.astype('int64', copy=False)
 
-for m in minutely:
-    m['date'] = get_date_string(m['recordedForDate'], m['recordedForDateTimezoneOffset'])
-    for k in removed_daily_fields:
-        m.pop(k, None)
+daily.drop(removed_daily_fields, axis=1, inplace=True,  errors='ignore')
+daily.sort_index(ascending=False, inplace=True)
+minutely.drop(removed_daily_fields, axis=1, inplace=True,  errors='ignore')
+minutely.sort_index(ascending=False, inplace=True)
 
-daily_head = {x:x for x in daily[0].keys()}
-minutely_head = {x:x for x in minutely[0].keys()}
+# daily_head = {x:x for x in daily[0].keys()}
+# minutely_head = {x:x for x in minutely[0].keys()}
 
-daily_top_10 = [x for x in reversed(daily)][:10]
-daily_top_50 = [x for x in reversed(daily)][:50]
-daily_top_100 = [x for x in reversed(daily)][:100]
+# daily_top_10 = [x for x in reversed(daily)][:10]
+# daily_top_50 = [x for x in reversed(daily)][:50]
+# daily_top_100 = [x for x in reversed(daily)][:100]
 
-daily_top_10.insert(0,daily_head)
-daily_top_50.insert(0,daily_head)
-daily_top_100.insert(0,daily_head)
+# daily_top_10.insert(0,daily_head)
+# daily_top_50.insert(0,daily_head)
+# daily_top_100.insert(0,daily_head)
 
-minutely_top_10 = [x for x in reversed(minutely)][:10]
-minutely_top_50 = [x for x in reversed(minutely)][:50]
-minutely_top_100 = [x for x in reversed(minutely)][:100]
+# minutely_top_10 = [x for x in reversed(minutely)][:10]
+# minutely_top_50 = [x for x in reversed(minutely)][:50]
+# minutely_top_100 = [x for x in reversed(minutely)][:100]
 
-minutely_top_10.insert(0,minutely_head)
-minutely_top_50.insert(0,minutely_head)
-minutely_top_100.insert(0,minutely_head)
+# minutely_top_10.insert(0,minutely_head)
+# minutely_top_50.insert(0,minutely_head)
+# minutely_top_100.insert(0,minutely_head)
