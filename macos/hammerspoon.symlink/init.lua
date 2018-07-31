@@ -154,7 +154,7 @@ end
 
 hs.hotkey.bind(hyper, "R", "Reload Configuration", function() hs.reload() end)
 
-local wfRedshift=hs.window.filter.new({loginwindow={visible=true,allowRoles='*'}},'wf-redshift')
-hs.redshift.start(2000,'19:20','7:00','3h',false,wfRedshift)
+-- local wfRedshift=hs.window.filter.new({loginwindow={visible=true,allowRoles='*'}},'wf-redshift')
+-- hs.redshift.start(2000,'19:20','7:00','3h',false,wfRedshift)
 
 

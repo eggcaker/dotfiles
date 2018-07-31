@@ -30,6 +30,11 @@ removed_daily_fields = [
     'lastSeenStepCounterReading',
     'lastSeenStepCounterTimeStamp',
     'recordType',
+    'activityName',
+    'payload',
+    'comments',
+    'recordedByPayload',
+    'sync_activity_hash',
     'startTimeTimezoneOffset',
     'recordedForDateTimezoneOffset'
 ]
@@ -40,31 +45,33 @@ with open('./MDData.db.json') as db:
 daily = pandas.DataFrame.from_dict(raw_json['MDData.db']['dailyActivityLog'])
 minutely = pandas.DataFrame.from_dict(raw_json['MDData.db']['minutelyActivityLog'])
 
+# if find some data not plotable then uncomment this line to clenup the data
+# daily.drop(daily[daily.recordedForDate.astype('int') < 2000].index, inplace=True)
+
 daily.activeTimeInSeconds = daily.activeTimeInSeconds.astype('int64', copy=False)
 daily.distanceInMeters = daily.distanceInMeters.astype('float', copy=False)
 daily.steps= daily.steps.astype('int64', copy=False)
-daily.recordedForDate.astype('int64', copy=False)
+
+dates = []
+
+for idx, row in daily.iterrows():
+    d = pandas.to_datetime(int(row['recordedForDate']), unit='s') + pandas.Timedelta(int(row['recordedTimezoneOffsetInMinutes']), unit='m')
+    dates.append(d)
+
+daily.recordedForDate = dates
+
+
+minute_dates = []
+
+for idx, row in minutely.iterrows():
+    d = pandas.to_datetime(int(row['recordedForDate']), unit='s') + pandas.Timedelta(int(row['recordedForDateTimezoneOffset']), unit='m')
+    minute_dates.append(d)
+
+minutely.recordedForDate = minute_dates
+
 
 daily.drop(removed_daily_fields, axis=1, inplace=True,  errors='ignore')
 daily.sort_index(ascending=False, inplace=True)
 minutely.drop(removed_daily_fields, axis=1, inplace=True,  errors='ignore')
 minutely.sort_index(ascending=False, inplace=True)
 
-# daily_head = {x:x for x in daily[0].keys()}
-# minutely_head = {x:x for x in minutely[0].keys()}
-
-# daily_top_10 = [x for x in reversed(daily)][:10]
-# daily_top_50 = [x for x in reversed(daily)][:50]
-# daily_top_100 = [x for x in reversed(daily)][:100]
-
-# daily_top_10.insert(0,daily_head)
-# daily_top_50.insert(0,daily_head)
-# daily_top_100.insert(0,daily_head)
-
-# minutely_top_10 = [x for x in reversed(minutely)][:10]
-# minutely_top_50 = [x for x in reversed(minutely)][:50]
-# minutely_top_100 = [x for x in reversed(minutely)][:100]
-
-# minutely_top_10.insert(0,minutely_head)
-# minutely_top_50.insert(0,minutely_head)
-# minutely_top_100.insert(0,minutely_head)
