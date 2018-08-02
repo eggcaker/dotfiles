@@ -51,7 +51,12 @@ minutely = pandas.DataFrame.from_dict(raw_json['MDData.db']['minutelyActivityLog
 
 daily.activeTimeInSeconds = daily.activeTimeInSeconds.astype('int64', copy=False)
 daily.distanceInMeters = daily.distanceInMeters.astype('float', copy=False)
+daily.calories = daily.calories.astype('float', copy=False)
 daily.steps= daily.steps.astype('int64', copy=False)
+
+minutely.distanceInMeters = minutely.distanceInMeters.astype('float', copy=False)
+minutely.calories = minutely.calories.astype('float', copy=False)
+minutely.steps= minutely.steps.astype('int64', copy=False)
 
 dates = []
 
@@ -80,3 +85,6 @@ minutely.index = minutely_key
 
 daily.sort_index(ascending=False, inplace=True)
 minutely.sort_index(ascending=False, inplace=True)
+
+d = daily.round({'calories': 2, 'distanceInMeters':2})
+m = minutely.round({'calories': 2, 'distanceInMeters':2})
