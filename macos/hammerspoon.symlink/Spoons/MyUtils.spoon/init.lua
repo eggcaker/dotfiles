@@ -12,14 +12,14 @@ end
 
 
 function obj:start()
-  set_app_input_method('Hammerspoon', English, hs.window.filter.windowCreated)
-  set_app_input_method('Spotlight', English, hs.window.filter.windowCreated)
-  set_app_input_method('Alfred', English, hs.window.filter.windowCreated)
-  set_app_input_method('Emacs', English)
-  set_app_input_method('iTerm2', English)
-  set_app_input_method('Google Chrome', English)
-  set_app_input_method('Android Studio', English)
-  set_app_input_method('WeChat', Chinese)
+  obj.set_app_input_method('Hammerspoon', English, hs.window.filter.windowCreated)
+  obj.set_app_input_method('Spotlight', English, hs.window.filter.windowCreated)
+  obj.set_app_input_method('Alfred', English, hs.window.filter.windowCreated)
+  obj.set_app_input_method('Emacs', English)
+  obj.set_app_input_method('iTerm2', English)
+  obj.set_app_input_method('Google Chrome', English)
+  obj.set_app_input_method('Android Studio', English)
+  obj.set_app_input_method('WeChat', Chinese)
 end
 
 function obj:getPacerIdFromFabric()
@@ -61,15 +61,15 @@ end
 
 
 -- Input state auto toggle
-local function Chinese()
+function Chinese()
   hs.keycodes.currentSourceID("com.aodaren.inputmethod.Qingg")
 end
 
-local function English()
+function English()
   hs.keycodes.currentSourceID("com.apple.keylayout.ABC")
 end
 
-local function set_app_input_method(app_name, set_input_method_function, event)
+function obj.set_app_input_method(app_name, set_input_method_function, event)
   event = event or hs.window.filter.windowFocused
 
   hs.window.filter.new(app_name)
