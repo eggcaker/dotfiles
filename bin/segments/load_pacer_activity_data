@@ -53,27 +53,12 @@ daily.activeTimeInSeconds = daily.activeTimeInSeconds.astype('int64', copy=False
 daily.distanceInMeters = daily.distanceInMeters.astype('float', copy=False)
 daily.calories = daily.calories.astype('float', copy=False)
 daily.steps= daily.steps.astype('int64', copy=False)
+daily.recordedForDate = pandas.to_datetime(daily.recordedForDate.astype('int') + daily.recordedTimezoneOffsetInMinutes.astype('int')*60, unit='s')
 
 minutely.distanceInMeters = minutely.distanceInMeters.astype('float', copy=False)
 minutely.calories = minutely.calories.astype('float', copy=False)
 minutely.steps= minutely.steps.astype('int64', copy=False)
-
-dates = []
-
-for idx, row in daily.iterrows():
-    d = pandas.to_datetime(int(row['recordedForDate']), unit='s') + pandas.Timedelta(int(row['recordedTimezoneOffsetInMinutes']), unit='m')
-    dates.append(d)
-
-daily.recordedForDate = dates
-
-minute_dates = []
-
-for idx, row in minutely.iterrows():
-    d = pandas.to_datetime(int(row['recordedForDate']), unit='s') + pandas.Timedelta(int(row['recordedForDateTimezoneOffset']), unit='m')
-    minute_dates.append(d)
-
-minutely.recordedForDate = minute_dates
-
+minutely.recordedForDate = pandas.to_datetime(minutely.recordedForDate.astype('int') + minutely.recordedForDateTimezoneOffset.astype('int')*60, unit='s')
 
 daily.drop(removed_daily_fields, axis=1, inplace=True,  errors='ignore')
 minutely.drop(removed_daily_fields, axis=1, inplace=True,  errors='ignore')
