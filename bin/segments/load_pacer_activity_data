@@ -64,9 +64,9 @@ daily.drop(removed_daily_fields, axis=1, inplace=True,  errors='ignore')
 minutely.drop(removed_daily_fields, axis=1, inplace=True,  errors='ignore')
 
 daily_key = [x for x in map( lambda x: x[:10],  daily.recordedForDate.astype('str').tolist())]
-daily.index = daily_key
+daily.index = pd.DatetimeIndex(daily_key)
 minutely_key = [x for x in map( lambda x: x[:10],  minutely.recordedForDate.astype('str').tolist())]
-minutely.index = minutely_key
+minutely.index = pd.DatetimeIndex(minutely_key)
 
 daily.sort_index(ascending=False, inplace=True)
 minutely.sort_index(ascending=False, inplace=True)
