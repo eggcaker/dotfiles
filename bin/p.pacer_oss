@@ -4,8 +4,11 @@ import sys
 import json
 
 c.disable_vpn
-$FEATURE_NAME = sys.argv[1] if len(sys.argv) == 2 else 'tz'
+$FLAVOR = sys.argv[1]
+$FEATURE_NAME = sys.argv[2]
 
-p.publish_release  ~/src/work/pacer_android/app/build/outputs/apk/playdev/release/app-playdev-release.apk dev/z1-$FEATURE_NAME.apk
-
+p.publish_release  ~/src/work/pacer_android/app/build/outputs/apk/play$FLAVOR/release/app-play$FLAVOR-release.apk dev/z1-$FEATURE_NAME.apk
+echo "https://cdn1.dongdong17.com/releases/dev/z1-$FEATURE_NAME.apk"|pbcopy
+echo "https://cdn1.dongdong17.com/releases/dev/z1-$FEATURE_NAME.apk"
+echo "DONE!"
 c.enable_vpn
