@@ -164,7 +164,8 @@ from prompt_toolkit.key_binding.vi_state import InputMode
 
 @events.on_ptk_create
 def custom_keybindings(bindings, **kw):
-    handler = bindings.add_binding
+    # handler = bindings.add_binding
+    handler = bindings.registry.add_binding
 
     @handler('f', 'd')
     def exit_insert_mode(event, filter=ViInsertMode):
