@@ -1,6 +1,9 @@
 import json
 import pendulum
-import pandas as pd
+import pandas 
+
+pandas.set_option('display.max_rows', 120)
+
 
 def get_date_string(seconds, offset):
     return pendulum.from_timestamp(int(seconds), tz=int(offset) / 60).format('YYYY-MM-DD HH:mm:ss')
