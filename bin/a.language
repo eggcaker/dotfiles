@@ -1,6 +1,18 @@
 #!/usr/bin/env xonsh 
 
-import sys 
+# download apk: https://play.google.com/store/apps/details?id=net.sanapeli.adbchangelanguage&rdid=net.sanapeli.adbchangelanguage
+# set permission
+# adb shell pm grant net.sanapeli.adbchangelanguage android.permission.CHANGE_CONFIGURATION
+#
 
-lang= sys.argv
-adb shell "su -u setprop persist.sys.language fr; setprop persist.sys.country CA; setprop ctl.restart zygote"
+# langs
+# 1. zh-rCN
+# 2. zh-rTW
+# 3. fr
+# ...
+
+import sys
+
+$LANG = sys.argv[1]
+
+adb shell am start -n net.sanapeli.adbchangelanguage/.AdbChangeLanguage -e language $LANG
