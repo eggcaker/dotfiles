@@ -12,7 +12,6 @@ function obj:init()
   hs.urlevent.bind('enablevpn', function(event, p) self:enable() end)
 end
 
--- TODO: cannot bind from init.lua, still don't konw why
 function obj:bindHotkeys(map)
   if (self.hotkey) then
     self.hotkey:delete()
