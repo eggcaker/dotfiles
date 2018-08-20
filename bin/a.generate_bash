@@ -1,39 +1,10 @@
 #!/usr/bin/env bash
 
 adb shell "su -c 'mount -o rw,remount /system'"
-echo 'pkg install git nodejs curl wget jq silversearcher-ag vim' > packages
+echo "#!/system/bin/sh" > shell
+echo "su -c 'source /data/data/com.termux/files/home/bin/termux-shell.sh'" >> shell
 
-if true; then
-cat << EOF > termux-shell.sh
-#!/system/bin/sh
-export PREFIX='/data/data/com.termux/files/usr'
-export HOME='/data/data/com.termux/files/home'
-export LD_LIBRARY_PATH='/data/data/com.termux/files/usr/lib'
-export PATH="/data/data/com.termux/files/usr/bin:/data/data/com.termux/files/usr/bin/applets:\$PATH"
-export LANG='en_US.UTF-8'
-export SHELL='/data/data/com.termux/files/usr/bin/bash'
-cd "\$HOME"
-exec "\$SHELL" -l
-EOF
-fi
-
-
-echo "#!/system/bin/sh" > fish
-echo "su -c 'source /data/data/com.termux/files/home/bin/termux-shell.sh'" >> fish
-
-adb push packages /mnt/sdcard/
-adb push termux-shell.sh /mnt/sdcard/
-adb push  fish /mnt/sdcard/
-
+adb push  shell /mnt/sdcard/
 adb shell "su -c 'mv /mnt/sdcard/fish /system/bin/f'"
-adb shell "su -c 'chmod 777 /system/bin/f'"
-adb shell "su -c 'mkdir -p /data/data/com.termux/files/home/bin'"
-adb shell "su -c 'cp /mnt/sdcard/packages /data/data/com.termux/files/home/bin/packages.sh'"
-adb shell "su -c 'cp /mnt/sdcard/termux-shell.sh /data/data/com.termux/files/home/bin/termux-shell.sh'"
-adb shell "su -c 'chmod 777 /data/data/com.termux/files/home/bin/packages.sh'"
-adb shell "su -c 'chmod 777 /data/data/com.termux/files/home/bin/termux-shell.sh'"
 adb shell "su -c 'mount -o ro,remount /system'"
-
-# rm packages
-# rm termux-shell.sh
-# rm fish
+rm shell
