@@ -108,7 +108,7 @@ c.downloads.location.prompt = False
 # gets replaced by the filename of the file to be edited.
 c.editor.command = ["termite", "-e", "vim '{}'"]
 
-monospace = "8px 'Bok MonteCarlo'"
+monospace = "13pt 'Bok MonteCarlo'"
 
 # Font used in the completion categories.
 c.fonts.completion.category = f"bold {monospace}"
@@ -135,7 +135,7 @@ c.fonts.messages.info = monospace
 c.fonts.messages.warning = monospace
 
 # Font used for prompts.
-c.fonts.prompts = "14pt monospace"
+c.fonts.prompts = monospace
 
 # Font used in the statusbar.
 c.fonts.statusbar = monospace
@@ -144,7 +144,7 @@ c.fonts.statusbar = monospace
 c.fonts.tabs = monospace
 
 # Font used for the hints.
-c.fonts.hints = "bold 18px 'DejaVu Sans Mono'"
+c.fonts.hints = "bold 14px 'DejaVu Sans Mono'"
 
 # Chars used for hint strings.
 c.hints.chars = "asdfghjklie"
@@ -179,9 +179,11 @@ c.tabs.last_close = "close"
 c.tabs.padding = {
     "left": 5,
     "right": 5,
-    "top": 0,
-    "bottom": 1,
+    "top": 2,
+    "bottom": 2,
 }
+
+c.tabs.position = "top"
 
 # Which tab to select when the focused tab is removed.
 # Valid values:
@@ -222,3 +224,4 @@ c.url.start_pages = "https://github.com/"
 #   * `{backend}`: Either ''webkit'' or ''webengine''
 #   * `{private}` : Indicates when private mode is enabled.
 c.window.title_format = "{private}{perc}{title}{title_sep}qutebrowser"
+c.window.hide_decoration = True
