@@ -7,7 +7,7 @@ c.disable_vpn
 $FLAVOR = sys.argv[1]
 $FEATURE_NAME = sys.argv[2]
 
-p.publish_release  ~/src/work/pacer_android/app/build/outputs/apk/play$FLAVOR/release/app-play$FLAVOR-release.apk dev/z1-$FEATURE_NAME.apk
+p.publish_release  ~/src/work/pacer_android/app/build/outputs/apk/play$FLAVOR/release/app-play$FLAVOR-release.apk dev/z2-$FEATURE_NAME.apk
 echo "https://cdn1.dongdong17.com/releases/dev/z1-$FEATURE_NAME.apk"|pbcopy
 echo "https://cdn1.dongdong17.com/releases/dev/z1-$FEATURE_NAME.apk"
 echo "DONE!"
