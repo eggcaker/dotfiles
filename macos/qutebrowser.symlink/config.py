@@ -225,3 +225,5 @@ c.url.start_pages = "https://github.com/"
 #   * `{private}` : Indicates when private mode is enabled.
 c.window.title_format = "{private}{perc}{title}{title_sep}qutebrowser"
 c.window.hide_decoration = True
+
+c.content.headers.user_agent = 'Mozilla/5.0 (X11; Linux x86_64; rv:52.0) Gecko/20100101 Firefox/52.0'
