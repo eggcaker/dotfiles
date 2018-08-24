@@ -135,7 +135,7 @@ c.fonts.tabs = monospace
 c.fonts.hints = "bold 14px 'DejaVu Sans Mono'"
 
 # Chars used for hint strings.
-c.hints.chars = "asdfghjklie"
+c.hints.chars = "hutenosadi"
 
 # Leave insert mode if a non-editable element is clicked.
 c.input.insert_mode.auto_leave = True
@@ -145,7 +145,7 @@ c.input.insert_mode.auto_leave = True
 c.input.insert_mode.auto_load = True
 
 # Show a scrollbar.
-c.scrolling.bar = True
+c.scrolling.bar = False
 
 # Enable smooth scrolling for web pages. Note smooth scrolling does not
 # work with the `:scroll-px` command.
@@ -335,7 +335,7 @@ c.colors.downloads.error.fg = "#b1a191"
 
 c.colors.downloads.error.bg = "#d79921"
 
-c.colors.webpage.bg = "#fbf1c7"
+c.colors.webpage.bg = "#f1f1f1"
 
 c.colors.keyhint.fg = "#d33682"
 
@@ -364,3 +364,5 @@ c.colors.prompts.fg = "#a89984"
 c.colors.prompts.bg = "#282828"
 
 c.colors.prompts.selected.bg = "#282828"
+
+
