@@ -39,7 +39,7 @@ $ANDROID_NDK = "/usr/local/opt/android-ndk/android-ndk-r14b"
 
 $PRODUCT_RELEASE = True
 $PLAY_RELEASE = True
-
+aliases['vi'] = 'emacsclient -nw'
 aliases['.'] = ['cd', '..']
 aliases['..'] = ['cd', '../..']
 aliases['...'] = ['cd', '../../..']

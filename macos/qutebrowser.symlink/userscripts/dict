@@ -1,0 +1,67 @@
+#!/usr/bin/env python
+"""
+If a single word is selected on a page, get the meaning of that
+word through the free Glosbe API, and display the meaning through
+the :message-info popup.
+Works only if a single word is selected, otherwise, nothing happens.
+Tip:
+    The default timeout on the messages popup is only 2 seconds, which
+    is quite short if the meaning is detailed. You can change this with:
+        :set messages.timeout <miliseconds>
+    I recommend around ~5-7 seconds, but it's up to you.
+Usage:
+    :spawn --userscript dict
+Recommendation:
+    :bind sm spawn --userscript dict
+    (sm -> show meaning)
+See also:
+    https://glosbe.com/a-api for providing a great, free api.
+"""
+import json
+import os
+import re
+import sys
+import urllib2
+
+
+def _clean_text(text):
+    return re.sub(r'(&\w{4};)|(<.+>)|(\[.+\])', '', text, flags=re.I)
+
+
+def format_meaning(phrase, data):
+    """Formats json data into a readable result"""
+    if 'tuc' not in data:
+        return '%s: no meaning found' % phrase
+
+    for t in data.get('tuc'):
+        if 'meanings' in t:
+            message = '; '.join([_clean_text(x['text'])
+                                 for x in t['meanings']])
+            return '%s: %s' % (phrase, message)
+
+    # we didn't find a more detailed description, so check if there
+    # is a simpler one so we don't return empty handed.
+    for t in data.get('tuc'):
+        if 'phrase' in t and 'text' in t.get('phrase', {}):
+            return '%s: %s' % (phrase, _clean_text(t['phrase']['text']))
+
+    return '%s: no meaning found' % phrase
+
+
+
+
+
+def main():
+    phrase = os.getenv('QUTE_SELECTED_TEXT', '')
+    if not phrase or len(phrase.split()) > 1:
+        # cannot handle multiple words.
+        sys.exit(0)
+
+    meaning = get_meaning(phrase)
+
+    with open(os.getenv('QUTE_FIFO'), 'w') as fifo:
+        fifo.write('message-info "%s"' % meaning)
+
+
+if __name__ == '__main__':
+    main()
