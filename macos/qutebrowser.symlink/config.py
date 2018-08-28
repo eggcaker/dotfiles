@@ -18,7 +18,7 @@ c.aliases = {'w': 'session-save', 'wq': 'quit --save', 'mpv': 'spawn -d mpv --fo
 #   - multiple-tabs: Show a confirmation if multiple tabs are opened.
 #   - downloads: Show a confirmation if downloads are running
 #   - never: Never show a confirmation.
-c.confirm_quit = ['downloads']
+c.confirm_quit = ['always']
 
 # Always restore open sites when qutebrowser is reopened.
 # Type: Bool
@@ -568,3 +568,5 @@ config.bind('tl', None)
 config.bind('z+', 'zoom-in')
 config.bind('z-', 'zoom-out')
 config.bind('zz', 'zoom')
+# :bind -m command <Up> completion-item-focus prev
+# :bind -m command <Down> completion-item-focus next
