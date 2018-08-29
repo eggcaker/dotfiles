@@ -199,5 +199,8 @@ $LESS_TERMCAP_us = "\033[00;36m"     # begin underline
 $LESS_TERMCAP_ue = "\033[0m"         # end underline
 
 # XONSH WIZARD START
-xontrib load coreutils vox z mpl
+xontrib load coreutils vox z mpl fzf-widgets
 # XONSH WIZARD END
+
+$fzf_history_binding = Keys.ControlR
+$fzf_ssh_binding = Keys.ControlS

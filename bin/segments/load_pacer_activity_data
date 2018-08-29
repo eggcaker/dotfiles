@@ -45,7 +45,9 @@ removed_daily_fields = [
 with open('./MDData.db.json') as db:
     raw_json = json.load(db)
 
+daily_raw = pandas.DataFrame.from_dict(raw_json['MDData.db']['dailyActivityLog'])
 daily = pandas.DataFrame.from_dict(raw_json['MDData.db']['dailyActivityLog'])
+minutely_raw = pandas.DataFrame.from_dict(raw_json['MDData.db']['minutelyActivityLog'])
 minutely = pandas.DataFrame.from_dict(raw_json['MDData.db']['minutelyActivityLog'])
 
 
@@ -67,9 +69,9 @@ daily.drop(removed_daily_fields, axis=1, inplace=True,  errors='ignore')
 minutely.drop(removed_daily_fields, axis=1, inplace=True,  errors='ignore')
 
 daily_key = [x for x in map( lambda x: x[:10],  daily.recordedForDate.astype('str').tolist())]
-daily.index = pd.DatetimeIndex(daily_key)
+daily.index = pandas.DatetimeIndex(daily_key)
 minutely_key = [x for x in map( lambda x: x[:10],  minutely.recordedForDate.astype('str').tolist())]
-minutely.index = pd.DatetimeIndex(minutely_key)
+minutely.index = pandas.DatetimeIndex(minutely_key)
 
 daily.sort_index(ascending=False, inplace=True)
 minutely.sort_index(ascending=False, inplace=True)
