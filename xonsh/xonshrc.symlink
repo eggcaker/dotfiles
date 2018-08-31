@@ -39,7 +39,6 @@ $ANDROID_NDK = "/usr/local/opt/android-ndk/android-ndk-r14b"
 
 $PRODUCT_RELEASE = True
 $PLAY_RELEASE = True
-aliases['vi'] = 'emacsclient -nw'
 aliases['.'] = ['cd', '..']
 aliases['..'] = ['cd', '../..']
 aliases['...'] = ['cd', '../../..']
@@ -142,6 +141,12 @@ aliases['java8'] = ['jhome', '-v', '1.8.0_141']
 aliases['js'] = ['java', '-jar', '/opt/java-libs/try-artifact-0.3.0.jar']
 
 
+def _redex():
+    """ run redex with docker"""
+    docker run -it  -v /usr/local/share/android-sdk:/opt/android-sdk-linux -v ./:/redex redex redex ./app-play-vp5.8.1.apk -o ./dex.apk
+
+aliases['redex'] = _redex
+
 aliases['p.load_pacer_data'] = ['source', '~/.dotfiles/bin/segments/load_pacer_activity_data']
 
 
@@ -155,7 +160,6 @@ aliases['jshell'] = _jshell
 
 # python chart
 aliases['imcat'] = lambda args, stdin: print('\033]1337;File=inline=1;height=80%%:%s\a\n' % stdin)
-
 $SHELL_TYPE = 'prompt_toolkit'
 $VI_MODE = True
 
@@ -199,8 +203,8 @@ $LESS_TERMCAP_us = "\033[00;36m"     # begin underline
 $LESS_TERMCAP_ue = "\033[0m"         # end underline
 
 # XONSH WIZARD START
-xontrib load coreutils vox z mpl fzf-widgets
+xontrib load coreutils vox z mpl #fzf-widgets
 # XONSH WIZARD END
 
-$fzf_history_binding = Keys.ControlR
-$fzf_ssh_binding = Keys.ControlS
+# $fzf_history_binding = Keys.ControlR
+# $fzf_ssh_binding = Keys.ControlS
