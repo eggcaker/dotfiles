@@ -5,6 +5,7 @@ echo "#!/system/bin/sh" > shell
 echo "su -c 'source /data/data/com.termux/files/home/bin/termux-shell.sh'" >> shell
 
 adb push  shell /mnt/sdcard/
-adb shell "su -c 'mv /mnt/sdcard/fish /system/bin/f'"
+adb shell "su -c 'mv /mnt/sdcard/shell /system/bin/f'"
+adb shell "su -c 'chmod 777 /system/bin/f'"
 adb shell "su -c 'mount -o ro,remount /system'"
 rm shell
