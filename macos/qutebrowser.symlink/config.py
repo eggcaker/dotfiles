@@ -560,4 +560,3 @@ c.fonts.tabs = "14pt 'Fira code'"
 # Bindings for command mode
 config.bind('<Ctrl+n>', 'completion-item-focus next', mode='command')
 config.bind('<Ctrl+p>', 'completion-item-focus prev', mode='command')
-config.bind('<Up>', 'completion-item-focus prev', mode='command')
