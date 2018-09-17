@@ -168,8 +168,8 @@ from prompt_toolkit.key_binding.vi_state import InputMode
 
 @events.on_ptk_create
 def custom_keybindings(bindings, **kw):
-    # handler = bindings.add_binding
-    handler = bindings.registry.add_binding
+    handler = bindings.add_binding # ptk2
+    # handler = bindings.registry.add_binding ptk1
 
     @handler('f', 'd')
     def exit_insert_mode(event, filter=ViInsertMode):
@@ -203,8 +203,8 @@ $LESS_TERMCAP_us = "\033[00;36m"     # begin underline
 $LESS_TERMCAP_ue = "\033[0m"         # end underline
 
 # XONSH WIZARD START
-xontrib load coreutils vox z mpl fzf-widgets
+xontrib load coreutils vox z mpl #fzf-widgets
 # XONSH WIZARD END
 
-$fzf_history_binding = Keys.ControlR
-$fzf_ssh_binding = Keys.ControlS
+# $fzf_history_binding = Keys.ControlR
+# $fzf_ssh_binding = Keys.ControlS
