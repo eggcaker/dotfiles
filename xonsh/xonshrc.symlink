@@ -33,7 +33,7 @@ $XONSH_HISTORY_BACKEND = 'sqlite'
 $HISTCONTROL = 'ignoredups'
 
 $WORK_NOTE_PATH = "$HOME/src/work/working-notes"
-$JAVA_HOME = "/Library/Java/JavaVirtualMachines/jdk1.8.0_141.jdk/Contents/Home"
+$JAVA_HOME = "/Library/Java/JavaVirtualMachines/jdk1.8.0_181.jdk/Contents/Home"
 $ANDROID_SDK_ROOT = "/usr/local/share/android-sdk"
 $ANDROID_HOME = "/usr/local/share/android-sdk"
 $ANDROID_NDK = "/usr/local/opt/android-ndk/android-ndk-r14b"
