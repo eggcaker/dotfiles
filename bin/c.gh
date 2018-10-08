@@ -18,6 +18,8 @@ function push_changes()  {
   echo "";
 }
 
+ssh-add ~/.ssh/*_rsa
+
 #push file to remote repo
 push_changes ~/.org-files;
 push_changes ~/.dotfiles;
