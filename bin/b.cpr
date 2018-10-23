@@ -21,7 +21,7 @@ DESC="$(git log origin/develop..${CURRENT_BRANCH} --pretty=oneline --abbrev-comm
 
 curl -H "Content-Type: application/json" \
 -H "Accept: application/json" \
-     -d '{"reviewers":[{"username":"xuemeichen881118"},{"username":"EricAlwaysWin"},{"username":"zoewong"}],"close_source_branch": true, "title":"'"${PR_NAME}"'","description":"'"${DESC}"'","head":"'"${CURRENT_REPO}"'","source":{"branch":{"name":"'"${CURRENT_BRANCH}"'"}},"destination":{"name":"develop"}}' \
+     -d '{"reviewers":[ {"username":"luliang108"}, {"username":"xuemeichen881118"},{"username":"EricAlwaysWin"},{"username":"zoewong"}],"close_source_branch": true, "title":"'"${PR_NAME}"'","description":"'"${DESC}"'","head":"'"${CURRENT_REPO}"'","source":{"branch":{"name":"'"${CURRENT_BRANCH}"'"}},"destination":{"name":"develop"}}' \
 --user "$BB_USER:$BB_PWD" \
  https://bitbucket.org/api/2.0/repositories/${CURRENT_REPO}/pullrequests > /tmp/pr_result
 
