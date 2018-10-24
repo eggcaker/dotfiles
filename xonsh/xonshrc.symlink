@@ -178,10 +178,11 @@ def custom_keybindings(bindings, **kw):
         vi_state.input_mode = InputMode.NAVIGATION
 
 
-$PROMPT_FIELDS['prompt_end'] = lambda: '{RED}$ ' if __xonsh_history__.last_cmd_rtn else '{BLUE}$ '
+$PROMPT_FIELDS['prompt_end'] = lambda: '{RED}$ ' if __xonsh__.history.last_cmd_rtn else '{BLUE}$ '
 $XONSH_SHOW_TRACEBACK = False
+
+
 $PROMPT = '{env_name:{} }{BOLD_BLUE} {cwd}{branch_color}{curr_branch: {}}{NO_COLOR} {BOLD_BLUE}{prompt_end}{NO_COLOR}'
-$INTENSIFY_COLORS_ON_WIN = False
 
 
 # matplotlib with xonsh
