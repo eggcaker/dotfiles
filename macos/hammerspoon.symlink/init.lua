@@ -13,12 +13,12 @@ hyper = {"cmd", "alt", "ctrl", "shift"}
 
 
 
-hs.loadSpoon("Caffeine")
-spoon.Caffeine:bindHotkeys({
-    toggle={hyper, "S"},
-    lock = {hyper, "L"}
-})
-spoon.Caffeine:start()
+-- hs.loadSpoon("Caffeine")
+-- spoon.Caffeine:bindHotkeys({
+--     toggle={hyper, "S"},
+--     lock = {hyper, "L"}
+-- })
+-- spoon.Caffeine:start()
 
 
 -- Draw pretty rounded corners on all screens
@@ -30,12 +30,12 @@ spoon.RoundedCorners:start()
 hs.loadSpoon("ModalMgr")
 
 hspoon_list = {
-  "CircleClock",
-  "HCalendar",
+  -- "CircleClock",
+  -- "HCalendar",
   "UnsplashZ",
   "WinWin",
   "Astrill",
-  "DragTerminal",
+  -- "DragTerminal",
   "MyUtils"
 }
 
