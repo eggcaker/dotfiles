@@ -39,7 +39,9 @@ c.content.headers.user_agent = 'Mozilla/5.0 (X11; Linux x86_64; rv:52.0) Gecko/2
 # required to exactly match the requested domain. Local domains are
 # always exempt from hostblocking.
 # Type: List of String
-c.content.host_blocking.whitelist = ['piwik.org', '*.flurry.com', 'flurry.com']
+c.content.host_blocking.whitelist = ['piwik.org', '*.flurry.com', 'flurry.com',
+                                     '*.firebase.google.com', '*.google.com', '*.googleapis.com',
+                                     '*.googlecode.com', '*.google-analytics.com']
 
 # Enable JavaScript.
 # Type: Bool
