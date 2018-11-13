@@ -109,7 +109,7 @@ c.downloads.location.prompt = False
 # `{line0}`: Same as `{line}`, but starting from index 0. * `{column0}`:
 # Same as `{column}`, but starting from index 0.
 # Type: ShellCommand
-c.editor.command = ['urxvt', '-e', "vim '{}'"]
+c.editor.command = ["emacsclient", "-c", "{}"]
 
 # When a hint can be automatically followed without pressing Enter.
 # Type: String
@@ -191,7 +191,10 @@ c.url.default_page = 'about:blank'
 # used by prepending the search engine name to the search term, e.g.
 # `:open google qutebrowser`.
 # Type: Dict
-c.url.searchengines = {'DEFAULT': 'https://www.google.com/search?q={}', 'gh': 'https://github.com/search?q={}', 'bd': 'https://www.baidu.com/s?wd={}'}
+c.url.searchengines = {'DEFAULT': 'https://www.google.com/search?q={}',
+                       'gh': 'https://github.com/search?q={}',
+                       'so': 'https://stackoverflow.com/search?q={}',
+                       'bd': 'https://www.baidu.com/s?wd={}'}
 
 # Page(s) to open at the start.
 # Type: List of FuzzyUrl, or FuzzyUrl
@@ -513,51 +516,51 @@ c.colors.webpage.bg = '#f1f1f1'
 
 # Font used in the completion widget.
 # Type: Font
-c.fonts.completion.entry = "14pt 'Fira code'"
+c.fonts.completion.entry = "16pt 'Fira code'"
 
 # Font used in the completion categories.
 # Type: Font
-c.fonts.completion.category = "bold 14pt 'Fira code'"
+c.fonts.completion.category = "bold 16pt 'Fira code'"
 
 # Font used for the debugging console.
 # Type: QtFont
-c.fonts.debug_console = "14pt 'Fira code'"
+c.fonts.debug_console = "16pt 'Fira code'"
 
 # Font used for the downloadbar.
 # Type: Font
-c.fonts.downloads = "14pt 'Fira code'"
+c.fonts.downloads = "16pt 'Fira code'"
 
 # Font used for the hints.
 # Type: Font
-c.fonts.hints = "bold 14px 'DejaVu Sans Mono'"
+c.fonts.hints = "bold 16pt 'DejaVu Sans Mono'"
 
 # Font used in the keyhint widget.
 # Type: Font
-c.fonts.keyhint = "14pt 'Fira code'"
+c.fonts.keyhint = "16pt 'Fira code'"
 
 # Font used for error messages.
 # Type: Font
-c.fonts.messages.error = "14pt 'Fira code'"
+c.fonts.messages.error = "16pt 'Fira code'"
 
 # Font used for info messages.
 # Type: Font
-c.fonts.messages.info = "14pt 'Fira code'"
+c.fonts.messages.info = "16pt 'Fira code'"
 
 # Font used for warning messages.
 # Type: Font
-c.fonts.messages.warning = "14pt 'Fira code'"
+c.fonts.messages.warning = "16pt 'Fira code'"
 
 # Font used for prompts.
 # Type: Font
-c.fonts.prompts = "14pt 'Fira code'"
+c.fonts.prompts = "16pt 'Fira code'"
 
 # Font used in the statusbar.
 # Type: Font
-c.fonts.statusbar = "14pt 'Fira code'"
+c.fonts.statusbar = "16pt 'Fira code'"
 
 # Font used in the tab bar.
 # Type: QtFont
-c.fonts.tabs = "14pt 'Fira code'"
+c.fonts.tabs = "16pt 'Fira code'"
 
 # Bindings for command mode
 config.bind('<Ctrl+n>', 'completion-item-focus next', mode='command')
