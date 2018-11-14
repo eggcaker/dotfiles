@@ -41,6 +41,7 @@ c.content.headers.user_agent = 'Mozilla/5.0 (X11; Linux x86_64; rv:52.0) Gecko/2
 # Type: List of String
 c.content.host_blocking.whitelist = ['piwik.org', '*.flurry.com', 'flurry.com',
                                      '*.firebase.google.com', '*.google.com', '*.googleapis.com',
+                                     '*.googleadservices.com',
                                      '*.googlecode.com', '*.google-analytics.com']
 
 # Enable JavaScript.
