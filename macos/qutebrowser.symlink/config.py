@@ -45,6 +45,7 @@ c.content.host_blocking.whitelist = ['*.flurry.com',
                                      '*.googleapis.com',
                                      '*.googleadservices.com',
                                      '*.gstatic.com',
+                                     '*.qq.com',
                                      '*.googlecode.com',
                                      '*.google-analytics.com']
 

@@ -130,7 +130,16 @@ def _p_dl():
     """Decrypt the xlog file with python2 inside docker image"""
     docker run  -v $PWD:/tmp/xlog  -ti xlog  /usr/bin/p.decode_log_crypt  /tmp/xlog/
 
+def _p_unzip_s3_log():
+ for dir in $(ls).split():
+     cd @(dir)
+     unzip *.zip
+     p.dl *
+     rm *.xlog
+     rm *.zip
+     cd ..
 
+aliases['p.unzip_s3_log'] = _p_unzip_s3_log
 aliases['p.dl'] = _p_dl
 aliases['a.top_activity'] = _a_top_activity
 aliases['a.pc'] = ['adb', 'shell', 'pm', 'clear', 'cc.pacer.androidapp']
