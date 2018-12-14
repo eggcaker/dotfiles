@@ -57,12 +57,14 @@ daily.activeTimeInSeconds = daily.activeTimeInSeconds.astype('int64', copy=False
 daily.distanceInMeters = daily.distanceInMeters.astype('float', copy=False)
 daily.calories = daily.calories.astype('float', copy=False)
 daily.steps= daily.steps.astype('int64', copy=False)
-daily.recordedForDate = pandas.to_datetime(daily.recordedForDate.astype('int') + daily.recordedTimezoneOffsetInMinutes.astype('int')*60, unit='s')
+daily.recordedForDate = pandas.to_datetime(daily.recordedForDate.astype('int'), unit='s') + pandas.Timedelta(60, 'm')
 
 minutely.distanceInMeters = minutely.distanceInMeters.astype('float', copy=False)
 minutely.calories = minutely.calories.astype('float', copy=False)
 minutely.steps= minutely.steps.astype('int64', copy=False)
-minutely.recordedForDate = pandas.to_datetime(minutely.recordedForDate.astype('int') + minutely.recordedForDateTimezoneOffset.astype('int')*60, unit='s')
+minutely['recordedForDateTimezoneOffset'] = minutely['recordedForDateTimezoneOffset'].fillna(0)
+minutely.recordedForDate = pandas.to_datetime(minutely.recordedForDate.astype('int'), unit='s') + pandas.Timedelta(60, 'm')
+
 
 daily.drop(removed_daily_fields, axis=1, inplace=True,  errors='ignore')
 minutely.drop(removed_daily_fields, axis=1, inplace=True,  errors='ignore')
