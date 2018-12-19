@@ -21,6 +21,7 @@ $LS_COLORS = 'rs=0:di=01;36:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;0
 #     '/usr/local/Cellar/xonsh/0.6.10/libexec/lib/python3.7/site-packages',
 #     '/usr/local/lib/python3.6/site-packages']
 
+$PATH.append("/usr/local/opt/decompile-apk/")
 
 $XONSH_COLOR_STYLE = "monokai"
 $SUPPRESS_BRANCH_TIMEOUT_MESSAGE = True
