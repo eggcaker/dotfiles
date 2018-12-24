@@ -144,6 +144,7 @@ aliases['p.unzip_s3_log'] = _p_unzip_s3_log
 aliases['p.dl'] = _p_dl
 aliases['a.top_activity'] = _a_top_activity
 aliases['a.pc'] = ['adb', 'shell', 'pm', 'clear', 'cc.pacer.androidapp']
+aliases['a.ps'] = ['adb', 'shell', 'am', 'start', 'cc.pacer.androidapp/.ui.splash.SplashActivity']
 aliases['a.dc'] = ['adb', 'shell', 'pm', 'clear', 'com.mandian.android.dongdong']
 aliases['a.plog'] = ['adb', 'pull', '/mnt/sdcard/Android/data/cc.pacer.androidapp/files/Download/xlog', '.']
 
