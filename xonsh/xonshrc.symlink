@@ -114,7 +114,8 @@ aliases['e.kill'] = ['pkill', '-SIGUSR2 -i', 'Emacs']
 aliases['adbs'] = ['adb', 'shell', '/data/home/bin/termux.sh']
 aliases['ssh-add'] = ['ssh-add', '-t', '403200m']
 aliases['ale'] = ['adb', 'logcat', '-s', 'EB']
-
+aliases['i'] = ['kitty', '+kitten', 'icat']
+aliases['d'] = d = ['kitty', '+kitten', 'diff']
 
 def pt(data):
     """Print the tablify data as a orgtabl format."""
