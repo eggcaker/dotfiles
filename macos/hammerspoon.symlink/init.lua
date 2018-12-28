@@ -11,16 +11,6 @@ display_monitor = "SwitchResX4 - DELL P2416D"
 hostname = hs.host.localizedName()
 hyper = {"cmd", "alt", "ctrl", "shift"}
 
-
-
--- hs.loadSpoon("Caffeine")
--- spoon.Caffeine:bindHotkeys({
---     toggle={hyper, "S"},
---     lock = {hyper, "L"}
--- })
--- spoon.Caffeine:start()
-
-
 -- Draw pretty rounded corners on all screens
 hs.loadSpoon("RoundedCorners")
 spoon.RoundedCorners:start()
@@ -154,8 +144,3 @@ for _hotkey, _fn in pairs(hyperfns) do
 end
 
 hs.hotkey.bind(hyper, "R", "Reload Configuration", function() hs.reload() end)
-
--- local wfRedshift=hs.window.filter.new({loginwindow={visible=true,allowRoles='*'}},'wf-redshift')
--- hs.redshift.start(2000,'19:20','7:00','3h',false,wfRedshift)
-
-

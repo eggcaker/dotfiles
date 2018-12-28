@@ -57,7 +57,7 @@ daily.activeTimeInSeconds = daily.activeTimeInSeconds.astype('int64', copy=False
 daily.distanceInMeters = daily.distanceInMeters.astype('float', copy=False)
 daily.calories = daily.calories.astype('float', copy=False)
 daily.steps= daily.steps.astype('int64', copy=False)
-daily.recordedForDate = pandas.to_datetime(daily.recordedForDate.astype('int'), unit='s') + pandas.Timedelta(60, 'm')
+daily.recordedForDate = pandas.to_datetime(daily.recordedForDate.astype('int'), unit='s') + pandas.Timedelta(-300, 'm')
 
 minutely.distanceInMeters = minutely.distanceInMeters.astype('float', copy=False)
 minutely.calories = minutely.calories.astype('float', copy=False)
