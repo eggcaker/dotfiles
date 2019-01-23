@@ -25,6 +25,7 @@ hspoon_list = {
   "UnsplashZ",
   "WinWin",
   "Astrill",
+  "Seal",
   -- "DragTerminal",
   "MyUtils"
 }
@@ -142,5 +143,41 @@ hyperfns['2'] = function() hs.layout.apply(dual_display) end
 for _hotkey, _fn in pairs(hyperfns) do
   hs.hotkey.bind(hyper, _hotkey, _fn)
 end
+
+
+-- use seal
+spoon.Seal:loadPlugins({"apps", "calc", "urlformats", "useractions" })
+spoon.Seal:bindHotkeys({show={{"alt"}, "Space"}})
+spoon.Seal:start()
+
+
+spoon.Seal.plugins.useractions.actions =
+  {
+    ["Hammerspoon docs webpage"] = {
+      url = "http://hammerspoon.org/docs/",
+      icon = hs.image.imageFromName(hs.image.systemImageNames.ApplicationIcon),
+      hotkey = { hyper, "h" }
+    },
+    ["Leave corpnet"] = {
+      fn = function()
+        spoon.WiFiTransitions:processTransition('foo', 'corpnet01')
+      end,
+    },
+    ["Arrive in corpnet"] = {
+      fn = function()
+        spoon.WiFiTransitions:processTransition('corpnet01', 'foo')
+      end,
+    },
+    ["Translate using Leo"] = {
+      url = "http://dict.leo.org/ende/index_de.html#/search=${query}",
+      icon = 'favicon',
+      keyword = "leo",
+    },
+    ["Tell me something"] = {
+      keyword = "tellme",
+      fn = function(str) hs.alert.show(str) end,
+    }
+  }
+
 
 hs.hotkey.bind(hyper, "R", "Reload Configuration", function() hs.reload() end)
