@@ -37,6 +37,13 @@ function obj:getPacerIdFromFabric()
   end
 end
 
+function obj:shareFileToAirDrop(filePath)
+  airDrop = hs.sharing.newShare("com.apple.share.AirDrop.send")
+  airDrop:subject("Send file" .. os.date()):recipients({})
+  file = hs.sharing.fileURL(filePath)
+  airDrop:shareItems({ [[ "Send file"]], file})
+end
+
 function obj:bindHotkeys(mapping)
   if (self.hotkey) then
     self.hotkey:delete()
