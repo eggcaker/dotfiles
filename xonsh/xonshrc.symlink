@@ -30,7 +30,7 @@ $UPDATE_COMPLETIONS_ON_KEYPRES = True
 $AUTO_PUSHD = True
 
 $XONSH_HISTORY_SIZE = (10000, 'commands')
-$XONSH_HISTORY_BACKEND = 'sqlite'
+$XONSH_HISTORY_BACKEND = 'json'
 $HISTCONTROL = 'ignoredups'
 
 $WORK_NOTE_PATH = "$HOME/src/work/working-notes"
