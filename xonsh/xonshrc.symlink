@@ -206,6 +206,9 @@ $MPLBACKEND="module://itermplot"
 
 source-bash ~/.private
 
+source-bash $(/usr/libexec/path_helper -s)
+
+
 # Coloured man page support
 # using 'less' env vars (format is '\E[<brightness>;<colour>m')
 $LESS_TERMCAP_mb = "\033[01;31m"     # begin blinking

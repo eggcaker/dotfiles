@@ -180,4 +180,8 @@ spoon.Seal.plugins.useractions.actions =
   }
 
 
+hs.loadSpoon('Ki')
+spoon.Ki.workflowEvents = {...}
+spoon.Ki:start()
+
 hs.hotkey.bind(hyper, "R", "Reload Configuration", function() hs.reload() end)
