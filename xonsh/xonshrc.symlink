@@ -23,7 +23,9 @@ $LS_COLORS = 'rs=0:di=01;36:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;0
 #     '/usr/local/lib/python3.6/site-packages']
 
 $PATH.append("/usr/local/opt/decompile-apk/")
-$PATH.append(0, "/usr/local/bin")
+$PATH.insert(0, "/usr/local/bin")
+$PATH.insert(0, "~/.dotfiles/bin")
+
 $XONSH_COLOR_STYLE = "monokai"
 $SUPPRESS_BRANCH_TIMEOUT_MESSAGE = True
 $WIN_UNICODE_CONSOLE = False
