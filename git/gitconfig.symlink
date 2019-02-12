@@ -151,9 +151,6 @@
 	changeHunkIndicators = false
 	stripLeadingSymbols = false
 	useUnicodeRuler = false
-[diff]
-    tool = kitty
-    guitool = kitty.gui
 [difftool]
     prompt = false
     trustExitCode = true

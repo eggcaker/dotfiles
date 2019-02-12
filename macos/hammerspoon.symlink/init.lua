@@ -158,24 +158,10 @@ spoon.Seal.plugins.useractions.actions =
       icon = hs.image.imageFromName(hs.image.systemImageNames.ApplicationIcon),
       hotkey = { hyper, "h" }
     },
-    ["Leave corpnet"] = {
-      fn = function()
-        spoon.WiFiTransitions:processTransition('foo', 'corpnet01')
-      end,
-    },
-    ["Arrive in corpnet"] = {
-      fn = function()
-        spoon.WiFiTransitions:processTransition('corpnet01', 'foo')
-      end,
-    },
     ["Translate using Leo"] = {
       url = "http://dict.leo.org/ende/index_de.html#/search=${query}",
       icon = 'favicon',
       keyword = "leo",
-    },
-    ["Tell me something"] = {
-      keyword = "tellme",
-      fn = function(str) hs.alert.show(str) end,
     }
   }
 
