@@ -20,7 +20,7 @@ c.auto_save.session = True
 # read from JavaScript is always the global value.
 # Type: String
 c.content.headers.accept_language = 'en-US,en;q=0.8,fi;q=0.6'
-c.content.headers.do_not_track = ''
+c.content.headers.do_not_track = True
 
 # User agent to send. Unset to send the default. Note that the value
 # read from JavaScript is always the global value.
