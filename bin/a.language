@@ -1,4 +1,4 @@
-#!/usr/bin/env xonsh 
+#!/usr/bin/env xonsh
 
 # download apk: https://play.google.com/store/apps/details?id=net.sanapeli.adbchangelanguage&rdid=net.sanapeli.adbchangelanguage
 # set permission
