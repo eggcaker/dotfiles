@@ -13,6 +13,7 @@
 
 import sys
 
-$LANG = sys.argv[1]
+$LANG = sys.argv[1].replace("-","--")
 
-adb shell am start -n net.sanapeli.adbchangelanguage/.AdbChangeLanguage -e language $LANG
+print($LANG)
+adb shell am start -n net.sanapeli.adbchangelanguage/.AdbChangeLanguage -e language "$LANG"
