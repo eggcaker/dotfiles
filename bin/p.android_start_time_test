@@ -1,0 +1,110 @@
+# -*- coding: utf-8 -*-
+import os, csv, time
+
+# # # 测试Pacer时务必打开VPN！！！ # # #
+# # # 最好在至少两个手机上测试，一个中高端机型，比如三星S7，华为P20lite，红米Note4；一个低端机型，比如三星J3，三星J7 # # #
+# # # 需要测本期新版本，以及至少最近一个线上版本，根据情况，可能还需要测试更早期的线上版本 # # #
+
+# App安装包文件名，如pacer.apk
+BASELINE_APP = '5.12.2.apk'
+BETA_APP = '6.1.1.apk'
+
+# 测试app的版本，如p5.9.1(2018092000)
+BASELINE_APP_VERSION = 'pacer5.12.2'
+BETA_APP_VERSION = 'pacer6.1.1'
+
+# 测试使用的activity
+TEST_ACTIVITY = {'Hot' : 'mainActivity',
+                 'Warm' : 'mainActivity',
+                 'Cold' : '1stActivity'}
+
+# parameters，测试的轮数，导出结果的文件名
+TEST_ROUNDS = 12
+RESULT_FILENAME = 'result0401.csv'
+
+
+os.system('adb devices')
+
+# 定义不同app的activities，leap的两个activity是相同的
+apps = {'pacer' : {'packageName' : 'cc.pacer.androidapp',
+                   '1stActivity' : 'cc.pacer.androidapp/cc.pacer.androidapp.ui.splash.SplashActivity',
+                   'mainActivity' : 'cc.pacer.androidapp/.ui.main.MainActivity'}}
+
+appVersions = {BASELINE_APP : BASELINE_APP_VERSION,
+               BETA_APP : BETA_APP_VERSION}
+
+
+# 偷个懒，如果结果文件已经存在，删掉
+if os.path.isfile(RESULT_FILENAME):
+    os.system('rm ' + RESULT_FILENAME)
+
+
+
+with open(RESULT_FILENAME, 'a') as f:
+    titles = ['TestType', 'StartType', 'App', 'AppVersion', 'Round', 'Warning', 'Activity', 'ThisTime', 'TotalTime', 'WaitTime']
+    csv_writer = csv.DictWriter(f, titles)
+
+    for testApp in [BASELINE_APP, BETA_APP]:
+
+        testType = 'Baseline' if testApp == BASELINE_APP else 'Beta'
+        print(testType)
+        # 初始化pacer，打开并跳过tutorial和保活弹窗
+        os.system('adb uninstall ' + apps['pacer']['packageName'] + '; adb install ' + testApp)
+        os.system('adb shell am start -W ' + apps['pacer']['1stActivity'])
+        time.sleep(5)
+        os.system('adb shell input keyevent 4')
+        time.sleep(2)
+        os.system('adb shell am force-stop ' + apps['pacer']['packageName'])
+        os.system('adb shell am start -W ' + apps['pacer']['1stActivity'])
+        time.sleep(2)
+        os.system('adb shell am force-stop ' + apps['pacer']['packageName'])
+
+
+
+
+        # 测试多种启动方式的耗时，可选hot/warm/cold，暂时没有考虑清数据打开到tutorial的情况
+        # for startType in ['Cold', 'Warm', 'Hot']:
+        for startType in ['Cold', 'Warm', 'Hot']:
+            print(startType)
+            for app in apps.keys():
+                os.system('adb shell am force-stop ' + apps[app]['packageName'])
+
+            for i in range(int(TEST_ROUNDS + 1)):
+                print(i)
+                for app in apps.keys():
+                    resultDict = dict()
+                    resultDict['TestType'] = testType
+                    resultDict['StartType'] = startType
+                    resultDict['App'] = apps[app][TEST_ACTIVITY[startType]].split('.')[1]
+                    resultDict['AppVersion'] = appVersions[testApp]
+                    resultDict['Round'] = str(i)
+
+                    # 捕获启动速度的屏幕输出
+                    screenOut = os.popen('adb shell am start -W ' + apps[app][TEST_ACTIVITY[startType]]).readlines()
+                    for line in screenOut:
+                        for key in titles[4:]:
+                            if key + ': ' in line:
+                                resultDict[key] = line.replace(key + ': ', '').strip()
+                                break
+                    # print(resultDict)
+
+                    # 写入文件
+                    csv_writer.writerow(resultDict)
+                    time.sleep(1)
+
+                    # 处理不同的启动模式
+                    if startType == 'Hot':
+                        # HOME键回到桌面
+                        os.system('adb shell input keyevent 3')
+                        os.system('adb shell input keyevent 3')
+                    elif startType == 'Warm':
+                        # BACK键回到桌面
+                        os.system('adb shell input keyevent 4')
+                        os.system('adb shell input keyevent 4')
+                    elif startType == 'Cold':
+                        # Force stop app
+                        os.system('adb shell am force-stop ' + apps[app]['packageName'])
+                        time.sleep(3)
+                    else:
+                        pass
+f.close()
