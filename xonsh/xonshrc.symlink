@@ -165,7 +165,7 @@ aliases['redex'] = _redex
 
 aliases['p.load_pacer_data'] = ['source', '~/.dotfiles/bin/segments/load_pacer_activity_data']
 
-
+aliases['p.load_start_time_data'] = ['source', '~/.dotfiles/bin/segments/load_app_start_time_data']
 
 def _jshell():
     """ Run the java shell with some external library"""

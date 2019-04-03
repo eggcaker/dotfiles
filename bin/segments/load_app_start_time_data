@@ -1,0 +1,26 @@
+import json
+import pendulum
+import pandas
+
+pandas.set_option('display.max_rows', 120)
+
+removed_fields = ['App', 'Activity', 'Warning']
+
+
+data = pandas.read_csv("./time_report.csv")
+data.drop(removed_fields, axis=1, inplace=True,  errors='ignore')
+
+base_c = data[(data['TestType'] == 'Baseline') & (data['StartType'] == 'Cold')]
+beta_c = data[(data['TestType'] == 'Beta') & (data['StartType'] == 'Cold')]
+
+
+base_w = data[(data['TestType'] == 'Baseline') & (data['StartType'] == 'Warm')].iloc[1:]
+beta_w = data[(data['TestType'] == 'Beta') & (data['StartType'] == 'Warm')].iloc[1:]
+
+base_h = data[(data['TestType'] == 'Baseline') & (data['StartType'] == 'Hot')].iloc[1:]
+beta_h = data[(data['TestType'] == 'Beta') & (data['StartType'] == 'Hot')].iloc[1:]
+
+
+
+
+
