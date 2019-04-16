@@ -167,6 +167,8 @@ aliases['p.load_pacer_data'] = ['source', '~/.dotfiles/bin/segments/load_pacer_a
 
 aliases['p.load_start_time_data'] = ['source', '~/.dotfiles/bin/segments/load_app_start_time_data']
 
+aliases['p.load_ana_script'] = ['source', '~/.dotfiles/bin/segments/load_databack_ana_script']
+
 def _jshell():
     """ Run the java shell with some external library"""
     docker run -v /opt/java-libs:/tmp -it openjdk:9-jdk bin/jshell --class-path /tmp/joda-time-2.10.jar

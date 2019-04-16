@@ -1,0 +1,20 @@
+raw_backup_size = [ [x[1],x[5]] for x in list(map(lambda x: x.split("]["), $(rg HealthDataManager | rg "\.zip [0-9]+bytes").split("\n"))) if len(x) ==6]
+raw_backup_size.sort()
+
+backup_size = ""
+for log in raw_backup_size:
+    backup_size += log[0] + log[1] + "\n"
+
+
+def copy_backup_size() :
+    echo @(backup_size) |pbcopy
+
+account = eval($(cat pref_pacer.xml |grep myself_account_key |sed -s 's/&quot;/"/g'|sed -s 's/false/False/g' |rg -o ".*?>(.*?)<.*"  -r "$1").replace("\n", ""))
+
+pid = account['id']
+lid = account['login_id']
+aliases['bs'] = copy_backup_size
+
+
+
+
