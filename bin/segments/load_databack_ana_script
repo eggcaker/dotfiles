@@ -11,10 +11,30 @@ def copy_backup_size() :
 
 account = eval($(cat pref_pacer.xml |grep myself_account_key |sed -s 's/&quot;/"/g'|sed -s 's/false/False/g' |rg -o ".*?>(.*?)<.*"  -r "$1").replace("\n", ""))
 
+def today_steps():
+    try:
+        eval($(rg getTodayPreload |head -n 1).split("Preload ")[1].replace("\n", ""))
+    except IndexError:
+        ""
+
+
+backupfiles = [ dict((k,v) for k,v in eval(n.split("FileUrl ")[1]).items() if k in ('created_at','file_name')) for n in $(rg 'BackupFileUrl \{').replace('false','False').replace('true', 'True').split("\n")[:-1]]
+
 pid = account['id']
 lid = account['login_id']
+
 aliases['bs'] = copy_backup_size
+aliases['ts'] = today_steps
+
+aliases['sd'] = "sqlite3 pacer.db.log  'select datetime(recordedForDate, 'unixepoch', 'localtime') as d, steps, activityType from dailyActivityLog'"
+
+rm -f /tmp/query_backup.sql
+echo @("select created_at, file_name from  pw_health_data_backup_info where account_id = " + str(pid) +" order by id desc;") > /tmp/query_backup.sql
+
+aliases['all_backups'] = ['kitty', '+kitten', 'ssh', 'ubuntu@ec2-52-54-224-59.compute-1.amazonaws.com', 'mysql', '-u', 'pwdbroot', '--password=pacer.prod!', '-h', 'pacerdb-replica-2.cmd7nqtaffk4.us-east-1.rds.amazonaws.com', 'pacerdb', '<', '/tmp/query_backup.sql']
 
 
+raw_backups = $(all_backups)[1:][:-1].split("\n")
+backups =  dict((info.split("\t")[0].split(" ")[0], info.split("\t")[1])  for info in raw_backups)
 
-
+restore = [ dict((k, v) for k,v in eval(line.split("BackupFileUrl ")[1]).items() if k in ('created_at', 'file_name')) for line in $(rg 'BackupFileUrl ').replace("false", "False").replace("true", "True").split("\n")[:-1]] 
