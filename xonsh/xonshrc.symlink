@@ -110,6 +110,20 @@ aliases['p.interview'] = ['open', 'https://docs.google.com/spreadsheets/d/1RVrRC
 aliases['p.weekly_report'] = ['open', 'https://docs.google.com/spreadsheets/d/1YOEGiku_5X8C65KJ14tWvn-M_Mdt6dxe8npiyDUMdN4/edit#gid=0']
 aliases['z0'] = ['open', 'https://drive.google.com/drive/folders/1ZuuBYIntK_YOdWtr5aOKKHKduVUjr9SQ']
 
+def _user_voice_research(args, stdin):
+    ticket=args[0]
+    mkdir @(ticket)
+    mkdir @(ticket)/logs
+    mkdir @(ticket)/db
+    mv ~/Downloads/pacer_zipped.log @(ticket)/logs/log.zip
+    cd @(ticket)/logs/
+    unzip log.zip
+    p.dl *.xlog
+    rm *.xlog
+
+
+aliases['uv'] = _user_voice_research
+
 # Emacs
 aliases['e'] = ['emacsclient', '-nw']
 aliases['eg'] = ['emacsclient', '-n']

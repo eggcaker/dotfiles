@@ -26,7 +26,7 @@ lid = account['login_id']
 aliases['bs'] = copy_backup_size
 aliases['ts'] = today_steps
 
-aliases['sd'] = "sqlite3 pacer.db.log  'select datetime(recordedForDate, 'unixepoch', 'localtime') as d, steps, activityType from dailyActivityLog'"
+aliases['sd'] = "sqlite3 pacer.db.log  'select datetime(recordedForDate -480*60+ recordedTimezoneOffsetInMinutes *60, 'unixepoch', 'localtime') as d, steps, activityType from dailyActivityLog'"
 
 rm -f /tmp/query_backup.sql
 echo @("select created_at, file_name from  pw_health_data_backup_info where account_id = " + str(pid) +" order by id desc;") > /tmp/query_backup.sql
@@ -37,4 +37,16 @@ aliases['all_backups'] = ['kitty', '+kitten', 'ssh', 'ubuntu@ec2-52-54-224-59.co
 raw_backups = $(all_backups)[1:][:-1].split("\n")
 backups =  dict((info.split("\t")[0].split(" ")[0], info.split("\t")[1])  for info in raw_backups)
 
-restore = [ dict((k, v) for k,v in eval(line.split("BackupFileUrl ")[1]).items() if k in ('created_at', 'file_name')) for line in $(rg 'BackupFileUrl ').replace("false", "False").replace("true", "True").split("\n")[:-1]] 
+restore = [ dict((k, v) for k,v in eval(line.split("BackupFileUrl ")[1]).items() if k in ('created_at', 'file_name')) for line in $(rg 'BackupFileUrl ').replace("false", "False").replace("true", "True").split("\n")[:-1]]
+
+../../../scripts/extract_summary.sh
+summary = eval($(cat ./summary.json))
+summary['pacer_id'] = pid
+summary["login_id"] = lid
+summary['upload_backup'] = backup_size
+
+oom = [ line.split("log:")[1] for line in  $(rg -o '.*?\[E\]\[(.*?)\].*?MalformedJsonException: Unterminated string at line 1 column ([0-9]+)' -r '{"restore_time":"$1", "column:":$2}').split("\n")[:-1] ]
+
+
+summary['has_oom'] = len(oom) > 0
+summary['has_restore'] = len(restore) > 0
