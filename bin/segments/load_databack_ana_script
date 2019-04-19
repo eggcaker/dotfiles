@@ -43,7 +43,7 @@ restore = [ dict((k, v) for k,v in eval(line.split("BackupFileUrl ")[1]).items()
 summary = eval($(cat ./summary.json))
 summary['pacer_id'] = pid
 summary["login_id"] = lid
-summary['upload_backup'] = backup_size
+summary['has_upload_backup'] = backup_size
 
 oom = [ line.split("log:")[1] for line in  $(rg -o '.*?\[E\]\[(.*?)\].*?MalformedJsonException: Unterminated string at line 1 column ([0-9]+)' -r '{"restore_time":"$1", "column:":$2}').split("\n")[:-1] ]
 
