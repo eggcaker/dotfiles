@@ -27,7 +27,8 @@ hspoon_list = {
   "Astrill",
   "Seal",
   -- "DragTerminal",
-  "MyUtils"
+  "MyUtils",
+  "Office"
 }
 
 -- Load those Spoons
@@ -170,4 +171,14 @@ hs.loadSpoon('Ki')
 spoon.Ki.workflowEvents = {...}
 spoon.Ki:start()
 
+spoon.Office:start()
+
 hs.hotkey.bind(hyper, "R", "Reload Configuration", function() hs.reload() end)
+
+
+function keyStrokes(str)
+  return function()
+    hs.eventtap.keyStrokes(str)
+  end
+end
+hs.hotkey.bind({"alt", "cmd"}, "L", keyStrokes("console.log("))

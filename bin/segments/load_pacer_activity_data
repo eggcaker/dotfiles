@@ -1,6 +1,7 @@
 import json
 import pendulum
-import pandas 
+import pandas
+from datetime import datetime
 
 pandas.set_option('display.max_rows', 120)
 
@@ -49,6 +50,7 @@ daily = pandas.DataFrame.from_dict(raw_json['MDData.db']['dailyActivityLog'])
 minutely_raw = pandas.DataFrame.from_dict(raw_json['MDData.db']['minutelyActivityLog'])
 minutely = pandas.DataFrame.from_dict(raw_json['MDData.db']['minutelyActivityLog'])
 
+daily_raw['recordedTimezoneOffsetInMinutes'] = daily_raw['recordedTimezoneOffsetInMinutes'].fillna(0)
 daily_offset_minutes = daily_raw.head(1)['recordedTimezoneOffsetInMinutes'].astype('int').values[0]
 
 # if find some data not plotable then uncomment this line to clenup the data
