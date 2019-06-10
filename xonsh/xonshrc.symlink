@@ -74,7 +74,7 @@ aliases['pa'] = ['cd', '~/src/work/pacer_android/']
 aliases['ec2web'] = ['open', 'http://859974941675.signin.aws.amazon.com/console']
 aliases['staging'] = ['ssh', 'ubuntu@staging.dongdong51.com']
 
-aliases['ana_db'] = ['kitty', '+kitten', 'ssh', 'ubuntu@ec2-52-54-224-59.compute-1.amazonaws.com']
+aliases['ana_db'] = ['kitty', '+kitten', 'ssh', 'zhuge@ec2-54-145-90-62.compute-1.amazonaws.com']
 aliases['read_db'] = ['ssh', 'ubuntu@ec2-54-81-98-51.compute-1.amazonaws.com']
 aliases['ec2p'] = ['ssh', 'ubuntu@ec2-54-208-157-80.compute-1.amazonaws.com']
 aliases['ec2q'] = ['ssh', 'ubuntu@ec2-52-91-142-114.compute-1.amazonaws.com']
