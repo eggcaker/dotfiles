@@ -54,8 +54,8 @@ nnoremap [] :         action MethodUp<cr>
 nnoremap ][ :         action MethodDown<cr>
 nnoremap <Leader>n :  action GotoNextError<cr>
 nnoremap <Leader>p :  action GotoPreviousError<cr>
-nnoremap <Leader>mi : action ImplementMethods<cr>
-nnoremap <Leader>mo : action OverrideMethods<cr>
+nnoremap <Leader>i : action ImplementMethods<cr>
+nnoremap <Leader>o : action OverrideMethods<cr>
 nnoremap <Leader>gc : action GotoClass<cr>
 nnoremap <Leader>gs : action GotoSymbol<cr>
 nnoremap <Leader>gi : action GotoImplementation<cr>
