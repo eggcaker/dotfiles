@@ -1,5 +1,9 @@
 # -*-mode: python -*-
 import warnings
+from forbiddenfruit import curse
+import hashlib
+import urllib.parse
+
 warnings.filterwarnings('ignore')
 
 $LANG = "en_US.UTF-8"
@@ -245,6 +249,24 @@ $BASE16_SHELL = $HOME + "/.config/base16-shell/"
 xontrib load coreutils vox z mpl base16_shell fzf-widgets
 # XONSH WIZARD END
 
+
+# extension functions to sting
+def md5(self):
+    m = hashlib.md5()
+    m.update(self.encode('UTF-8'))
+    return m.hexdigest()
+
+curse(str, "md5", md5)
+
+def url_encode(self):
+    return urllib.parse.quote(self)
+
+def url_decode(self):
+    return urllib.parse.unquote(self)
+
+curse(str, "md5", md5)
+curse(str, "url_encode", url_encode)
+curse(str, "url_decode", url_decode)
 
 # $fzf_history_binding = Keys.ControlR
 # $fzf_ssh_binding = Keys.ControlS
