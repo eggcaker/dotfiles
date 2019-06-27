@@ -267,6 +267,8 @@ def url_decode(self):
 curse(str, "md5", md5)
 curse(str, "url_encode", url_encode)
 curse(str, "url_decode", url_decode)
+curse(int, 'tc', lambda self: hex(int(255*self/100)))
+curse(float, 'tc', lambda self: hex(int(255*self/100)))
 
 # $fzf_history_binding = Keys.ControlR
 # $fzf_ssh_binding = Keys.ControlS
