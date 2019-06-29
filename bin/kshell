@@ -1,4 +1,4 @@
-#!/usr/bin/env kscript -i 
+#!/usr/bin/env kscript 
 //DEPS joda-time:joda-time:2.9.9 io.reactivex.rxjava2:rxjava:2.1.8 com.google.code.gson:gson:2.8.0 org.json:json:20180813
 import java.time.*
 import java.util.*
