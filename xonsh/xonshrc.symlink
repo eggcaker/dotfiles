@@ -246,7 +246,7 @@ $LESS_TERMCAP_ue = "\033[0m"         # end underline
 $BASE16_SHELL = $HOME + "/.config/base16-shell/"
 
 # XONSH WIZARD START
-xontrib load coreutils vox z mpl base16_shell fzf-widgets
+xontrib load coreutils vox z mpl base16_shell fzf-widgets kitty
 # XONSH WIZARD END
 
 
