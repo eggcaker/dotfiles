@@ -1,7 +1,2 @@
-if isdir(Pkg.dir("OhMyREPL"))
-    @eval using OhMyREPL
-    colorscheme!("BoxyMonokai256")
-else
-    warn("OhMyREPL not installed")
-end
 using JuliaRC
+using OhMyREPL

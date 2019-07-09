@@ -41,6 +41,7 @@ $XONSH_HISTORY_BACKEND = 'json'
 $HISTCONTROL = 'ignoredups'
 
 $WORK_NOTE_PATH = "$HOME/src/work/working-notes"
+# adoptopenjdk-9.jdk
 $JAVA_HOME = "/Library/Java/JavaVirtualMachines/jdk1.8.0_181.jdk/Contents/Home"
 $ANDROID_SDK_ROOT = "/usr/local/share/android-sdk"
 $ANDROID_HOME = "/usr/local/share/android-sdk"
