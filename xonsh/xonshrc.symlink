@@ -29,6 +29,7 @@ $LS_COLORS = 'rs=0:di=01;36:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;0
 $PATH.append("/usr/local/opt/decompile-apk/")
 $PATH.insert(0, "/usr/local/bin")
 $PATH.insert(0, "~/.dotfiles/bin")
+$PATH.insert(0, "/usr/local/Cellar/rakudo-star/2019.03/share/perl6/site/bin")
 
 $XONSH_COLOR_STYLE = "monokai"
 $SUPPRESS_BRANCH_TIMEOUT_MESSAGE = True
@@ -75,59 +76,7 @@ aliases['pi'] = ['cd', '~/src/work/mandian_server/server/']
 aliases['pg'] = ['cd', '~/src/work/pacer_groups/']
 aliases['pa'] = ['cd', '~/src/work/pacer_android/']
 
-# ec2 instances
-aliases['ec2web'] = ['open', 'http://859974941675.signin.aws.amazon.com/console']
-aliases['staging'] = ['ssh', 'ubuntu@staging.dongdong51.com']
-
-aliases['ana_db'] = ['kitty', '+kitten', 'ssh', 'zhuge@ec2-54-145-90-62.compute-1.amazonaws.com']
-aliases['read_db'] = ['ssh', 'ubuntu@ec2-54-81-98-51.compute-1.amazonaws.com']
-aliases['ec2p'] = ['ssh', 'ubuntu@ec2-54-208-157-80.compute-1.amazonaws.com']
-aliases['ec2q'] = ['ssh', 'ubuntu@ec2-52-91-142-114.compute-1.amazonaws.com']
-aliases['ec2r'] = ['ssh', 'ubuntu@ec2-52-91-81-215.compute-1.amazonaws.com']
-aliases['ec2t'] = ['ssh', 'ubuntu@ec2-52-91-155-158.compute-1.amazonaws.com']
-aliases['ec2u'] = ['ssh', 'ubuntu@ec2-52-90-162-162.compute-1.amazonaws.com']
-aliases['ec2v'] = ['ssh', 'ubuntu@ec2-52-90-224-198.compute-1.amazonaws.com']
-aliases['ec2w'] = ['ssh', 'ubuntu@ec2-54-88-3-9.compute-1.amazonaws.com']
-aliases['ec2x'] = ['ssh', 'ubuntu@ec2-54-174-221-101.compute-1.amazonaws.com']
-aliases['ec2y'] = ['ssh', 'ubuntu@ec2-52-90-235-73.compute-1.amazonaws.com']
-aliases['ec2z'] = ['ssh', 'ubuntu@ec2-54-89-42-103.compute-1.amazonaws.com']
-
-aliases['dev'] = ['ssh', 'ubuntu@dev.dongdong51.com']
-aliases['ci'] = ['ssh', 'ubuntu@54.235.103.142']
-aliases['watson'] = ['ssh', 'ubuntu@watson.dongdong17.com']
-aliases['wx'] = ['ssh', 'ubuntu@47.95.13.171']
-aliases['jp1'] = ['ssh', '-i', '~/.ssh/mandiankey_02.pem', 'ubuntu@54.248.219.219']
-aliases['jp2'] = ['ssh', '-i', '~/.ssh/mandiankey_02.pem', 'ubuntu@54.248.112.26']
-aliases['rdstest'] = ['mysql', '-h', 'pacerfacebooktest.cmd7nqtaffk4.us-east-1.rds.amazonaws.com', '-upwdbroot', '-p', 'pacerdb', '-A']
-aliases['rdsprod'] = ['mysql', '-h', 'pacerdbprod.cmd7nqtaffk4.us-east-1.rds.amazonaws.com', '-upwdbroot', '-p', 'pacerdb', '-A']
-aliases['coach'] = ['ssh', 'ubuntu@52.2.87.138']
-aliases['pgp'] = ['open', 'https://play.google.com/apps/publish']
-aliases['aliyun'] = ['open', 'http://signin.aliyun.com/1689961257397308/login.htm']
-aliases['s3'] = ['open', 'https://859974941675.signin.aws.amazon.com/console']
-aliases['a.pr'] = ['open', 'https://bitbucket.org/pacerhealth/pacer_android/pull-requests/']
-aliases['a.stop_pacer'] = ['adb', 'shell', 'am', 'force-stop', 'cc.pacer.androidapp']
-aliases['a.stop_dongdong'] = ['adb', 'shell', 'am', 'force-stop', 'com.mandian.android.dongdong']
-aliases['p.estimate'] = ['open', 'https://docs.google.com/spreadsheets/d/127iuLOG0B3Ukydv-VsA2WIPVaJzKpYBEF6OOLyXFlGc/edit#gid=1265009236']
-aliases['p.backlog'] = ['open', 'https://docs.google.com/spreadsheets/d/1gnnmB42mJ4k1limeYZHgv1tjwx9Nplxjf40xXGnj09U/edit#gid=0']
-aliases['p.file'] = ['open', 'https://docs.google.com/spreadsheets/d/1gnnmB42mJ4k1limeYZHgv1tjwx9Nplxjf40xXGnj09U/edit#gid=0']
-aliases['p.release'] = ['open', 'https://docs.google.com/spreadsheets/d/1As9Cu8elTzPh9lEqYZeqYCRvkbv1LBcRa9scp42ALeg/edit#gid=0']
-aliases['p.interview'] = ['open', 'https://docs.google.com/spreadsheets/d/1RVrRC06Z5D-19aqSNdLGBmofzP_LCEfbFbaEuEx-cKw/edit?usp=drive_web']
-aliases['p.weekly_report'] = ['open', 'https://docs.google.com/spreadsheets/d/1YOEGiku_5X8C65KJ14tWvn-M_Mdt6dxe8npiyDUMdN4/edit#gid=0']
-aliases['z0'] = ['open', 'https://drive.google.com/drive/folders/1ZuuBYIntK_YOdWtr5aOKKHKduVUjr9SQ']
-
-def _user_voice_research(args, stdin):
-    ticket=args[0]
-    mkdir @(ticket)
-    mkdir @(ticket)/logs
-    mkdir @(ticket)/db
-    mv ~/Downloads/pacer_zipped.log @(ticket)/logs/log.zip
-    cd @(ticket)/logs/
-    unzip log.zip
-    p.dl *.xlog
-    rm *.xlog
-
-
-aliases['uv'] = _user_voice_research
+aliases['p6repl'] =['rlwrap', 'perl6', '-I$HOME/.perl6/repl/ -MREPLHelper']
 
 # Emacs
 aliases['e'] = ['emacsclient', '-nw']

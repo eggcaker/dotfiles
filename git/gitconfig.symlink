@@ -5,7 +5,8 @@
   email = eggcaker@gmail.com
 [author]
   name = eggcaker
-  email = eggcaker@gmail.com
+  email = eggcaker@gmail.com 
+
 
 [alias]
   # View the SHA, description, and history graph of the latest 20 commits
