@@ -13,54 +13,56 @@ set ignorecase
 noremap N 5j
 noremap P 5k
 
-let mapleader=' '
+let mapleader = " "
+
 
 " easy system clipboard copy/paste
-noremap <Leader>y "*y
-noremap <Leader>Y "*Y
-noremap <Leader>p "*p
-noremap <Leader>P "*P
+noremap <leader>y "*y
+noremap <leader>Y "*Y
+noremap <leader>p "*p
+noremap <leader>P "*P
 
-set clipboard+=unnamed
+set clipboard=unnamedplus,unnamed
 
-" easy window navigation
-nnoremap <c-l> <c-w>l
-nnoremap <c-h> <c-w>h
-nnoremap <a-h> gT
-nnoremap <a-l> gt
+" key bindings for quickly moving between windows
+" h left, l right, k up, j down
+nmap <leader>h <c-w>h
+nmap <leader>l <c-w>l
+nmap <leader>k <c-w>k
+nmap <leader>j <c-w>j
 
 " intellij actions
-nnoremap <Leader>a :        action ResourceBundleEditorShowIntentions<cr>
-nnoremap <Leader>a :        action ShowIntentionActions<cr>
-nnoremap <Leader>q :        action CloseContent<cr>
-nnoremap <Leader>Q :        action ReopenClosedTab<cr>
-nnoremap <Leader>j :        action EditorJoinLines<cr>
-nnoremap <Leader><Leader> : action VimFilePrevious<cr>
-nnoremap <Leader>e :        action GotoFile<cr>
-nnoremap <Leader>E :        action Switcher<cr>
-nnoremap <Leader>T :        action FileStructurePopup<cr>
-nnoremap <Leader>td:        action ToggleDistractionFreeMode<cr>
-nnoremap <Leader>tf:        action ToggleDistractionFreeMode<cr>
-nnoremap <Leader>te:        action HideAllWindow<cr>
+nmap <leader>a :action ResourceBundleEditorShowIntentions<cr>
+nmap <leader>a :action ShowIntentionActions<cr>
+nmap <leader>q :action CloseContent<cr>
+nmap <leader>Q :action ReopenClosedTab<cr>
+nmap <leader>j :action EditorJoinLines<cr>
+nmap <leader><leader> :action VimFilePrevious<cr>
+nmap <leader>e :action GotoFile<cr>
+nmap <leader>E :action Switcher<cr>
+nmap <leader>T :action FileStructurePopup<cr>
+nmap <leader>td :action ToggleDistractionFreeMode<cr>
+nmap <leader>tf :action ToggleDistractionFreeMode<cr>
+nmap <leader>te :action HideAllWindow<cr>
 
-nnoremap mm   :             action FileStructurePopup<cr>
-nnoremap ff :               action ReformatCode<cr>
-map <Leader>f :             action GotoFile<cr>
+nmap mm :action FileStructurePopup<cr>
+nmap ff :action ReformatCode<cr>
+nmap <leader>f :action GotoFile<cr>
 
 
 " code navigation
-nnoremap <Leader>u :  action FindUsages<cr>
+nnoremap <leader>u :  action FindUsages<cr>
 nnoremap [] :         action MethodUp<cr>
 nnoremap ][ :         action MethodDown<cr>
-nnoremap <Leader>n :  action GotoNextError<cr>
-nnoremap <Leader>p :  action GotoPreviousError<cr>
-nnoremap <Leader>i : action ImplementMethods<cr>
-nnoremap <Leader>o : action OverrideMethods<cr>
-nnoremap <Leader>gc : action GotoClass<cr>
-nnoremap <Leader>gs : action GotoSymbol<cr>
-nnoremap <Leader>gi : action GotoImplementation<cr>
-nnoremap <Leader>gp : action GotoSuperMethod<cr>
-nnoremap <Leader>ga : action GotoAction<cr>
+nnoremap <leader>n :  action GotoNextError<cr>
+nnoremap <leader>p :  action GotoPreviousError<cr>
+nnoremap <leader>i : action ImplementMethods<cr>
+nnoremap <leader>o : action OverrideMethods<cr>
+nnoremap <leader>gc : action GotoClass<cr>
+nnoremap <leader>gs : action GotoSymbol<cr>
+nnoremap <leader>gi : action GotoImplementation<cr>
+nnoremap <leader>gp : action GotoSuperMethod<cr>
+nnoremap <leader>ga : action GotoAction<cr>
 nnoremap <c-j>      : action VcsShowNextChangeMarker<cr>
 nnoremap <c-k>      : action VcsShowPrevChangeMarker<cr>  
 
@@ -111,16 +113,16 @@ vnoremap <C-q> <Esc>
 cmap <C-q> <C-c>
 
 " Select all text
-map <Leader>A ggVG
+map <leader>A ggVG
 
 " Copy until the end of the line
 noremap Y y$
 
 " Indent everything
-noremap <Leader>I ggvG=
+noremap <leader>I ggvG=
 
 " Indent the current line
-noremap <Leader>i v=
+noremap <leader>i v=
 
 " Change current word - kill
 noremap K ciw
@@ -129,10 +131,10 @@ noremap K ciw
 noremap C ci"
 
 " Join lines
-nnoremap <Leader>J J
+nnoremap <leader>J J
 
 " code refactoring
-nnoremap <Leader>rr :action RenameElement<cr>
+nnoremap <leader>rr :action RenameElement<cr>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => VIM user interface
