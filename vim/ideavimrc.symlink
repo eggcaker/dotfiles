@@ -354,3 +354,4 @@ vmap mp :<Backspace><Backspace><Backspace><Backspace><Backspace>action UnselectP
 vmap ma :<Backspace><Backspace><Backspace><Backspace><Backspace>action SelectAllOccurrences<CR>
 
 
+set ideajoin
