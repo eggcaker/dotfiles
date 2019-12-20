@@ -16,16 +16,6 @@ $XONSH_SHOW_TRACEBACK = True
 
 $LS_COLORS = 'rs=0:di=01;36:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:'
 
-
-# $PYTHONPATH = [
-#     '/usr/local/Cellar/xonsh/0.6.10/libexec/bin',
-#     '/usr/local/Cellar/xonsh/0.6.10/libexec/lib/python37.zip',
-#     '/usr/local/Cellar/xonsh/0.6.10/libexec/lib/python3.7',
-#     '/usr/local/Cellar/xonsh/0.6.10/libexec/lib/python3.7/lib-dynload',
-#     '/usr/local/opt/python/Frameworks/Python.framework/Versions/3.7/lib/python3.7',
-#     '/usr/local/Cellar/xonsh/0.6.10/libexec/lib/python3.7/site-packages',
-#     '/usr/local/lib/python3.6/site-packages']
-
 $PATH.append("/usr/local/opt/decompile-apk/")
 $PATH.insert(0, "/usr/local/bin")
 $PATH.insert(0, "~/.dotfiles/bin")
@@ -87,6 +77,9 @@ aliases['ssh-add'] = ['ssh-add', '-t', '403200m']
 aliases['ale'] = ['adb', 'logcat', '-s', 'EB']
 aliases['i'] = ['kitty', '+kitten', 'icat']
 aliases['d'] = d = ['kitty', '+kitten', 'diff']
+
+aliases['wy'] = "~/src/geek/wenyan-lang/build/wenyan.js"  
+
 
 def pt(data):
     """Print the tablify data as a orgtabl format."""
@@ -222,24 +215,3 @@ curse(float, 'tc', lambda self: hex(int(255*self/100)))
 
 # $fzf_history_binding = Keys.ControlR
 # $fzf_ssh_binding = Keys.ControlS
-
-$(
-
-export PATH="/Users/eggcaker/.rbenv/shims:${PATH}"
-export RBENV_SHELL=Python
-command rbenv rehash 2>/dev/null
-rbenv() {
-  local command
-  command="${1:-}"
-  if [ "$#" -gt 0 ]; then
-    shift
-  fi
-
-  case "$command" in
-  rehash|shell)
-    eval "$(rbenv "sh-$command" "$@")";;
-  *)
-    command rbenv "$command" "$@";;
-  esac
-}
-)
