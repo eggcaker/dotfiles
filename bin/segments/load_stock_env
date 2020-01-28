@@ -1,0 +1,20 @@
+import json
+import pendulum as p
+import pandas
+from datetime import datetime
+import tushare as ts
+
+pandas.set_option('display.max_rows', 50)
+
+ts.set_token('d88fba92b289db01c87119e731c2a43cf8fc6d9727572dafa11e93b9')
+pro = ts.pro_api()
+
+cmb = pro.query('fina_indicator', ts_code='600036.SH')
+cmb_roes = cmb[['roe','roe_yearly']]
+
+
+
+
+
+
+

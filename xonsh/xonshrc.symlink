@@ -4,7 +4,7 @@ from forbiddenfruit import curse
 import hashlib
 import urllib.parse
 
-warnings.filterwarnings('ignore')
+warnings.filterwarnings("ignore", category=DeprecationWarning)
 
 $LANG = "en_US.UTF-8"
 $LANGUAGE = "en_US.UTF-8"
@@ -61,9 +61,6 @@ aliases['last'] = ['git', 'log', '--pretty=format:"%C(yellow)%h%x09%Creset%an%x0
 aliases['graph'] = "git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)%Creset' --abbrev-commit --all"
 aliases['graph2'] = "git log --graph --all --format=format:'%C(bold yellow)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset)%C(bold yellow)%d%C(reset)%n'' %C(white)%s%C(reset) %C(bold white)- %an%C(reset)' --abbrev-commit"
 
-# Project', 'related
-aliases['pi'] = ['cd', '~/src/work/mandian_server/server/']
-aliases['pg'] = ['cd', '~/src/work/pacer_groups/']
 aliases['pa'] = ['cd', '~/src/work/pacer_android/']
 
 aliases['p6repl'] =['rlwrap', 'perl6', '-I$HOME/.perl6/repl/ -MREPLHelper']
@@ -78,7 +75,9 @@ aliases['ale'] = ['adb', 'logcat', '-s', 'EB']
 aliases['i'] = ['kitty', '+kitten', 'icat']
 aliases['d'] = d = ['kitty', '+kitten', 'diff']
 
-aliases['wy'] = "~/src/geek/wenyan-lang/build/wenyan.js"  
+aliases['wy'] = "~/src/geek/wenyan-lang/build/wenyan.js"
+
+aliases['s.load_data'] = ['source', '~/.dotfiles/bin/segments/load_stock_env']
 
 
 def pt(data):
