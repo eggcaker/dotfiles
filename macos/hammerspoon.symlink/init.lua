@@ -25,7 +25,7 @@ hspoon_list = {
   "UnsplashZ",
   "WinWin",
   "Astrill",
-  "Seal",
+  -- "Seal",
   -- "DragTerminal",
   "MyUtils",
   "Office"
