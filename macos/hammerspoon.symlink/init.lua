@@ -147,24 +147,24 @@ end
 
 
 -- use seal
-spoon.Seal:loadPlugins({"apps", "calc", "urlformats", "useractions" })
-spoon.Seal:bindHotkeys({show={{"alt"}, "Space"}})
-spoon.Seal:start()
+-- spoon.Seal:loadPlugins({"apps", "calc", "urlformats", "useractions" })
+-- spoon.Seal:bindHotkeys({show={{"alt"}, "Space"}})
+-- spoon.Seal:start()
 
 
-spoon.Seal.plugins.useractions.actions =
-  {
-    ["Hammerspoon docs webpage"] = {
-      url = "http://hammerspoon.org/docs/",
-      icon = hs.image.imageFromName(hs.image.systemImageNames.ApplicationIcon),
-      hotkey = { hyper, "h" }
-    },
-    ["Translate using Leo"] = {
-      url = "http://dict.leo.org/ende/index_de.html#/search=${query}",
-      icon = 'favicon',
-      keyword = "leo",
-    }
-  }
+-- spoon.Seal.plugins.useractions.actions =
+-- {
+--   ["Hammerspoon docs webpage"] = {
+--     url = "http://hammerspoon.org/docs/",
+--     icon = hs.image.imageFromName(hs.image.systemImageNames.ApplicationIcon),
+--     hotkey = { hyper, "h" }
+--   },
+--   ["Translate using Leo"] = {
+--     url = "http://dict.leo.org/ende/index_de.html#/search=${query}",
+--     icon = 'favicon',
+--     keyword = "leo",
+--   }
+-- }
 
 
 hs.loadSpoon('Ki')
