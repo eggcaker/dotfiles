@@ -1,0 +1,8 @@
+#!/usr/bin/env xonsh
+
+mbsync -a 
+mu index --maildir=/Users/eggcaker/.mails
+
+
+
+
