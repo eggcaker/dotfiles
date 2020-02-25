@@ -1,2 +1,1 @@
-#!/usr/bin/env xonsh 
-
+#!/usr/bin/env xonsh

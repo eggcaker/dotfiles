@@ -15,20 +15,20 @@ _zlua() {
 	elif [ "$1" = "--complete" ]; then
 		shift
 		"$ZLUA_LUAEXE" "$ZLUA_SCRIPT" --complete "$@"
-		return 
+		return
 	fi
 	while [ "$1" ]; do
-		case "$1" in 
-			-l) local arg_mode="-l" ;;
-			-e) local arg_mode="-e" ;;
-			-x) local arg_mode="-x" ;;
-			-t) local arg_type="-t" ;;
-			-r) local arg_type="-r" ;;
-			-c) local arg_subdir="-c" ;;
-			-s) local arg_strip="-s" ;;
-			-i) local arg_inter="-i" ;;
-			-h|--help) local arg_mode="-h" ;;
-			*) break ;;
+		case "$1" in
+		-l) local arg_mode="-l" ;;
+		-e) local arg_mode="-e" ;;
+		-x) local arg_mode="-x" ;;
+		-t) local arg_type="-t" ;;
+		-r) local arg_type="-r" ;;
+		-c) local arg_subdir="-c" ;;
+		-s) local arg_strip="-s" ;;
+		-i) local arg_inter="-i" ;;
+		-h | --help) local arg_mode="-h" ;;
+		*) break ;;
 		esac
 		shift
 	done
@@ -55,12 +55,11 @@ _zlua() {
 # alias ${_ZL_CMD:-z}='_zlua 2>&1'
 alias ${_ZL_CMD:-z}='_zlua'
 
-case "$PROMPT_COMMAND" in 
-	*_zlua?--add*) ;;
-	*) PROMPT_COMMAND="(_zlua --add \"\$(command pwd 2>/dev/null)\" &);$PROMPT_COMMAND" ;;
+case "$PROMPT_COMMAND" in
+*_zlua?--add*) ;;
+*) PROMPT_COMMAND="(_zlua --add \"\$(command pwd 2>/dev/null)\" &);$PROMPT_COMMAND" ;;
 esac
 
 if [ -n "$BASH_VERSION" ]; then
 	complete -o filenames -C '_zlua --complete "$COMP_LINE"' ${_ZL_CMD:-z}
 fi
-
