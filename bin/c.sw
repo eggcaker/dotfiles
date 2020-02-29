@@ -9,6 +9,7 @@ function pull_changes() {
 }
 
 pull_changes ~/.spacemacs.d;
-pull_changes ~/.org-files;
+pull_changes ~/.doom.d;
+pull_changes ~/.org-notes;
 pull_changes ~/.dotfiles;
-pull_changes ~/.org-files;
+#pull_changes ~/.org-files;
