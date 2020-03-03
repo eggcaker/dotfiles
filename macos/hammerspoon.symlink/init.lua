@@ -107,7 +107,6 @@ if spoon.Astrill then
                                    spoon.Astrill:disable() end)
 end
 
-
 ----------------------------------------------------------------------------------------------------
 -- Register Hammerspoon console
 hsconsole_keys = hsconsole_keys or {"alt", "Z"}
