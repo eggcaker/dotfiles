@@ -1,4 +1,4 @@
-#!/usr/bin/bin zsh
+#!/usr/bin/env zsh
 
 function pull_changes() {
   echo "pull files of $1 ... "
@@ -7,6 +7,9 @@ function pull_changes() {
   git pull origin `git branch|grep '\*'| awk '{print $2}'`;
   echo "--------------------------------------------------------------------------------"
 }
+
+
+ssh-add ~/.ssh/*_rsa
 
 pull_changes ~/.spacemacs.d;
 pull_changes ~/.doom.d;
