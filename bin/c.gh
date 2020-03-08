@@ -26,4 +26,4 @@ push_changes ~/.org-notes;
 push_changes ~/.dotfiles;
 push_changes ~/.doom.d;
 push_changes ~/.spacemacs.d;
-push_change ~/src/personal/emacs.cc;
+push_changes ~/src/personal/emacs.cc;
