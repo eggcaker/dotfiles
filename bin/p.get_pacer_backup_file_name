@@ -1,7 +1,0 @@
-#!/usr/bin/env xonsh
-import sys
-
-$ACCOUNT_ID=sys.argv[1]
-
-ssh ubuntu@ec2-54-81-98-51.compute-1.amazonaws.com "MYSQL_PWD=$dbpassword mysql -u pwdbroot --database=pacerdb  -h $dbhost -e 'select * from pw_health_data_backup_info where account_id = $ACCOUNT_ID order by id desc limit 1'"
-

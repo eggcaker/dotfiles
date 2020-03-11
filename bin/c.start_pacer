@@ -1,3 +1,0 @@
-#!/usr/bin/env bash
-
-adb shell am start -n cc.pacer.androidapp/.ui.splash.SplashActivity
