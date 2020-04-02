@@ -1,16 +1,16 @@
 #!/usr/bin/env sh
 
-#source ~/.cache/wal/colors.sh # pywal shcema -update if needed.
+source ~/.cache/wal/colors.sh # pywal shcema -update if needed.
 
 # yabai template colours
-#CBACK=$(echo $background | sed 's/#//')
-#CFORE=$(echo $foreground | sed 's/#//')
-#CACTV=$(echo $color3 | sed 's/#//')
-#CNORM=$(echo $color1 | sed 's/#//')
-#CINSE=$(echo $foreground | sed 's/#//')
+CBACK=$(echo $background | sed 's/#//')
+CFORE=$(echo $foreground | sed 's/#//')
+CACTV=$(echo $color3 | sed 's/#//')
+CNORM=$(echo $color1 | sed 's/#//')
+CINSE=$(echo $foreground | sed 's/#//')
 
-yabai -m config status_bar_background_color  0xff202020 #$CBACK
-yabai -m config status_bar_foreground_color  0xffa8a8a8 #$CFORE
+yabai -m config status_bar_background_color  0xff$CBACK
+yabai -m config status_bar_foreground_color  0xff$CFORE
  
 # bar settings
 yabai -m config status_bar                   off
@@ -41,8 +41,8 @@ yabai -m config active_window_border_color   0xff775759 #$CACTV
 yabai -m config normal_window_border_color   0xff505050 #$CNORM
 yabai -m config insert_window_border_color   0xffd75f5f #$CINSE
 
-yabai -m config active_window_opacity        1.0
-yabai -m config normal_window_opacity        0.95
+yabai -m config active_window_opacity        0.98
+yabai -m config normal_window_opacity        0.90
 yabai -m config split_ratio                  0.62
 yabai -m config auto_balance                 on
 yabai -m config mouse_modifier               fn
@@ -52,13 +52,14 @@ yabai -m config mouse_action2                resize
 # general space settings
 yabai -m config layout                       bsp
 yabai -m config top_padding                  35
-yabai -m config bottom_padding               0
-yabai -m config left_padding                 0
-yabai -m config right_padding
-0
-yabai -m config window_gap                   0
+yabai -m config bottom_padding               10
+yabai -m config left_padding                 10
+yabai -m config right_padding                10
+yabai -m config window_gap                   10
 
 # Emacs 
-yabai -m rule --add app=Emacs manage=on
+yabai -m rule --add app=Emacs manage=off space=2
+yabai -m rule --add app=qutebrowser manage=on
+yabai -m rule --add app=mupdf-gl manage=on
 
 echo "yabai configuration loaded.."

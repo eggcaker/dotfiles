@@ -261,20 +261,11 @@ c.fonts.statusbar = "16pt 'Fira code'"
 # Type: QtFont
 c.fonts.tabs = "16pt 'Fira code'"
 
+c.fonts.monospace = "16pt 'Fira code'"
+
 # Bindings for command mode
 config.bind('<Ctrl+n>', 'completion-item-focus next', mode='command')
 config.bind('<Ctrl+p>', 'completion-item-focus prev', mode='command')
 
 
-import dracula.draw
-
-dracula.draw.blood(c, {
-    'spacing': {
-        'vertical': 6,
-        'horizontal': 8
-    },
-    'font': {
-        'family': 'Menlo, Terminus, Monaco, Monospace',
-        'size': 14
-    }
-})
+config.source('qutewal.py')

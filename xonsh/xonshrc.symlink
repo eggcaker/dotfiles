@@ -218,5 +218,11 @@ curse(float, 'tc', lambda self: hex(int(255*self/100)))
 # wal color theme
 (cat ~/.cache/wal/sequences &)
 
+def _pywal() : 
+    current_wallpaper=$(osascript -e 'tell app "finder" to get posix path of (get desktop picture as alias)').strip() 
+    wal -i @(current_wallpaper) -n 
+
+aliases['pywal'] = _pywal
+
 # To add support for TTYs this line can be optionally added.
 #source-bash ~/.cache/wal/colors-tty.sh
