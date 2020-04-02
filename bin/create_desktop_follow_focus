@@ -1,0 +1,6 @@
+#!/usr/bin/env xonsh 
+#
+yabai -m space --create
+id=$(yabai -m query --displays --display |jq '.spaces'|jq 'reverse[0]').strip();
+yabai -m space --focus @(id)
+ 
