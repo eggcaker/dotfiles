@@ -57,9 +57,44 @@ yabai -m config left_padding                 10
 yabai -m config right_padding                10
 yabai -m config window_gap                   10
 
+yabai -m config window_topmost                  on
+yabai -m config window_shadow                   float
+
+# Space labels
+yabai -m space 1 --label "Primary"
+yabai -m space 2 --label "Latex"
+yabai -m space 3 --label "Tools"
+yabai -m space 4 --label "Float"
+
+# Space config
+yabai -m config --space 4 layout float
+
+# Unmanaged
+yabai -m rule --add app="^System Preferences$"  manage=off border=off
+yabai -m rule --add app="^QQ$"                  manage=off
+yabai -m rule --add app="^WeChat$"              manage=off
+
+# Primary
+yabai -m rule --add app="kitty" space=1
+yabai -m rule --add app="Emacs" space=1
+
 # Emacs 
-yabai -m rule --add app=Emacs manage=off space=2
 yabai -m rule --add app=qutebrowser manage=on
 yabai -m rule --add app=mupdf-gl manage=on
 
+yabai -m rule --add app="Skim"        space=2
+yabai -m rule --add title="^nvim"     space=2
+
+
+# Tools
+yabai -m rule --add app="Finder"                space=3
+yabai -m rule --add title="^ranger"             space=3
+yabai -m rule --add app="Postman"               space=3
+yabai -m rule --add app="Activity Monitor"      space=3
+yabai -m rule --add app="App Store"             space=3
+
+# Floating
+yabai -m rule --add app="^System Preferences$"  space=4
+yabai -m rule --add app="^QQ$"                  space=4
+yabai -m rule --add app="^WeChat$"              space=4
 echo "yabai configuration loaded.."

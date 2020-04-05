@@ -261,7 +261,7 @@ c.fonts.statusbar = "16pt 'Fira code'"
 # Type: QtFont
 c.fonts.tabs = "16pt 'Fira code'"
 
-c.fonts.monospace = "16pt 'Fira code'"
+c.fonts.default_family= "16pt 'Fira code'"
 
 # Bindings for command mode
 config.bind('<Ctrl+n>', 'completion-item-focus next', mode='command')
