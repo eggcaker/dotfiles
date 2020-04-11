@@ -25,7 +25,7 @@ shift + cmd - l : yabai -m window --warp east
 cmd + shift + alt + ctrl - 0 : yabai -m space --balance
 
 # make floating window fill screen
-cmd + shift + alt + ctrl - f     : yabai -m window --grid 1:1:0:0:1:1
+cmd + shift - f     : yabai -m window --grid 1:1:0:0:1:1
 
 # make floating window fill left-half of screen
 cmd + shift + alt + ctrl - left   : yabai -m window --grid 1:2:0:0:1:1
@@ -102,10 +102,10 @@ alt - a : yabai -m space --toggle padding; yabai -m space --toggle gap
 alt - d : yabai -m window --toggle zoom-parent
 
 # toggle window fullscreen zoom
-cmd + shift + ctrl +alt - f : yabai -m window --toggle zoom-fullscreen
+#cmd + shift + ctrl +alt - f : yabai -m window --toggle zoom-fullscreen
 
 # toggle window native fullscreen
-shift + alt - f : yabai -m window --toggle native-fullscreen
+cmd + shift + alt + ctrl - f : yabai -m window --toggle native-fullscreen
 
 # toggle window border
 shift + alt - b : yabai -m window --toggle border
