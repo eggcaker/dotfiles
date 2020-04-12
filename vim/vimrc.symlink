@@ -6,6 +6,9 @@ filetype plugin indent on
 "set spelllang=en_us
 inoremap <C-l> <c-g>u<Esc>[s1z=`]a<c-g>u
 
+"let $TMPDIR = "/var/folders/tl/cwny95z539dcv_n2ymqfn6qh0000gn/T/"
+
+let maplocalleader = " "
 syntax on
 
 " Specify a directory for plugins
@@ -18,51 +21,22 @@ call plug#begin('~/.vim/plugged')
 " Shorthand notation; fetches https://github.com/junegunn/vim-easy-align
 Plug 'junegunn/vim-easy-align'
 
-" Any valid git URL is allowed
-Plug 'https://github.com/junegunn/vim-github-dashboard.git'
-
 " Multiple Plug commands can be written in a single line using | separators
 Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
 let g:UltiSnipsExpandTrigger = '<tab>'
 let g:UltiSnipsJumpForwardTrigger = '<tab>'
 let g:UltiSnipsJumpBackwardTrigger = '<s-tab>'
  
-
 " On-demand loading
 Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
-Plug 'tpope/vim-fireplace', { 'for': 'clojure' }
-
-" Using a non-master branch
-Plug 'rdnetto/YCM-Generator', { 'branch': 'stable' }
-
-" Using a tagged release; wildcard allowed (requires git 1.9.2 or above)
-Plug 'fatih/vim-go', { 'tag': '*' }
-
-" Plugin options
-Plug 'nsf/gocode', { 'tag': 'v.20150303', 'rtp': 'vim' }
 
 " Plugin outside ~/.vim/plugged with post-update hook
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 
-" Unmanaged plugin (manually installed and updated)
-Plug '~/my-prototype-plugin'
-
 Plug 'lervag/vimtex'
-let g:tex_flavor='xelatex'
-let g:vimtex_view_method='skim'
-let g:vimtex_quickfix_mode=0
-let g:vimtex_compiler_latexmk = {
-        \ 'executable' : 'latexmk',
-        \ 'options' : [
-        \   '-xelatex',
-        \   '-file-line-error',
-        \   '-synctex=1',
-        \   '-interaction=nonstopmode',
-        \ ],
-        \}
 
-Plug 'KeitaNakamura/tex-conceal.vim'
-set conceallevel=1
+Plug 'KeitaNakamura/tex-conceal.vim',{'for':'tex'}
+set conceallevel=2
 let g:tex_conceal='abdmg'
 hi Conceal ctermbg=none
 
@@ -71,6 +45,31 @@ Plug 'dylanaraps/wal.vim'
 " Initialize plugin system
 call plug#end()
 
+" Tex options 
+let g:tex_flavor='xelatex'
+let g:vimtex_view_method='skim'
+let g:vimtex_view_automatic=1
+let g:vimtex_quickfix_mode=0
+let g:vimtex_quickfix_latexlog ={
+			\ 'font' : 0,
+            \ 'overfull' : 0,
+            \ 'underfull' : 0,
+            \ 'packages' : {
+            \   'default' : 0,
+            \ },
+            \ }
+
+let g:vimtex_compiler_latexmk = {
+			\ 'executable' : 'latexmk',
+			\ 'options' : [
+			\   '-xelatex',
+			\   '-file-line-error',
+			\   '-synctex=1',
+			\   '-interaction=nonstopmode',
+			\ ],
+			\}
+ 
+" wal options 
 colorscheme wal
 set background=dark
  
