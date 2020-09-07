@@ -175,10 +175,14 @@ spoon.Office:start()
 hs.hotkey.bind(hyper, "R", "Reload Configuration", function() hs.reload() end)
 
 
+
+hs.hotkey.bind(hyper, "L", "System sleep",  function() hs.caffeinate.systemSleep() end)
+
 function keyStrokes(str)
   return function()
     hs.eventtap.keyStrokes(str)
   end
 end
+
 hs.hotkey.bind({"alt", "cmd"}, "L", keyStrokes("console.log("))
 
