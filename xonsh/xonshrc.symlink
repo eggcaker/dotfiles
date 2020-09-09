@@ -78,6 +78,7 @@ aliases['d'] = d = ['kitty', '+kitten', 'diff']
 aliases['wy'] = "~/src/geek/wenyan-lang/build/wenyan.js"
 
 aliases['s.load_data'] = ['source', '~/.dotfiles/bin/segments/load_stock_env']
+aliases['p.load_azure'] = ['source', '~/.dotfiles/bin/segments/load_azure_storage']
 
 
 def pt(data):

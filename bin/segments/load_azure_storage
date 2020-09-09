@@ -1,0 +1,53 @@
+$UPDATE_OS_ENVIRON = True
+
+import os, uuid
+from azure.storage.blob import BlobServiceClient, BlobClient, ContainerClient
+
+connect_str = os.getenv('AZURE_STORAGE_CONNECTION_STRING')
+container_name = 'vanke-iot'
+
+blob_service_client = BlobServiceClient.from_connection_string(connect_str)
+container_client = blob_service_client.get_container_client(container_name)
+
+
+def _lf():
+    blist = container_client.list_blobs()
+    for b in blist:
+        print("\t" + b.name)
+
+
+aliases['lf'] = _lf
+
+
+def _upload(names):
+    localname = names[0]
+    if (len(names) == 1):
+        rname = os.path.basename(localname)
+
+    print(localname, rname)
+    blob_client = blob_service_client.get_blob_client(container=container_name, blob=rname)
+
+    with open(localname, "rb") as data:
+        blob_client.upload_blob(data)
+
+
+aliases['uf'] = _upload
+
+
+def _delete(name):
+    container_client.delete_blob(name[0])
+
+
+aliases['rf'] = _delete
+
+
+def _get_blob(names):
+    name = names[0]
+    blob_client = container_client.get_blob_client(name)
+    download_file_path = os.path.join("./data", name)
+
+    with open(download_file_path, "wb") as download_file:
+        download_file.write(blob_client.download_blob().readall())
+
+
+aliases['gf'] = _get_blob
