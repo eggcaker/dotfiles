@@ -192,7 +192,7 @@ $LESS_TERMCAP_ue = "\033[0m"         # end underline
 $BASE16_SHELL = $HOME + "/.config/base16-shell/"
 
 # XONSH WIZARD START
-xontrib load coreutils vox z mpl fzf-widgets kitty
+xontrib load coreutils vox z mpl fzf-widgets kitty  ssh_agent
 # XONSH WIZARD END
 
 
@@ -227,6 +227,9 @@ def _pywal() :
     wal -i @(current_wallpaper) -n 
 
 aliases['pywal'] = _pywal
+
+
+$BASH_COMPLETIONS.insert(0, '/opt/local/share/bash-completion/bash_completion')
 
 # To add support for TTYs this line can be optionally added.
 #source-bash ~/.cache/wal/colors-tty.sh
