@@ -23,6 +23,7 @@ if not _G.requirePackage then
 end
 
 local File = _G.requirePackage("file", true)
+local SmartFolder = _G.requirePackage("smart-folder", true)
 
 local entities = {
     ActivityMonitor = _G.requirePackage("entities/activity-monitor", true),
@@ -32,6 +33,7 @@ local entities = {
     Calculator = _G.requirePackage("entities/calculator", true),
     Contacts = _G.requirePackage("entities/contacts", true),
     Dictionary = _G.requirePackage("entities/dictionary", true),
+    DiskUtility = _G.requirePackage("entities/disk-utility", true),
     FaceTime = _G.requirePackage("entities/facetime", true),
     Finder = _G.requirePackage("entities/finder", true),
     GoogleChrome = _G.requirePackage("entities/google-chrome", true),
@@ -75,6 +77,10 @@ function Defaults.createFileEvents()
         end
     end
 
+    local recentsSavedSearchPath =
+        "/System/Library/CoreServices/Finder.app/Contents/Resources/MyLibraries/myDocuments.cannedSearch/Resources/search.savedSearch"
+    local Recents = SmartFolder:new(recentsSavedSearchPath)
+
     local fileEvents = {
         { nil, "a", File:new("/Applications"), { "Files", "Applications" } },
         { nil, "d", File:new("~/Downloads"), { "Files", "Downloads" } },
@@ -82,11 +88,12 @@ function Defaults.createFileEvents()
         { nil, "m", File:new("~/Movies"), { "Files", "Movies" } },
         { nil, "p", File:new("~/Pictures"), { "Files", "Pictures" } },
         { nil, "t", File:new("~/.Trash"), { "Files", "Trash" } },
+        { nil, "v", File:new("/Volumes"), { "Files", "Volumes" } },
         { { "cmd" }, "a", openFinderAppEvent("Airdrop"), { "Files", "Airdrop" } },
         { { "cmd" }, "c", openFinderAppEvent("Computer"), { "Files", "Computer" } },
-        { { "cmd" }, "i", openFinderAppEvent("iCloud Drive"), { "Files", "iCloud Drive" } },
+        { { "cmd" }, "i", openFinderAppEvent("iCloud\\ Drive"), { "Files", "iCloud Drive" } },
         { { "cmd" }, "n", openFinderAppEvent("Network"), { "Files", "Network" } },
-        { { "cmd" }, "r", openFinderAppEvent("Recents"), { "Files", "Recents" } },
+        { { "cmd" }, "r", Recents, { "Files", "Recents" } },
         { { "shift" }, "a", openFinderAppEvent("All My Files"), { "Files", "All My Files" } },
         { { "shift" }, "d", File:new("~/Desktop"), { "Files", "Desktop" } },
         { { "cmd", "shift" }, "d", File:new("~/Documents"), { "Files", "Documents" } },
@@ -124,6 +131,7 @@ function Defaults.createEntityEvents()
         { nil, "t", entities.Terminal, { "Entities", "Terminal" } },
         { nil, "v", entities.VoiceMemos, { "Entities", "Voice Memos" } },
         { nil, ",", entities.SystemPreferences, { "Entities", "System Preferences" } },
+        { { "cmd" }, "d", entities.DiskUtility, { "Entities", "Disk Utility" } },
         { { "alt", "cmd" }, "s", entities.Siri, { "Entities", "Siri" } },
         { { "shift" }, "a", entities.ActivityMonitor, { "Entities", "Activity Monitor" } },
         { { "shift" }, "c", entities.Calculator, { "Entities", "Calculator" } },
@@ -146,8 +154,10 @@ function Defaults.createEntityEvents()
         { nil, "m", entities.Messages, { "Select Events", "Select a Messages conversation" } },
         { nil, "n", entities.Notes, { "Select Events", "Select a Note" } },
         { nil, "p", entities.Preview, { "Select Events", "Select a Preview window" } },
+        { nil, "q", entities.QuickTimePlayer, { "Select Events", "QuickTime Player" } },
         { nil, "s", entities.Safari, { "Select Events", "Select a Safari tab or window" } },
         { nil, "t", entities.Terminal, { "Select Events", "Select a Terminal window" } },
+        { nil, ",", entities.SystemPreferences, { "Entities", "Select a System Preferences pane" } },
         { { "shift" }, "t", entities.TextEdit, { "Select Events", "Select a Text Edit window" } },
     }
 
@@ -163,34 +173,100 @@ end
 ---
 --- Returns:
 ---  * A list of `url` workflow events
-function Defaults.createUrlEvents()
-    local function urlEventHandler(url)
-        return function()
-            hs.urlevent.openURL(url)
-            return true
-        end
-    end
+---  * A table of `url` entities
+function Defaults.createUrlEvents(URL)
+     local urls = {
+         Amazon = URL:new("https://amazon.com"),
+         Facebook = URL:new("https://facebook.com"),
+         GitHub = URL:new("https://github.com"),
+         GMail = URL:new("https://mail.google.com"),
+         Google = URL:new("https://google.com"),
+         GoogleMaps = URL:new("https://maps.google.com"),
+         HackerNews = URL:new("https://news.ycombinator.com"),
+         LinkedIn = URL:new("https://linkedin.com"),
+         Messenger = URL:new("https://messenger.com"),
+         Netflix = URL:new("https://netflix.com"),
+         Reddit = URL:new("https://reddit.com"),
+         Wikipedia = URL:new("https://wikipedia.org"),
+         Weather = URL:new("https://weather.com"),
+         Yelp = URL:new("https://yelp.com"),
+         YouTube = URL:new("https://youtube.com"),
+         Zillow = URL:new("https://zillow.com"),
+     }
 
-    local urlEvents = {
-        { nil, "a", urlEventHandler("https://amazon.com"), { "URL Events", "Amazon" } },
-        { nil, "f", urlEventHandler("https://facebook.com"), { "URL Events", "Facebook" } },
-        { nil, "g", urlEventHandler("https://google.com"), { "URL Events", "Google" } },
-        { nil, "h", urlEventHandler("https://news.ycombinator.com"), { "URL Events", "Hacker News" } },
-        { nil, "l", urlEventHandler("https://linkedin.com"), { "URL Events", "LinkedIn" } },
-        { nil, "m", urlEventHandler("https://messenger.com"), { "URL Events", "Facebook Messenger" } },
-        { nil, "n", urlEventHandler("https://netflix.com"), { "URL Events", "Netflix" } },
-        { nil, "r", urlEventHandler("https://reddit.com"), { "URL Events", "Reddit" } },
-        { nil, "w", urlEventHandler("https://wikipedia.org"), { "URL Events", "Wikipedia" } },
-        { nil, "y", urlEventHandler("https://youtube.com"), { "URL Events", "YouTube" } },
-        { nil, "z", urlEventHandler("https://zillow.com"), { "URL Events", "Zillow" } },
-        { { "shift" }, "g", urlEventHandler("https://github.com"), { "URL Events", "GitHub" } },
-        { { "shift" }, "m", urlEventHandler("https://maps.google.com"), { "URL Events", "Google Maps" } },
-        { { "shift" }, "w", urlEventHandler("https://weather.com"), { "URL Events", "Weather" } },
-        { { "shift" }, "y", urlEventHandler("https://yelp.com"), { "URL Events", "Yelp" } },
-        { { "cmd", "shift" }, "m", urlEventHandler("https://mail.google.com"), { "URL Events", "Gmail" } },
-    }
+     urls.Facebook.paths = {
+         { name = "Facebook", path = "https://www.facebook.com" },
+         { name = "FB Messages", path = "/messages" },
+         { name = "FB Marketplace", path = "/marketplace" },
+         { name = "FB watch", path = "/watch" },
+     }
 
-    return urlEvents
+     urls.HackerNews.paths = {
+         { name = "Hacker News", path = "https://news.ycombinator.com" },
+         { name = "New", path = "/newest" },
+         { name = "Threads", path = "/threads" },
+         { name = "Past", path = "/front" },
+         { name = "Comments", path = "/newcomments" },
+         { name = "Ask", path = "/ask" },
+         { name = "Show", path = "/show" },
+         { name = "Jobs", path = "/jobs" },
+         { name = "Submit", path = "/submit" },
+     }
+
+     urls.LinkedIn.paths = {
+         { name = "LinkedIn", path = "https://linkedin.com" },
+         { name = "My Network", path = "/mynetwork/" },
+         { name = "Jobs", path = "/jobs/" },
+         { name = "Messaging", path = "/messaging/" },
+         { name = "Notifications", path = "/notifications/" },
+     }
+
+     urls.Google.paths = {
+         { name = "Google Search", path = "https://google.com" },
+         { name = "Google Image Search", path = "https://www.google.com/imghp" },
+         { name = "Google Account", path = "https://myaccount.google.com" },
+         { name = "Google Calendar", path = "https://www.google.com/calendar" },
+         { name = "Google Contacts", path = "https://contacts.google.com" },
+         { name = "Google Drive", path = "https://drive.google.com" },
+         { name = "Google Maps", path = "https://maps.google.com" },
+         { name = "Google Play Store", path = "https://play.google.com" },
+         { name = "Google News", path = "https://news.google.com" },
+         { name = "Google Photos", path = "https://photos.google.com" },
+         { name = "Google Shopping", path = "https://www.google.com/shopping" },
+         { name = "Google Translate", path = "https://translate.google.com" },
+         { name = "GMail", path = "https://mail.google.com" },
+         { name = "YouTube", path = "https://www.youtube.com" },
+     }
+
+     urls.YouTube.paths = {
+         { name = "YouTube", path = "https://youtube.com" },
+         { name = "Trending", path = "/feed/trending" },
+         { name = "Subscriptions", path = "/feed/subscriptions" },
+         { name = "Library", path = "/feed/library" },
+         { name = "History", path = "/feed/history" },
+         { name = "Watch Later", path = "/playlist?list=WL" },
+     }
+
+     local urlEvents = {
+         { nil, "a", urls.Amazon, { "URL Events", "Amazon" } },
+         { nil, "f", urls.Facebook, { "URL Events", "Facebook" } },
+         { nil, "g", urls.Google, { "URL Events", "Google" } },
+         { nil, "h", urls.HackerNews, { "URL Events", "Hacker News" } },
+         { nil, "l", urls.LinkedIn, { "URL Events", "LinkedIn" } },
+         { nil, "m", urls.Messenger, { "URL Events", "Facebook Messenger" } },
+         { nil, "n", urls.Netflix, { "URL Events", "Netflix" } },
+         { nil, "r", urls.Reddit, { "URL Events", "Reddit" } },
+         { nil, "w", urls.Wikipedia, { "URL Events", "Wikipedia" } },
+         { nil, "y", urls.YouTube, { "URL Events", "YouTube" } },
+         { nil, "z", urls.Zillow, { "URL Events", "Zillow" } },
+         { { "shift" }, "g", urls.GitHub, { "URL Events", "GitHub" } },
+         { { "shift" }, "m", urls.GoogleMaps, { "URL Events", "Google Maps" } },
+         { { "shift" }, "w", urls.Weather, { "URL Events", "Weather" } },
+         { { "shift" }, "y", urls.Yelp, { "URL Events", "Yelp" } },
+         { { "cmd", "shift" }, "m", urls.GMail, { "URL Events", "Gmail" } },
+     }
+
+     return urlEvents, urls
 end
 
 --- Defaults.createVolumeEvents()
@@ -300,7 +376,23 @@ end
 --- Returns:
 ---  * A list of `normal` workflow events
 function Defaults.createNormalEvents(Ki)
-    local function startScreenSaver()
+    local actions = {}
+
+    function actions.logout()
+        Ki.state:exitMode()
+
+        hs.timer.doAfter(0, function()
+            hs.focus()
+
+            local answer = hs.dialog.blockAlert("Log out from your computer?", "", "Log out", "Cancel")
+
+            if answer == "Log out" then
+                hs.osascript.applescript([[ tell application "System Events" to log out ]])
+            end
+        end)
+    end
+
+    function actions.startScreenSaver()
         hs.osascript.applescript([[
             tell application "System Events" to start current screen saver
         ]])
@@ -308,36 +400,45 @@ function Defaults.createNormalEvents(Ki)
         return true
     end
 
-    local function sleep()
+    function actions.sleep()
         Ki.state:exitMode()
         hs.osascript.applescript([[ tell application "Finder" to sleep ]])
     end
 
-    local function restart()
+    function actions.restart()
         Ki.state:exitMode()
 
-        local answer = hs.dialog.blockAlert("Restart your computer?", "", "Restart", "Cancel")
+        hs.timer.doAfter(0, function()
+            hs.focus()
 
-        if answer == "Restart" then
-            hs.osascript.applescript([[ tell application "Finder" to restart ]])
-        end
+            local answer = hs.dialog.blockAlert("Restart your computer?", "", "Restart", "Cancel")
+
+            if answer == "Restart" then
+                hs.osascript.applescript([[ tell application "Finder" to restart ]])
+            end
+        end)
     end
 
-    local function shutdown()
+    function actions.shutdown()
         Ki.state:exitMode()
 
-        local answer = hs.dialog.blockAlert("Shut down your computer?", "", "Shut Down", "Cancel")
+        hs.timer.doAfter(0, function()
+            hs.focus()
 
-        if answer == "Shut Down" then
-            hs.osascript.applescript([[ tell application "System Events" to shut down ]])
-        end
+            local answer = hs.dialog.blockAlert("Shut down your computer?", "", "Shut Down", "Cancel")
+
+            if answer == "Shut Down" then
+                hs.osascript.applescript([[ tell application "System Events" to shut down ]])
+            end
+        end)
     end
 
     local normalEvents = {
-        { { "ctrl" }, "q", shutdown, { "Normal Mode", "Shut Down" } },
-        { { "ctrl" }, "s", sleep, { "Normal Mode", "Sleep" } },
-        { { "ctrl" }, "r", restart, { "Normal Mode", "Restart" } },
-        { { "cmd", "ctrl" }, "s", startScreenSaver, { "Normal Mode", "Enter Screen Saver" } },
+        { { "ctrl" }, "l", actions.logout, { "Normal Mode", "Log Out" } },
+        { { "ctrl" }, "q", actions.shutdown, { "Normal Mode", "Shut Down" } },
+        { { "ctrl" }, "r", actions.restart, { "Normal Mode", "Restart" } },
+        { { "ctrl" }, "s", actions.sleep, { "Normal Mode", "Sleep" } },
+        { { "cmd", "ctrl" }, "s", actions.startScreenSaver, { "Normal Mode", "Enter Screen Saver" } },
     }
 
     return normalEvents
@@ -354,7 +455,7 @@ end
 ---   * A table containing events for `url`, `select`, `entity`, `volume`, `brightness`, and `normal` modes
 ---   * A table containing all default desktop entity objects
 function Defaults.create(Ki)
-    local urlEvents = Defaults.createUrlEvents()
+    local urlEvents, urlEntities = Defaults.createUrlEvents(Ki.URL)
     local entityEvents, entitySelectEvents = Defaults.createEntityEvents()
     local fileEvents = Defaults.createFileEvents()
     local volumeEvents = Defaults.createVolumeEvents()
@@ -370,7 +471,7 @@ function Defaults.create(Ki)
         normal = normalEvents,
     }
 
-    return events, entities
+    return events, entities, urlEntities
 end
 
 return Defaults

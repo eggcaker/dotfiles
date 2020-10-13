@@ -160,7 +160,7 @@ $PROMPT_FIELDS['prompt_end'] = lambda: '{RED}$ ' if __xonsh__.history.last_cmd_r
 $XONSH_SHOW_TRACEBACK = False
 
 
-$PROMPT = '{env_name:{} }{BOLD_BLUE} {cwd}{branch_color}{curr_branch: {}}{NO_COLOR} {BOLD_BLUE}{prompt_end}{NO_COLOR}'
+$PROMPT = '{env_name:{} }{BOLD_BLUE} {cwd}{branch_color}{curr_branch: {}}{RESET} {BOLD_BLUE}{prompt_end}{RESET}'
 
 # nnn configurations 
 $NNN_PLUG='f:finder;o:fzopen;p:mocplay;d:diffs;t:nmount;v:imgview'
@@ -233,3 +233,9 @@ $BASH_COMPLETIONS.insert(0, '/opt/local/share/bash-completion/bash_completion')
 
 # To add support for TTYs this line can be optionally added.
 #source-bash ~/.cache/wal/colors-tty.sh
+
+
+
+# reddit server
+aliases['ra'] = ['kitty', '+kitten', 'ssh', 'azureuser@52.247.192.91']
+aliases['rb'] = ['kitty', '+kitten', 'ssh', 'azureuser@40.91.104.34']

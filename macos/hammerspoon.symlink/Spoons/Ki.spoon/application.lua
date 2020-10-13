@@ -21,50 +21,80 @@ if not _G.requirePackage then
 end
 -- luacov: enable
 
-local Entity = _G.requirePackage("Entity", true)
+local Util = _G.requirePackage("util", true)
+local Entity = _G.requirePackage("entity", true)
 local Application = Entity:subclass("Application")
+local ApplicationBehaviors = {}
+
+-- Default application behavior function
+function ApplicationBehaviors.default(self, eventHandler)
+    local app = self.name and self:getApplication() or nil
+
+    if not app then
+        return self.autoExitMode
+    end
+
+    local autoFocus, autoExit = eventHandler(app)
+
+    if app and autoFocus == true then
+        self.focus(app)
+    end
+
+    return autoExit == nil and self.autoExitMode or autoExit
+end
+
+-- Application behavior function for select mode
+function ApplicationBehaviors.select(self, eventHandler)
+    local app = self.name and self:getApplication() or nil
+
+    if not app then
+        return self.autoExitMode
+    end
+
+    local choices = self:getSelectionItems()
+
+    if choices and #choices > 0 then
+        local function onSelection(choice)
+            if choice then
+                eventHandler(app, choice)
+            end
+        end
+
+        self.showSelectionModal(choices, onSelection)
+    end
+
+    return true
+end
+
+-- Application behavior function for entity mode
+function ApplicationBehaviors.entity(self, eventHandler, _, _, workflow)
+    local shouldSelect = false
+    local app = self.name and self:getApplication() or nil
+
+    if not app then
+        return self.autoExitMode
+    end
+
+    for _, event in pairs(workflow) do
+        if event.mode == "select" then
+            shouldSelect = true
+            break
+        end
+    end
+
+    if shouldSelect then
+        return ApplicationBehaviors.select(self, eventHandler, _, _, workflow)
+    end
+
+    local _, autoExit = eventHandler(app, shouldSelect)
+
+    return autoExit == nil and self.autoExitMode or autoExit
+end
 
 --- Application.behaviors
 --- Variable
 --- Application [behaviors](Entity.html#behaviors) defined to invoke event handlers with `hs.application`.
-Application.behaviors = Entity.behaviors + {
-    default = function(self, eventHandler)
-        local app = self.name and self:getApplication() or nil
-
-        if not app then
-            return self.autoExitMode
-        end
-
-        local autoFocus, autoExit = eventHandler(app)
-
-        if app and autoFocus == true then
-            self.focus(app)
-        end
-
-        return autoExit == nil and self.autoExitMode or autoExit
-    end,
-    select = function(self, eventHandler)
-        local app = self.name and self:getApplication() or nil
-
-        if not app then
-            return self.autoExitMode
-        end
-
-        local choices = self:getSelectionItems()
-
-        if choices and #choices > 0 then
-            local function onSelection(choice)
-                if choice then
-                    eventHandler(app, choice)
-                end
-            end
-
-            self.showSelectionModal(choices, onSelection)
-        end
-
-        return true
-    end,
-}
+Application.behaviors = Entity.behaviors + ApplicationBehaviors
 
 --- Application:getSelectionItems()
 --- Method
@@ -89,6 +119,7 @@ function Application:getSelectionItems()
             text = window:title(),
             subText = "Window "..index.." "..state,
             windowId = window:id(),
+            windowIndex = index,
         })
     end
 
@@ -117,16 +148,65 @@ function Application.createMenuItemEvent(menuItem, options)
             Application.focus(app, choice)
         end
 
+        local isRegex = options.isRegex or false
+
         if options.isToggleable then
-            _ = app:selectMenuItem(menuItem[1], options.isRegex)
-                or app:selectMenuItem(menuItem[2], options.isRegex)
+            _ = app:selectMenuItem(menuItem[1], isRegex)
+                or app:selectMenuItem(menuItem[2], isRegex)
         else
-            app:selectMenuItem(menuItem, options.isRegex)
+            app:selectMenuItem(menuItem, isRegex)
         end
 
         if (options.focusAfter) then
             Application.focus(app, choice)
         end
+    end
+end
+
+--- Application.createMenuItemSelectionEvent(menuItem[, shouldFocusAfter, shouldFocusBefore])
+--- Method
+--- Convenience method to create an event handler that presents a selection modal containing menu items that are nested/expandable underneath at the provided `menuItem` path, with optionally specified behavior on how the menu item selection occurs
+---
+--- Parameters:
+---  * `menuItem` - a table list of strings that represent a path to a menu item that expands to menu item list, i.e., `{ "File", "Open Recent" }`
+---  * `options` - a optional table containing some or all of the following fields to define the behavior for the menu item selection event:
+---     * `focusBefore` - an optional boolean denoting whether to focus the application before the menu item is selected
+---     * `focusAfter` - an optional boolean denoting whether to focus the application after the menu item is selected
+---
+--- Returns:
+---  * None
+function Application.createMenuItemSelectionEvent(menuItem, options)
+    options = options or {}
+
+    return function(app, windowChoice)
+        local menuItemList = Application.getMenuItemList(app, menuItem)
+        local choices = {}
+
+        for _, item in pairs(menuItemList) do
+            if item.AXTitle and #item.AXTitle > 0 then
+                table.insert(choices, {
+                    text = item.AXTitle,
+                })
+            end
+        end
+
+        Application.showSelectionModal(choices, function(menuItemChoice)
+            if menuItemChoice then
+                if (options.focusBefore) then
+                    Application.focus(app, windowChoice)
+                end
+
+                local targetMenuItem = Util:clone(menuItem)
+
+                table.insert(targetMenuItem, menuItemChoice.text)
+
+                app:selectMenuItem(targetMenuItem)
+
+                if (options.focusAfter) then
+                    Application.focus(app, windowChoice)
+                end
+            end
+        end)
     end
 end
 
@@ -148,7 +228,6 @@ function Application.getMenuItemList(app, menuItemPath)
         for _, menuItem in pairs(menuItems) do
             if menuItem.AXTitle == menuItemName then
                 menuItems = menuItem.AXChildren[1]
-
                 if menuItemName ~= menuItemPath[#menuItemPath] then
                     isFound = true
                 end

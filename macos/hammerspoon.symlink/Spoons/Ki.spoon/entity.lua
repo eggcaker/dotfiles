@@ -1,6 +1,6 @@
 --- === Entity ===
 ---
---- Entity class that represents some generic automatable desktop entity
+--- Entity class that represents some abstract automatable desktop entity
 ---
 
 local luaVersion = _VERSION:match("%d+%.%d+")
@@ -38,6 +38,9 @@ local Entity = class("Entity")
 ---  * `keyName` - A string containing the name of a keyboard key (in `hs.keycodes.map`)
 ---
 --- The table is defined with an `__add` metamethod to overwrite the default entity behaviors.
+---
+--- Currently supported behaviors:
+--- * `default` - triggers the event handler and returns a boolean flag whether to auto-exit back to desktop mode or not, depending on the return value of the handler or the `autoExitMode` variable on the entity class
 Entity.behaviors = {
     default = function(self, eventHandler)
         local _, autoExit = eventHandler()
@@ -72,22 +75,33 @@ function Entity.notifyError(message, details)
     print("[Ki] "..message..":", details)
 end
 
---- Entity.renderScriptTemplate(scriptName[, viewModel]) -> string
+--- Entity.renderScriptTemplate(script[, viewModel]) -> string
 --- Method
 --- Generates an applescript from templates located in `src/osascripts` with some view model object
 ---
 --- Parameters:
----  * `scriptName` - The applescript file name
+---  * `scriptPath` - The absolute file path to the applescript file or the name of an existing Ki applescript file (in src/osascripts)
 ---  * `viewModel` - An optional [lustache](http://olivinelabs.com/lustache/) view model
 ---
 --- Returns:
----  * The rendered script string
-function Entity.renderScriptTemplate(scriptName, viewModel)
+---  * The rendered script string or `nil`
+function Entity.renderScriptTemplate(script, viewModel)
     viewModel = viewModel or {}
 
-    local localScriptPath = _G.getSpoonPath().."/osascripts/"..scriptName..".applescript"
-    local scriptPath = string.match(scriptName, "/") and scriptName or localScriptPath
-    local file = assert(io.open(scriptPath, "rb"))
+    local scriptPath = script
+
+    if not scriptPath:match("/") then
+        local localScriptPath = _G.getSpoonPath().."/osascripts/"..script..".applescript"
+        scriptPath = string.match(script, "/") and script or localScriptPath
+    end
+
+    local success, file = pcall(function() return assert(io.open(scriptPath, "rb")) end)
+
+    if not success or not file then
+        Entity.notifyError("Unable to render script template for the script", script)
+        return nil
+    end
+
     local scriptTemplate = file:read("*all")
 
     file:close()
@@ -186,11 +200,13 @@ end
 --- Returns:
 ---   * None
 function Entity.triggerAfterConfirmation(question, action)
-    hs.focus()
+    hs.timer.doAfter(0, function()
+        hs.focus()
 
-    local answer = hs.dialog.blockAlert(question, "", "Confirm", "Cancel")
+        local answer = hs.dialog.blockAlert(question, "", "Confirm", "Cancel")
 
-    if answer == "Confirm" then action() end
+        if answer == "Confirm" then action() end
+    end)
 end
 
 --- Entity.selectionModalShortcuts
@@ -198,9 +214,13 @@ end
 --- A list of shortcuts that can be used when the selection modal is visible. The following shortcuts are available by default:
 ---  * <kbd>^k</kbd> to navigate up an item
 ---  * <kbd>^j</kbd> to navigate down an item
+---  * <kbd>^u</kbd> to navigate a page of rows up
+---  * <kbd>^d</kbd> to navigate a page of rows down
 Entity.selectionModalShortcuts = {
     { { "ctrl" }, "j", function(modal) modal:selectedRow(modal:selectedRow() + 1) end },
     { { "ctrl" }, "k", function(modal) modal:selectedRow(modal:selectedRow() - 1) end },
+    { { "ctrl" }, "d", function(modal) modal:selectedRow(modal:selectedRow() + modal:rows()) end },
+    { { "ctrl" }, "u", function(modal) modal:selectedRow(modal:selectedRow() - modal:rows()) end },
 }
 
 --- Entity.showSelectionModal(choices, callback)
@@ -276,10 +296,11 @@ end
 --- Parameters:
 ---  * `mode` - The name of the current mode
 ---  * `shortcut` - A shortcut object containing the keybindings and event handler for the entity
+---  * `workflow` - The list of events that compose the current workflow
 ---
 --- Returns:
 ---  * A boolean denoting to whether enable or disable automatic mode exit after the action has been dispatched
-function Entity:dispatchAction(mode, shortcut)
+function Entity:dispatchAction(mode, shortcut, workflow)
     local flags = shortcut.flags
     local keyName = shortcut.keyName
     local eventHandler = self.getEventHandler(self.shortcuts, flags, keyName)
@@ -287,7 +308,7 @@ function Entity:dispatchAction(mode, shortcut)
     if eventHandler then
         local behaviorFunc = self.behaviors[mode] or self.behaviors.default
 
-        return behaviorFunc(self, eventHandler, flags, keyName)
+        return behaviorFunc(self, eventHandler, flags, keyName, workflow)
     else
         return self.autoExitMode
     end

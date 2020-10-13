@@ -1,6 +1,6 @@
 --- === File ===
 ---
---- File class that subclasses [Entity](Entity.html) to represent some directory or file
+--- File class that subclasses [Entity](Entity.html) to represent some directory or file to be automated
 ---
 
 local luaVersion = _VERSION:match("%d+%.%d+")
@@ -28,9 +28,26 @@ local File = Entity:subclass("File")
 --- File.behaviors
 --- Variable
 --- File [behaviors](Entity.html#behaviors) defined to invoke event handlers with the file path.
+--- Currently supported behaviors:
+--- * `default` - simply triggers the event handler with the instance's url string.
+--- * `file` - triggers the appropriate event handler for the file entity instance. Depending on whether the workflow includes select mode, the event handler will be invoked with `shouldNavigate` set to `true`.
 File.behaviors = Entity.behaviors + {
     default = function(self, eventHandler)
         eventHandler(self.path)
+        return true
+    end,
+    file = function(self, eventHandler, _, _, workflow)
+        local shouldNavigate = false
+
+        for _, event in pairs(workflow) do
+            if event.mode == "select" then
+                shouldNavigate = true
+                break
+            end
+        end
+
+        eventHandler(self.path, shouldNavigate)
+
         return true
     end,
 }
@@ -42,6 +59,9 @@ File.behaviors = Entity.behaviors + {
 --- Parameters:
 ---  * `path` - The initial directory path
 ---  * `shortcuts` - The list of shortcuts containing keybindings and actions for the file entity
+---  * `options` - A table containing various options that configures the file instance
+---    * `showHiddenFiles` - A flag to display hidden files in the file selection modal. Defaults to `false`
+---    * `sortAttribute` - The file attribute to sort the file selection list by. File attributes come from [hs.fs.dir](http://www.hammerspoon.org/docs/hs.fs.html#dir). Defaults to `modification` (last modified timestamp)
 ---
 --- Each `shortcut` item should be a list with items at the following indices:
 ---  * `1` - An optional table containing zero or more of the following keyboard modifiers: `"cmd"`, `"alt"`, `"shift"`, `"ctrl"`, `"fn"`
@@ -53,19 +73,43 @@ File.behaviors = Entity.behaviors + {
 ---
 --- Returns:
 ---  * None
-function File:initialize(path, shortcuts)
+function File:initialize(path, shortcuts, options)
+    options = options or {}
+
     local absolutePath = hs.fs.pathToAbsolute(path)
-    local attributes = hs.fs.attributes(absolutePath) or {}
+
+    if not absolutePath then
+        self.notifyError("Error initializing File entity", "Path "..path.." may not exist.")
+        return
+    end
+
+    local success, value = pcall(function() return hs.fs.attributes(absolutePath) or {} end)
+
+    if not success then
+        self.notifyError("Error initializing File entity", value or "")
+        return
+    end
+
+    local attributes = value
     local isDirectory = attributes.mode == "directory"
+    local openFileInFolder = self:createEvent(path, function(target) self.open(target) end)
 
     local actions = {
-        open = self.open,
+        copy = function(target) self:copy(target) end,
+        move = function(target) self:move(target) end,
         showCheatsheet = function() self.cheatsheet:show() end,
-        openFileInFolder = self:createEvent(path, function(target) self.open(target) end),
+        openFileInFolder = openFileInFolder,
         openFileInFolderWith = self:createEvent(path, function(target) self:openWith(target) end),
         showInfoForFileInFolder = self:createEvent(path, function(target) self:openInfoWindow(target) end),
         quickLookFileInFolder = self:createEvent(path, function(target) hs.execute("qlmanage -p "..target) end),
         deleteFileInFolder = self:createEvent(path, function(target) self:moveToTrash(target) end),
+        open = function(target, shouldNavigate)
+            if shouldNavigate then
+                return openFileInFolder(target)
+            end
+
+            return self.open(target)
+        end,
     }
     local commonShortcuts = {
         { nil, nil, actions.open, { path, "Activate/Focus" } },
@@ -75,9 +119,11 @@ function File:initialize(path, shortcuts)
     -- Append directory shortcuts if the file entity is representing a directory path
     if isDirectory then
         local commonDirectoryShortcuts = {
+            { nil, "c", actions.copy, { path, "Copy File to Folder" } },
             { nil, "d", actions.deleteFileInFolder, { path, "Move File in Folder to Trash" } },
+            { nil, "i", actions.showInfoForFileInFolder, { path, "Open File Info Window" } },
+            { nil, "m", actions.move, { path, "Move File to Folder" } },
             { nil, "o", actions.openFileInFolder, { path, "Open File in Folder" } },
-            { nil, "i", actions.showInfoForFileInFolder, { path, "Get File Info for File in Folder" } },
             { nil, "space", actions.quickLookFileInFolder, { path, "Quick Look" } },
             { { "shift" }, "o", actions.openFileInFolderWith, { path, "Open File in Folder with App" } },
         }
@@ -92,6 +138,8 @@ function File:initialize(path, shortcuts)
     self.path = path
     self.shortcuts = mergedShortcuts
     self.cheatsheet = cheatsheet
+    self.showHiddenFiles = options.showHiddenFiles or false
+    self.sortAttribute = options.sortAttribute or "modification"
 
     local cheatsheetDescription = "Ki shortcut keybindings registered for file "..self.path
     self.cheatsheet:init(self.path, cheatsheetDescription, mergedShortcuts)
@@ -112,9 +160,29 @@ function File:createEvent(path, action)
     end
 end
 
+--- File:runFileModeApplescript(viewModel)
+--- Method
+--- Convenience method to render and run the `file-mode-operations.applescript` file and notify on execution errors. Refer to the applescript template file itself to see available view model records.
+---
+--- Parameters:
+---  * `viewModel` - The view model object used to render the template
+---
+--- Returns:
+---   * None
+function File:runFileModeApplescript(viewModel)
+    local script = self.renderScriptTemplate("file-mode-operations", viewModel)
+    local isOk, _, rawTable = hs.osascript.applescript(script)
+
+    if not isOk then
+        local operationName = viewModel and "\""..viewModel.operation.."\"" or "unknown"
+        local errorMessage = "Error executing the "..operationName.." file operation"
+        self.notifyError(errorMessage, rawTable.NSLocalizedFailureReason)
+    end
+end
+
 --- File:getFileIcon(path) -> [`hs.image`](http://www.hammerspoon.org/docs/hs.image.html)
 --- Method
---- Retrieves an icon image for the given file path or returns nil if not found
+--- Retrieves an icon image for the given file path or returns `nil` if not found
 ---
 --- Parameters:
 ---  * `path` - The path of a file
@@ -181,7 +249,6 @@ function File:showFileSelectionModal(path, handler)
     local parentPathRegex = "^(.+)/.+$"
     local absolutePath = hs.fs.pathToAbsolute(path)
     local parentDirectory = absolutePath:match(parentPathRegex) or "/"
-    local iterator, directory = hs.fs.dir(absolutePath)
 
     -- Add selection modal shortcut to open files with cmd + return
     local function openFile(modal)
@@ -190,11 +257,23 @@ function File:showFileSelectionModal(path, handler)
         handler(choice.filePath, true)
         modal:cancel()
     end
+    -- Add selection modal shortcut to toggle hidden files cmd + shift + "."
+    local function toggleHiddenFiles(modal)
+        modal:cancel()
+        self.showHiddenFiles = not self.showHiddenFiles
+
+        -- Defer execution to avoid conflicts with the prior selection modal that just closed
+        hs.timer.doAfter(0, function()
+            self:showFileSelectionModal(path, handler)
+        end)
+    end
     local navigationShortcuts = {
         { { "cmd" }, "return", openFile },
+        { { "cmd", "shift" }, ".", toggleHiddenFiles },
     }
     self.selectionModalShortcuts = self.mergeShortcuts(navigationShortcuts, self.selectionModalShortcuts)
 
+    local iterator, directory = hs.fs.dir(absolutePath)
     if iterator == nil then
         self.notifyError("Error walking the path at "..path)
         return
@@ -202,27 +281,44 @@ function File:showFileSelectionModal(path, handler)
 
     for file in iterator, directory do
         local filePath = absolutePath.."/"..file
+        local attributes = hs.fs.attributes(filePath) or {}
         local displayName = hs.fs.displayName(filePath) or file
+        local isHiddenFile = string.sub(file, 1, 1) == "."
+        local shouldShowFile = isHiddenFile and self.showHiddenFiles or not isHiddenFile
         local subText = filePath
 
-        if file == "." then
-            displayName = file
-            subText = absolutePath.." (Current directory)"
-            filePath = absolutePath
-        elseif file == ".." then
-            displayName = file
-            subText = parentDirectory.." (Parent directory)"
-            filePath = parentDirectory
+        if file ~= "." and file ~= ".." and shouldShowFile then
+            table.insert(choices, {
+                text = displayName,
+                subText = subText,
+                file = file,
+                filePath = filePath,
+                image = filePath and self.getFileIcon(filePath),
+                fileAttributes = attributes,
+            })
         end
-
-        table.insert(choices, {
-            text = displayName,
-            subText = subText,
-            file = file,
-            filePath = filePath,
-            image = filePath and self.getFileIcon(filePath),
-        })
     end
+
+    -- Sort choices by last modified timestamp and add current/parent directories to choices
+    table.sort(choices, function(a, b)
+        local value1 = a.fileAttributes[self.sortAttribute]
+        local value2 = b.fileAttributes[self.sortAttribute]
+        return value1 > value2
+    end)
+    table.insert(choices, {
+        text = "..",
+        subText = parentDirectory.." (Parent directory)",
+        file = "..",
+        filePath = parentDirectory,
+        image = self.getFileIcon(absolutePath),
+    })
+    table.insert(choices, {
+        text = ".",
+        subText = absolutePath.." (Current directory)",
+        file = ".",
+        filePath = absolutePath,
+        image = self.getFileIcon(absolutePath),
+    })
 
     self.showSelectionModal(choices, function(choice)
         if choice then
@@ -254,6 +350,46 @@ function File.open(path)
     end
 end
 
+--- File.createFileChoices(fileListIterator, createText, createSubText) -> choice object list
+--- Method
+--- Creates a list of choice objects each representing the file walked with the provided iterator
+---
+--- Parameters:
+---  * `fileListIterator` - an iterator to walk a list of file paths, i.e. `s:gmatch(pattern)`
+---  * `createText` - an optional function that takes in a single `path` argument to return a formatted string to assign to the `text` field in each file choice object
+---  * `createSubText` - an optional function that takes in a single `path` argument to return a formatted string to assign to the `subText` field in each file choice object
+---
+--- Returns:
+---   * `choices` - A list of choice objects each containing the following fields:
+---     * `text` - The primary chooser text string
+---     * `subText` - The chooser subtext string
+---     * `fileName` - The name of the file
+---     * `path` - The path of the file
+function File.createFileChoices(fileListIterator, createText, createSubText)
+    local choices = {}
+    local fileNameRegex = "^.+/(.+)$"
+
+    for path in fileListIterator do
+        local bundleInfo = hs.application.infoForBundlePath(path)
+        local fileName = path:match(fileNameRegex) or ""
+        local choice = {
+            text = createText and createText(path) or fileName,
+            subText = createSubText and createSubText(path) or path,
+            fileName = fileName,
+            path = path,
+        }
+
+        if bundleInfo then
+            choice.text = bundleInfo.CFBundleName
+            choice.image = hs.image.imageFromAppBundle(bundleInfo.CFBundleIdentifier)
+        end
+
+        table.insert(choices, choice)
+    end
+
+    return choices
+end
+
 --- File:openWith(path)
 --- Method
 --- Opens a file or directory at the given path with a specified application and raises the application to the front
@@ -267,38 +403,18 @@ function File:openWith(path)
     local allApplicationsPath = _G.spoonPath.."/bin/AllApplications"
     local shellscript = allApplicationsPath.." -path \""..path.."\""
     local output = hs.execute(shellscript)
-    local choices = {}
-
-    for applicationPath in string.gmatch(output, "[^\n]+") do
-        local bundleInfo = hs.application.infoForBundlePath(applicationPath)
-        local choice = {
-            text = applicationPath,
-            subText = applicationPath,
-            applicationPath = applicationPath,
-        }
-
-        if bundleInfo then
-            choice.text = bundleInfo.CFBundleName
-            choice.image = hs.image.imageFromAppBundle(bundleInfo.CFBundleIdentifier)
-        end
-
-        table.insert(choices, choice)
-    end
+    local choices = self.createFileChoices(string.gmatch(output, "[^\n]+"))
 
     -- Defer execution to avoid conflicts with the prior selection modal that just closed
     hs.timer.doAfter(0, function()
         self.showSelectionModal(choices, function(choice)
             if not choice then return end
 
-            local isOk, _, rawTable = hs.osascript.applescript([[
-                tell application "Finder"
-                    open file ("]]..path..[[" as POSIX file) using ("]]..choice.applicationPath..[[" as POSIX file)
-                end tell
-            ]])
-
-            if not isOk then
-                self.notifyError("Error opening file with specified application", rawTable.NSLocalizedFailureReason)
-            end
+            self:runFileModeApplescript({
+                operation = "open-with",
+                filePath1 = path,
+                filePath2 = choice.path,
+            })
         end)
     end)
 end
@@ -313,18 +429,7 @@ end
 --- Returns:
 ---   * None
 function File:openInfoWindow(path)
-    local isOk, _, rawTable = hs.osascript.applescript([[
-        set targetFile to (POSIX file "]]..path..[[") as alias
-        tell application "Finder"
-            set infoWindow to information window of targetFile
-            open infoWindow
-            activate
-        end tell
-    ]])
-
-    if not isOk then
-        self.notifyError("Error getting info", rawTable.NSLocalizedFailureReason)
-    end
+    self:runFileModeApplescript({ operation = "open-info-window", filePath1 = path })
 end
 
 --- File:moveToTrash(path)
@@ -340,13 +445,57 @@ function File:moveToTrash(path)
     local question = "Move \""..path.."\" to the Trash?"
 
     self.triggerAfterConfirmation(question, function()
-        local isOk, _, rawTable = hs.osascript.applescript([[
-            tell application "Finder" to delete (POSIX file "]]..path..[[")
-        ]])
+        self:runFileModeApplescript({ operation = "move-to-trash", filePath1 = path })
+    end)
+end
 
-        if not isOk then
-            self.notifyError("Error moving file to trash", rawTable.NSLocalizedFailureReason)
-        end
+--- File:move(path)
+--- Method
+--- Method to move one file into a directory. Opens a navigation modal for selecting the target file, then on selection opens another navigation modal to select the destination path. A confirmation dialog is presented to proceed with moving the file to the target directory.
+---
+--- Parameters:
+---  * `path` - the initial directory path to select a target file to move
+---
+--- Returns:
+---   * None
+function File:move(initialPath)
+    self:navigate(initialPath, function(targetPath)
+        self:navigate(initialPath, function(destinationPath)
+            local question = "Move \""..targetPath.."\" to \""..destinationPath.."\"?"
+
+            self.triggerAfterConfirmation(question, function()
+                self:runFileModeApplescript({
+                    operation = "move",
+                    filePath1 = targetPath,
+                    filePath2 = destinationPath,
+                })
+            end)
+        end)
+    end)
+end
+
+--- File:copy(path)
+--- Method
+--- Method to copy one file into a directory. Opens a navigation modal for selecting the target file, then on selection opens another navigation modal to select the destination path. A confirmation dialog is presented to proceed with copying the file to the target directory.
+---
+--- Parameters:
+---  * `path` - the initial directory path to select a target file to copy
+---
+--- Returns:
+---   * None
+function File:copy(initialPath)
+    self:navigate(initialPath, function(targetPath)
+        self:navigate(initialPath, function(destinationPath)
+            local question = "Copy \""..targetPath.."\" to \""..destinationPath.."\"?"
+
+            self.triggerAfterConfirmation(question, function()
+                self:runFileModeApplescript({
+                    operation = "copy",
+                    filePath1 = targetPath,
+                    filePath2 = destinationPath,
+                })
+            end)
+        end)
     end)
 end
 

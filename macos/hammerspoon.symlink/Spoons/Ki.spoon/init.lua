@@ -44,7 +44,7 @@ local Ki = {}
 Ki.__index = Ki
 
 Ki.name = "Ki"
-Ki.version = "1.2.1"
+Ki.version = "1.6.4"
 Ki.author = "Andrew Kwon"
 Ki.homepage = "https://github.com/andweeb/ki"
 Ki.license = "MIT - https://opensource.org/licenses/MIT"
@@ -79,21 +79,9 @@ _G.SHORTCUT_METADATA_INDEX = 4
 
 local fsm = _G.requirePackage("fsm")
 local util = _G.requirePackage("util", true)
-local Defaults = _G.requirePackage("defaults", true)
-local defaultWorkflowEvents, defaultEntities = Defaults.create(Ki)
 
 -- Allow Spotlight to be used to find alternate names for applications
 hs.application.enableSpotlightForNameSearches(true)
-
---- Ki.defaultWorkflowEvents
---- Variable
---- A table containing the default workflow events for all default modes in Ki.
-Ki.defaultWorkflowEvents = defaultWorkflowEvents
-
---- Ki.defaultEntities
---- Variable
---- A table containing the default automatable desktop entity instances in Ki.
-Ki.defaultEntities = defaultEntities
 
 --- Ki.Entity
 --- Variable
@@ -109,6 +97,29 @@ Ki.Application = _G.requirePackage("application", true)
 --- Variable
 --- A [middleclass](https://github.com/kikito/middleclass/wiki) class that represents some file or directory at an existing file path. Class methods and properties are documented [here](File.html).
 Ki.File = _G.requirePackage("file", true)
+
+--- Ki.URL
+--- Variable
+--- A [middleclass](https://github.com/kikito/middleclass/wiki) class that represents some url. Class methods and properties are documented [here](URL.html).
+Ki.URL = _G.requirePackage("url", true)
+
+local Defaults = _G.requirePackage("defaults", true)
+local defaultWorkflowEvents, defaultEntities, defaultUrlEntities = Defaults.create(Ki)
+
+--- Ki.defaultWorkflowEvents
+--- Variable
+--- A table containing the default workflow events for all default modes in Ki.
+Ki.defaultWorkflowEvents = defaultWorkflowEvents
+
+--- Ki.defaultEntities
+--- Variable
+--- A table containing the default automatable desktop entity instances in Ki.
+Ki.defaultEntities = defaultEntities
+
+--- Ki.defaultUrlEntities
+--- Variable
+--- A table containing the default automatable URL entity instances in Ki.
+Ki.defaultUrlEntities = defaultUrlEntities
 
 --- Ki.state
 --- Variable
@@ -304,6 +315,11 @@ Ki.defaultTransitionEvents = {
             { "Entity Mode", "Exit to Normal Mode" },
         },
         {
+            {"cmd"}, "u",
+            function() Ki.state:enterUrlMode() end,
+            { "Entity Mode", "Transition to URL Mode" },
+        },
+        {
             {"cmd"}, "f",
             function() Ki.state:enterFileMode() end,
             { "Entity Mode", "Transition to File Mode" },
@@ -333,6 +349,21 @@ Ki.defaultTransitionEvents = {
             nil, "escape",
             function() Ki.state:exitMode() end,
             { "Select Mode", "Exit to Normal Mode" },
+        },
+        {
+            {"cmd"}, "e",
+            function() Ki.state:enterEntityMode() end,
+            { "Select Mode", "Transition to Entity Mode" },
+        },
+        {
+            {"cmd"}, "f",
+            function() Ki.state:enterFileMode() end,
+            { "Select Mode", "Transition to File Mode" },
+        },
+        {
+            {"cmd"}, "u",
+            function() Ki.state:enterUrlMode() end,
+            { "Select Mode", "Transition to URL Mode" },
         },
     },
     url = {
@@ -373,15 +404,19 @@ Ki._defaultStateEvents = {
     { name = "enterNormalMode", from = "desktop", to = "normal" },
     { name = "enterEntityMode", from = "normal", to = "entity" },
     { name = "enterEntityMode", from = "action", to = "entity" },
+    { name = "enterEntityMode", from = "select", to = "entity" },
     { name = "enterActionMode", from = "normal", to = "action" },
     { name = "enterSelectMode", from = "entity", to = "select" },
     { name = "enterSelectMode", from = "normal", to = "select" },
     { name = "enterFileMode", from = "normal", to = "file" },
     { name = "enterFileMode", from = "entity", to = "file" },
+    { name = "enterFileMode", from = "select", to = "file" },
     { name = "enterSelectMode", from = "file", to = "select" },
     { name = "enterVolumeControlMode", from = "normal", to = "volume" },
     { name = "enterBrightnessControlMode", from = "normal", to = "brightness" },
     { name = "enterUrlMode", from = "normal", to = "url" },
+    { name = "enterUrlMode", from = "select", to = "url" },
+    { name = "enterUrlMode", from = "entity", to = "url" },
     { name = "exitMode", from = "normal", to = "desktop" },
     { name = "exitMode", from = "entity", to = "desktop" },
     { name = "exitMode", from = "file", to = "desktop" },
@@ -431,8 +466,17 @@ Ki.statusDisplay = nil
 
 -- A table that stores the workflow history.
 Ki.history = {
+    workflow = {},
     action = {},
 }
+
+function Ki.history:recordEvent(mode, keyName, flags)
+    table.insert(self.workflow, {
+        mode = mode,
+        flags = flags,
+        keyName = keyName,
+    })
+end
 
 function Ki._renderHotkeyText(modifiers, keyName)
     local modKeyText = ""
@@ -470,6 +514,7 @@ function Ki:_createFsmCallbacks()
         self.statusDisplay:show(stateMachine.current, parenthetical)
 
         if nextState == "desktop" then
+            self.history.workflow = {}
             self.history.action = {}
         end
     end
@@ -512,8 +557,10 @@ function Ki:_handleKeyDown(event)
 
     -- Avoid propagating existing handler or non-existent handler in a non-normal mode
     if handler then
+        Ki.history:recordEvent(mode, keyName, flags)
+
         if type(handler) == "table" and handler.dispatchAction then
-            local shouldAutoExit = handler:dispatchAction(mode, Ki.history.action)
+            local shouldAutoExit = handler:dispatchAction(mode, Ki.history.action, Ki.history.workflow)
 
             if shouldAutoExit then
                 self.state:exitMode()
