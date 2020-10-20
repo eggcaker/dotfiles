@@ -13,6 +13,8 @@ $LC_CTYPE = "en_US.UTF-8"
 
 $XONSH_DEBUG = 1
 $XONSH_SHOW_TRACEBACK = True
+$EDITOR="vim"
+$VISUAL="vim"
 
 $LS_COLORS = 'rs=0:di=01;36:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:'
 
@@ -27,8 +29,8 @@ $WIN_UNICODE_CONSOLE = False
 $UPDATE_COMPLETIONS_ON_KEYPRES = True
 $AUTO_PUSHD = True
 
-$XONSH_HISTORY_SIZE = (10000, 'commands')
-$XONSH_HISTORY_BACKEND = 'json'
+$XONSH_HISTORY_SIZE = (2000, 'commands')
+$XONSH_HISTORY_BACKEND = 'sqlite'
 $HISTCONTROL = 'ignoredups'
 
 $WORK_NOTE_PATH = "$HOME/src/work/working-notes"
@@ -61,7 +63,7 @@ aliases['last'] = ['git', 'log', '--pretty=format:"%C(yellow)%h%x09%Creset%an%x0
 aliases['graph'] = "git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)%Creset' --abbrev-commit --all"
 aliases['graph2'] = "git log --graph --all --format=format:'%C(bold yellow)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset)%C(bold yellow)%d%C(reset)%n'' %C(white)%s%C(reset) %C(bold white)- %an%C(reset)' --abbrev-commit"
 
-aliases['pa'] = ['cd', '~/src/personal/xiaobing/src/Commercial.CSSDK/partner/common/demo']
+aliases['pa'] = ['cd', '~/src/personal/xiaobing/XiaoiceAICProjs/private/XiaoIceBMWDemo/XiaoiceDemo']
 
 aliases['p6repl'] =['rlwrap', 'perl6', '-I$HOME/.perl6/repl/ -MREPLHelper']
 
@@ -79,6 +81,7 @@ aliases['wy'] = "~/src/geek/wenyan-lang/build/wenyan.js"
 
 aliases['s.load_data'] = ['source', '~/.dotfiles/bin/segments/load_stock_env']
 aliases['p.load_azure'] = ['source', '~/.dotfiles/bin/segments/load_azure_storage']
+aliases['p.load_workflow'] = ['source', '~/.dotfiles/bin/segments/load_workflow_azure']
 
 
 def pt(data):
@@ -192,7 +195,7 @@ $LESS_TERMCAP_ue = "\033[0m"         # end underline
 $BASE16_SHELL = $HOME + "/.config/base16-shell/"
 
 # XONSH WIZARD START
-xontrib load coreutils vox z mpl fzf-widgets kitty  ssh_agent
+xontrib load coreutils vox z mpl fzf-widgets kitty  ssh_agent 
 # XONSH WIZARD END
 
 
@@ -235,7 +238,5 @@ $BASH_COMPLETIONS.insert(0, '/opt/local/share/bash-completion/bash_completion')
 #source-bash ~/.cache/wal/colors-tty.sh
 
 
-
-# reddit server
-aliases['ra'] = ['kitty', '+kitten', 'ssh', 'azureuser@52.247.192.91']
-aliases['rb'] = ['kitty', '+kitten', 'ssh', 'azureuser@40.91.104.34']
+aliases['ut'] = ['mono', '/Library/Frameworks/IronPython.framework/Versions/2.7.10/bin/ipy.exe',   '/Users/eggcaker/src/personal/xiaobing/Xiaobing/private/src/Workflow.Scripts/XiaoiceUnitTest.py', 'DeviceControlDuplexCmd.py']
+aliases['ip'] = ['mono', '/Library/Frameworks/IronPython.framework/Versions/2.7.10/bin/ipy.exe']

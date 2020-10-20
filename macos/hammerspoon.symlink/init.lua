@@ -22,7 +22,7 @@ hs.loadSpoon("ModalMgr")
 hspoon_list = {
   -- "CircleClock",
   -- "HCalendar",
-  "UnsplashRandom",
+  -- "UnsplashRandom",
   "WinWin",
   "Astrill",
   -- "Seal",
