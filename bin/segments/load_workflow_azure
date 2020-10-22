@@ -1,17 +1,22 @@
 $UPDATE_OS_ENVIRON = True
 
-{"CloudHub.Azure.Storage.BlobContainer":{"connection":{"type":"blobContainer","container":"scriptint","serviceEndpoint":"https://scriptsa.blob.core.windows.net","credentials":[{"type":"sas","sasToken":"sv=2019-10-10&st=2020-10-19T05%3A45%3A01Z&se=2021-10-20T05%3A45%3A00Z&sr=c&sp=racwl&sig=t9T1%2FsOtzXmOaogB0428%2Fs8PelvCh9lw5BWTW5kff7U%3D"}]},"connectionString":"BlobEndpoint=https://scriptsa.blob.core.windows.net;SharedAccessSignature=sv=2019-10-10&st=2020-10-19T05%3A45%3A01Z&se=2021-10-20T05%3A45%3A00Z&sr=c&sp=racwl&sig=t9T1%2FsOtzXmOaogB0428%2Fs8PelvCh9lw5BWTW5kff7U%3D","containerName":"scriptint","accountUri":"https://scriptsa.blob.core.windows.net","sasToken":"sv=2019-10-10&st=2020-10-19T05%3A45%3A01Z&se=2021-10-20T05%3A45%3A00Z&sr=c&sp=racwl&sig=t9T1%2FsOtzXmOaogB0428%2Fs8PelvCh9lw5BWTW5kff7U%3D"}}
+#{"CloudHub.Azure.Storage.BlobContainer":{"connection":{"type":"blobContainer","container":"scriptint","serviceEndpoint":"https://scriptsa.blob.core.windows.net","credentials":[{"type":"sas","sasToken":"sv=2019-10-10&st=2020-10-19T05%3A45%3A01Z&se=2021-10-20T05%3A45%3A00Z&sr=c&sp=racwl&sig=t9T1%2FsOtzXmOaogB0428%2Fs8PelvCh9lw5BWTW5kff7U%3D"}]},"connectionString":"BlobEndpoint=https://scriptsa.blob.core.windows.net;SharedAccessSignature=sv=2019-10-10&st=2020-10-19T05%3A45%3A01Z&se=2021-10-20T05%3A45%3A00Z&sr=c&sp=racwl&sig=t9T1%2FsOtzXmOaogB0428%2Fs8PelvCh9lw5BWTW5kff7U%3D","containerName":"scriptint","accountUri":"https://scriptsa.blob.core.windows.net","sasToken":"sv=2019-10-10&st=2020-10-19T05%3A45%3A01Z&se=2021-10-20T05%3A45%3A00Z&sr=c&sp=racwl&sig=t9T1%2FsOtzXmOaogB0428%2Fs8PelvCh9lw5BWTW5kff7U%3D"}}
 
 import os, uuid, errno
 from azure.storage.blob import BlobServiceClient, BlobClient, ContainerClient
 
-try:
-    print(container_name)
-except NameError:
-    container_name = 'scriptint'
+#try:
+#    print(container_name)
+#except NameError:
+#
+container_name = 'scriptint'
 
+#{"CloudHub.Azure.Storage.BlobContainer":{"connection":{"type":"blobContainer","container":"sc
+#riptint","serviceEndpoint":"https://scriptsa.blob.core.windows.net","credentials":[{"type":"sas","sasToken":"sv=2019-10-10&st=2020-10-19T05%3A45%3A01Z&se=2021-10-20T05%3A45%3A00Z&sr=c&sp
+#=racwl&sig=t9T1%2FsOtzXmOaogB0428%2Fs8PelvCh9lw5BWTW5kff7U%3D"}]},"connectionString":}}
 
-connect_str = os.getenv('AZURE_STORAGE_CONNECTION_STRING')
+connect_str = "BlobEndpoint=https://scriptsa.blob.core.windows.net;SharedAccessSignature=sv=2019-10-10&st=2020-10-19T05%3A45%3A01Z&se=2021-10-20T05%3A45%3A00Z&sr=c&sp=racwl&sig=t9T1%2FsOtzXmOaogB0428%2Fs8PelvCh9lw5BWTW5kff7U%3D"
+
 
 blob_service_client = BlobServiceClient.from_connection_string(connect_str)
 container_client = blob_service_client.get_container_client(container_name)
