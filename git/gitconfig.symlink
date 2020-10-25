@@ -141,7 +141,7 @@
 [magit]
 	hideCampaign = true
 [dotfiles]
-	lastupdate = 202003312318
+	lastupdate = 202010250922
 [color "diff-highlight"]
 	oldNormal = red bold
 	oldHighlight = red bold 52

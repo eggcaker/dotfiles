@@ -64,6 +64,7 @@ aliases['graph'] = "git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%
 aliases['graph2'] = "git log --graph --all --format=format:'%C(bold yellow)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset)%C(bold yellow)%d%C(reset)%n'' %C(white)%s%C(reset) %C(bold white)- %an%C(reset)' --abbrev-commit"
 
 aliases['pa'] = ['cd', '~/src/personal/xiaobing/XiaoiceAICProjs/private/XiaoIceBMWDemo/XiaoiceDemo']
+aliases['pw'] = ['cd', '~/src/personal/xiaobing/Xiaobing/private/src/Workflow.Scripts']
 
 aliases['p6repl'] =['rlwrap', 'perl6', '-I$HOME/.perl6/repl/ -MREPLHelper']
 
