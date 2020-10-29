@@ -161,6 +161,6 @@
     cmd = kitty kitty +kitten diff $LOCAL $REMOTE
 
 [gpg]
-	program = /usr/local/bin/gpg
+	program = /usr/local/bin/gpg2
 [cola]
 	spellcheck = false
