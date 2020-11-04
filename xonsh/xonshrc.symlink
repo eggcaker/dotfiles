@@ -19,9 +19,10 @@ $VISUAL="vim"
 $LS_COLORS = 'rs=0:di=01;36:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:'
 
 $PATH.append("/usr/local/opt/decompile-apk/")
-$PATH.insert(0, "/usr/local/bin")
 $PATH.insert(0, "~/.dotfiles/bin")
 $PATH.insert(0, "/usr/local/Cellar/rakudo-star/2019.03/share/perl6/site/bin")
+$PATH.insert(0, "/usr/local/share/dotnet/")
+$PATH.insert(0, "/usr/local/bin")
 
 $XONSH_COLOR_STYLE = "monokai"
 $SUPPRESS_BRANCH_TIMEOUT_MESSAGE = True
@@ -239,5 +240,8 @@ $BASH_COMPLETIONS.insert(0, '/opt/local/share/bash-completion/bash_completion')
 #source-bash ~/.cache/wal/colors-tty.sh
 
 
+aliases['chat_server'] = ['ssh', 'azureuser@bmw-en-serving.westeurope.cloudapp.azure.com']
+
 aliases['ut'] = ['mono', '/Library/Frameworks/IronPython.framework/Versions/2.7.10/bin/ipy.exe',   '/Users/eggcaker/src/personal/xiaobing/Xiaobing/private/src/Workflow.Scripts/XiaoiceUnitTest.py', 'DeviceControlDuplexCmd.py']
 aliases['ip'] = ['mono', '/Library/Frameworks/IronPython.framework/Versions/2.7.10/bin/ipy.exe']
+#source-bash '~/src/apps/google-cloud-sdk/completion.bash.inc'
