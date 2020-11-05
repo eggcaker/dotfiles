@@ -197,7 +197,7 @@ $LESS_TERMCAP_ue = "\033[0m"         # end underline
 $BASE16_SHELL = $HOME + "/.config/base16-shell/"
 
 # XONSH WIZARD START
-xontrib load coreutils vox z mpl fzf-widgets kitty  ssh_agent 
+xontrib load coreutils vox z mpl fzf-widgets kitty ssh_agent #ergopack
 # XONSH WIZARD END
 
 
@@ -245,3 +245,22 @@ aliases['chat_server'] = ['ssh', 'azureuser@bmw-en-serving.westeurope.cloudapp.a
 aliases['ut'] = ['mono', '/Library/Frameworks/IronPython.framework/Versions/2.7.10/bin/ipy.exe',   '/Users/eggcaker/src/personal/xiaobing/Xiaobing/private/src/Workflow.Scripts/XiaoiceUnitTest.py', 'DeviceControlDuplexCmd.py']
 aliases['ip'] = ['mono', '/Library/Frameworks/IronPython.framework/Versions/2.7.10/bin/ipy.exe']
 #source-bash '~/src/apps/google-cloud-sdk/completion.bash.inc'
+#
+#
+#
+import matplotlib.pyplot as plt
+import matplotlib as mpll
+
+mpll.style.use('seaborn-darkgrid')
+
+plt.figure(figsize=(6,3), dpi=160)
+# plt.rcParams.update({
+#     "figure.facecolor":  (1.0, 0.0, 0.0, 0.3),  # red   with alpha = 30%
+#     "axes.facecolor":    (0.0, 1.0, 0.0, 0.5),  # green with alpha = 50%
+#     "savefig.facecolor": (1.0, 1.0, 1.0, 0.2),  # blue  with alpha = 20%
+# })
+
+def _p():
+    plt.show()
+
+aliases['p'] = _p
