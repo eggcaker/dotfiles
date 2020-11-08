@@ -17,9 +17,11 @@ $LS_COLORS = 'rs=0:di=01;36:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;0
 
 $PATH.append("/usr/local/opt/decompile-apk/")
 $PATH.insert(0, "~/.dotfiles/bin")
-$PATH.insert(0, "/usr/local/Cellar/rakudo-star/2019.03/share/perl6/site/bin")
 $PATH.insert(0, "/usr/local/share/dotnet/")
 $PATH.insert(0, "/usr/local/bin")
+$PYENV_ROOT = '%s/.pyenv' % $HOME
+$PATH.insert(0, '%s/bin' % $PYENV_ROOT)
+
 
 $XONSH_COLOR_STYLE = "monokai"
 $SUPPRESS_BRANCH_TIMEOUT_MESSAGE = True
@@ -188,7 +190,7 @@ $LESS_TERMCAP_ue = "\033[0m"         # end underline
 $BASE16_SHELL = $HOME + "/.config/base16-shell/"
 
 # XONSH WIZARD START
-xontrib load coreutils vox z mpl fzf-widgets kitty ssh_agent onepath pyenv 
+xontrib load coreutils vox z mpl fzf-widgets kitty ssh_agent pyenv 
 # XONSH WIZARD END
 
 from forbiddenfruit import curse
