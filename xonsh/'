@@ -84,6 +84,56 @@ def pt(data):
     print(tabulate(data[1:], headers=data[0], tablefmt='orgtbl'))
 
 
+def _a_top_activity():
+    """Get the top activity on connected android device."""
+    print($(adb shell dumpsys window windows | rg "mCurrentFocus|mFocusedApp"))
+
+
+def _p_dl():
+    """Decrypt the xlog file with python2 inside docker image"""
+    docker run  -v $PWD:/tmp/xlog  -ti xlog  /usr/bin/decode_mars_log  /tmp/xlog/
+
+def _p_unzip_s3_log():
+ for dir in $(ls).split():
+     cd @(dir)
+     unzip *.zip
+     p.dl *
+     rm *.xlog
+     rm *.zip
+     cd ..
+
+aliases['p.unzip_s3_log'] = _p_unzip_s3_log
+aliases['p.dl'] = _p_dl
+aliases['a.top_activity'] = _a_top_activity
+aliases['a.pc'] = ['adb', 'shell', 'pm', 'clear', 'cc.pacer.androidapp']
+aliases['a.ps'] = ['adb', 'shell', 'am', 'start', 'cc.pacer.androidapp/.ui.splash.SplashActivity']
+aliases['a.dc'] = ['adb', 'shell', 'pm', 'clear', 'com.mandian.android.dongdong']
+aliases['a.plog'] = ['adb', 'pull', '/mnt/sdcard/Android/data/cc.pacer.androidapp/files/Download/xlog', '.']
+
+aliases['java9'] = ['jhome', '-v', '9.0.1']
+aliases['java8'] = ['jhome', '-v', '1.8.0_141']
+aliases['js'] = ['java', '-jar', '/opt/java-libs/try-artifact-0.3.0.jar']
+
+
+def _redex():
+    """ run redex with docker"""
+    docker run -it  -v /usr/local/share/android-sdk:/opt/android-sdk-linux -v ./:/redex redex redex ./app-play-vp5.8.1.apk -o ./dex.apk
+
+aliases['redex'] = _redex
+
+aliases['p.load_pacer_data'] = ['source', '~/.dotfiles/bin/segments/load_pacer_activity_data']
+
+aliases['p.load_start_time_data'] = ['source', '~/.dotfiles/bin/segments/load_app_start_time_data']
+
+aliases['p.load_ana_script'] = ['source', '~/.dotfiles/bin/segments/load_databack_ana_script']
+
+def _jshell():
+    """ Run the java shell with some external library"""
+    docker run -v /opt/java-libs:/tmp -it openjdk:9-jdk bin/jshell --class-path /tmp/joda-time-2.10.jar
+
+
+aliases['jshell'] = _jshell
+
 # python chart
 aliases['imcat'] = lambda args, stdin: print('\033]1337;File=inline=1;height=80%%:%s\a\n' % stdin)
 
@@ -140,7 +190,7 @@ $LESS_TERMCAP_ue = "\033[0m"         # end underline
 $BASE16_SHELL = $HOME + "/.config/base16-shell/"
 
 # XONSH WIZARD START
-xontrib load coreutils vox z fzf-widgets kitty ssh_agent pyenv autoxsh abbrevs
+xontrib load coreutils vox z fzf-widgets kitty ssh_agent pyenv 
 # XONSH WIZARD END
 
 $BASH_COMPLETIONS.insert(0, '/opt/local/share/bash-completion/bash_completion')
@@ -149,10 +199,3 @@ aliases['chat_server'] = ['ssh', 'azureuser@bmw-en-serving.westeurope.cloudapp.a
 aliases['ut'] = ['mono', '/Library/Frameworks/IronPython.framework/Versions/2.7.10/bin/ipy.exe',   '/Users/eggcaker/src/personal/xiaobing/Xiaobing/private/src/Workflow.Scripts/XiaoiceUnitTest.py', 'DeviceControlDuplexCmd.py']
 aliases['ip'] = ['mono', '/Library/Frameworks/IronPython.framework/Versions/2.7.10/bin/ipy.exe']
 #source-bash '~/src/apps/google-cloud-sdk/completion.bash.inc'
-
-
-# abbrevs
-abbrevs['gst'] = 'git status -s'
-abbrevs['ipd'] = 'import pandas as pd'
-abbrevs['inp'] = 'import numpy as np'
-abbrevs['p40'] = 'kitty +kitten ssh azureuser@bmw-en-test-p40.westus2.cloudapp.azure.com'

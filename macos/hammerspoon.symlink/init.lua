@@ -82,7 +82,7 @@ if spoon.WinWin then
   cmodal:bind('', '`', 'Center Cursor', function() spoon.WinWin:centerCursor() end)
 
   -- Register resizeM with modal supervisor
-  hsresizeM_keys = {"cmd", "space"}
+  hsresizeM_keys = { hyper, "space"}
   if string.len(hsresizeM_keys[2]) > 0 then
     spoon.ModalMgr.supervisor:bind(hsresizeM_keys[1], hsresizeM_keys[2], "Enter resizeM Environment", function()
                                      -- Deactivate some modal environments or not before activating a new one
@@ -145,27 +145,6 @@ for _hotkey, _fn in pairs(hyperfns) do
 end
 
 
--- use seal
--- spoon.Seal:loadPlugins({"apps", "calc", "urlformats", "useractions" })
--- spoon.Seal:bindHotkeys({show={{"alt"}, "Space"}})
--- spoon.Seal:start()
-
-
--- spoon.Seal.plugins.useractions.actions =
--- {
---   ["Hammerspoon docs webpage"] = {
---     url = "http://hammerspoon.org/docs/",
---     icon = hs.image.imageFromName(hs.image.systemImageNames.ApplicationIcon),
---     hotkey = { hyper, "h" }
---   },
---   ["Translate using Leo"] = {
---     url = "http://dict.leo.org/ende/index_de.html#/search=${query}",
---     icon = 'favicon',
---     keyword = "leo",
---   }
--- }
-
-
 hs.loadSpoon('Ki')
 spoon.Ki.workflowEvents = {...}
 spoon.Ki:start()
@@ -173,16 +152,10 @@ spoon.Ki:start()
 spoon.Office:start()
 
 hs.hotkey.bind(hyper, "R", "Reload Configuration", function() hs.reload() end)
-
-
-
-hs.hotkey.bind(hyper, "L", "System sleep",  function() hs.caffeinate.systemSleep() end)
+hs.hotkey.bind(hyper, "L", "System sleep",  function() spoon.Astrill:disable() hs.caffeinate.systemSleep() end)
 
 function keyStrokes(str)
   return function()
     hs.eventtap.keyStrokes(str)
   end
 end
-
-hs.hotkey.bind({"alt", "cmd"}, "L", keyStrokes("console.log("))
-
