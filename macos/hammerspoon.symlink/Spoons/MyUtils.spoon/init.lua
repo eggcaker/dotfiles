@@ -22,28 +22,6 @@ function obj:start()
   obj.set_app_input_method('WeChat', Chinese)
 end
 
-function obj:getPacerIdFromFabric()
-  for i = 20, 1, -1 do
-    hs.eventtap.leftClick({x=-1298.46484375, y=240.7109375},100000)
-    hs.timer.usleep(1200000)
-    doubleLeftClick({  x = -1238.62109375, y = 619.53125})
-    hs.eventtap.keyStroke({"cmd"}, "c")
-    hs.timer.usleep(200000)
-    local pacer_id = hs.pasteboard.getContents()
-    file = io.open("/Users/eggcaker/Desktop/pacer_id.txt", "a")
-    file:write(pacer_id, "\n")
-    file:close()
-    hs.timer.usleep(500000)
-  end
-end
-
-function obj:shareFileToAirDrop(filePath)
-  airDrop = hs.sharing.newShare("com.apple.share.AirDrop.send")
-  airDrop:subject("Send file" .. os.date()):recipients({})
-  file = hs.sharing.fileURL(filePath)
-  airDrop:shareItems({ [[ "Send file"]], file})
-end
-
 function obj:bindHotkeys(mapping)
   if (self.hotkey) then
     self.hotkey:delete()
@@ -54,7 +32,6 @@ function obj:bindHotkeys(mapping)
     local ley = mod_key[2]
     hs.hotkey.bind(mods, key, function() self[fn](self) end)
   end
-
 end
 
 local function doubleLeftClick(point)
@@ -69,11 +46,11 @@ end
 
 -- Input state auto toggle
 function Chinese()
-  hs.keycodes.currentSourceID("com.aodaren.inputmethod.Qingg")
+  hs.keycodes.currentSourceID("im.rime.inputmethod.Squirrel.Rime")
 end
 
 function English()
-  hs.keycodes.currentSourceID("com.apple.keylayout.ABC")
+  hs.keycodes.currentSourceID("com.apple.keylayout.US")
 end
 
 function obj.set_app_input_method(app_name, set_input_method_function, event)
@@ -95,7 +72,6 @@ function obj:showSourceID()
                   .."IM source id:  "
                   ..hs.keycodes.currentSourceID())
 end
-
 
 
 return obj
