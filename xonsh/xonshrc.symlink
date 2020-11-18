@@ -35,7 +35,9 @@ $HISTCONTROL = 'ignoredups'
 
 $WORK_NOTE_PATH = "$HOME/src/work/working-notes"
 # adoptopenjdk-9.jdk
-$JAVA_HOME = "/Library/Java/JavaVirtualMachines/jdk1.8.0_181.jdk/Contents/Home"
+#$JAVA_HOME = "/Library/Java/JavaVirtualMachines/jdk1.8.0_181.jdk/Contents/Home"
+# java 11
+$JAVA_HOME = "/Library/Java/JavaVirtualMachines/adoptopenjdk-11.jdk/Contents/Home"
 $ANDROID_SDK_ROOT = "/usr/local/share/android-sdk"
 $ANDROID_HOME = "/usr/local/share/android-sdk"
 $ANDROID_NDK = "/usr/local/opt/android-ndk/android-ndk-r14b"
@@ -156,3 +158,9 @@ abbrevs['gst'] = 'git status -s'
 abbrevs['ipd'] = 'import pandas as pd'
 abbrevs['inp'] = 'import numpy as np'
 abbrevs['p40'] = 'kitty +kitten ssh azureuser@bmw-en-test-p40.westus2.cloudapp.azure.com'
+
+
+aliases['k'] = 'kubectl'
+aliases['kgp'] = ['kubectl', 'get', 'pods']
+aliases['kgn'] = ['kubectl', 'get', 'nodes']
+aliases['kgs'] = ['kubectl', 'get', 'services']

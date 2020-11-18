@@ -32,6 +32,7 @@ hspoon_list = {
   -- "Seal",
   -- "DragTerminal",
   --"MyUtils",
+  -- "VimMode",
   "Office"
 }
 
@@ -86,7 +87,7 @@ if spoon.WinWin then
   cmodal:bind('', '`', 'Center Cursor', function() spoon.WinWin:centerCursor() end)
 
   -- Register resizeM with modal supervisor
-  hsresizeM_keys = { "ctrl", "space"}
+  hsresizeM_keys = { "cmd", "space"}
   if string.len(hsresizeM_keys[2]) > 0 then
     spoon.ModalMgr.supervisor:bind(hsresizeM_keys[1], hsresizeM_keys[2], "Enter resizeM Environment", function()
                                      -- Deactivate some modal environments or not before activating a new one
