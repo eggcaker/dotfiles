@@ -164,3 +164,7 @@ aliases['k'] = 'kubectl'
 aliases['kgp'] = ['kubectl', 'get', 'pods']
 aliases['kgn'] = ['kubectl', 'get', 'nodes']
 aliases['kgs'] = ['kubectl', 'get', 'services']
+aliases['kgd'] = ['kubectl', 'get', 'deployments']
+aliases['kdp'] = ['kubectl', 'describe', 'pod']
+aliases['kdn'] = ['kubectl', 'describe', 'node']
+aliases['kds'] = ['kubectl', 'describe', 'service']

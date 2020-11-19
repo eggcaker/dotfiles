@@ -11,11 +11,6 @@ display_monitor = "SwitchResX4 - DELL P2416D"
 hostname = hs.host.localizedName()
 hyper = {"cmd", "alt", "ctrl", "shift"}
 
--- Draw pretty rounded corners on all screens
-hs.loadSpoon("RoundedCorners")
-spoon.RoundedCorners:start()
-
-
 print('==================================================')
 require('ime.ime')
 
