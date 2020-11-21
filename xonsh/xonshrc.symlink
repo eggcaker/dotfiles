@@ -168,3 +168,8 @@ aliases['kgd'] = ['kubectl', 'get', 'deployments']
 aliases['kdp'] = ['kubectl', 'describe', 'pod']
 aliases['kdn'] = ['kubectl', 'describe', 'node']
 aliases['kds'] = ['kubectl', 'describe', 'service']
+
+
+def command_not_found(cmd, env):
+    print(cmd)
+    print(env)

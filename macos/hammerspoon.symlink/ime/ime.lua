@@ -1,10 +1,8 @@
 local function Chinese()
-  print("enable Chinese")
   hs.keycodes.currentSourceID("im.rime.inputmethod.Squirrel.Rime")
 end
 
 local function English()
-  print("enable English")
   hs.keycodes.currentSourceID("com.apple.keylayout.US")
 end
 
