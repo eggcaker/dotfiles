@@ -21,6 +21,7 @@ function push_changes()  {
 ssh-add ~/.ssh/*_rsa
 
 #push file to remote repo
+push_changes ~/.todos;
 push_changes ~/.org-notes;
 push_changes ~/.dotfiles;
 push_changes ~/.doom.d;
