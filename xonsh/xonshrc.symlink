@@ -170,6 +170,20 @@ aliases['kdn'] = ['kubectl', 'describe', 'node']
 aliases['kds'] = ['kubectl', 'describe', 'service']
 
 
-def command_not_found(cmd, env):
-    print(cmd)
-    print(env)
+
+aliases['t']="ultralist"
+aliases['tl']=["ultralist", "l"]
+aliases['tc']=["ultralist", "l", "due:agenda", "group:context"]
+aliases['tp']=["ultralist", 'l', 'due:agenda',"group:project"]
+aliases['td']=["ultralist", 'c']
+aliases['tod']=["ultralist", "l", 'group:project', 'due:tod']
+aliases['tom']=["ultralist","l","group:project","due:tom"]
+aliases['mon']=["ultralist","l","group:project","due:mon"]
+aliases['tue']=["ultralist","l","group:project","due:tue"]
+aliases['wed']=["ultralist","l","group:project","due:wed"]
+aliases['thu']=["ultralist","l","group:project","due:thu"]
+aliases['fri']=["ultralist","l","group:project","due:fri"]
+aliases['c'] = ["ultralist","l","completed:tod"]
+
+# pipe ultralist into fzf for ultra-fast searching of tasks!
+#aliases['uf']=["script", "-c" \"ultralist l\"  < /dev/null | fzf --ansi"
