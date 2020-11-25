@@ -21,7 +21,7 @@ $PATH.insert(0, "/usr/local/share/dotnet/")
 $PATH.insert(0, "/usr/local/bin")
 $PYENV_ROOT = '%s/.pyenv' % $HOME
 $PATH.insert(0, '%s/bin' % $PYENV_ROOT)
-
+$PATH.insert(0, "~/src/apps/vsdbg")
 
 $XONSH_COLOR_STYLE = "monokai"
 $SUPPRESS_BRANCH_TIMEOUT_MESSAGE = True
@@ -64,6 +64,7 @@ aliases['last'] = ['git', 'log', '--pretty=format:"%C(yellow)%h%x09%Creset%an%x0
 
 aliases['pa'] = ['cd', '~/src/personal/xiaobing/XiaoiceAICProjs/private/XiaoIceBMWDemo/XiaoiceDemo']
 aliases['pw'] = ['cd', '~/src/personal/xiaobing/Xiaobing/private/src/Workflow.Scripts']
+aliases['pf'] = ['cd', '~/src/personal/xiaobing/Xiaobing/private/src/XiaoIce.AvatarFramework.FrontendService/XiaoIce.AvatarFramework.FrontendService']
 
 # Emacs
 aliases['e'] = ['emacsclient', '-nw']

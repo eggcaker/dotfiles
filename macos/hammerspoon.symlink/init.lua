@@ -152,8 +152,9 @@ spoon.Ki:start()
 spoon.Office:start()
 
 hs.hotkey.bind(hyper, "R", "Reload Configuration", function() hs.reload() end)
-hs.hotkey.bind(hyper, "L", "System sleep",  function() hs.execute('c.gh') spoon.Astrill:disable() hs.caffeinate.systemSleep() end)
+hs.hotkey.bind(hyper, "L", "System sleep",  function() hs.execute('~/.dotfiles/bin/c.gh') spoon.Astrill:disable() hs.caffeinate.systemSleep() end)
 hs.hotkey.bind(hyper, "P", "Push local repos",  function() hs.execute('c.gh') end)
+hs.hotkey.bind(hyper, "F", "Pull local repos",  function() hs.execute('c.sw') end)
 
 function keyStrokes(str)
   return function()
