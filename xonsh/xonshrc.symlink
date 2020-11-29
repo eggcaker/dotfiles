@@ -111,7 +111,7 @@ $PROMPT_FIELDS['prompt_end'] = lambda: '{RED}$ ' if __xonsh__.history.last_cmd_r
 $XONSH_SHOW_TRACEBACK = False
 
 
-$PROMPT = '{env_name:{} }{BOLD_BLUE} {cwd}{branch_color}{curr_branch: {}}{RESET} {BOLD_BLUE}{prompt_end}{RESET}'
+$PROMPT = '{env_name:{}}{BOLD_BLUE} {cwd}{branch_color}{curr_branch: {}}{RESET} {BOLD_BLUE}{prompt_end}{RESET}'
 
 # nnn configurations 
 $NNN_PLUG='f:finder;o:fzopen;p:mocplay;d:diffs;t:nmount;v:imgview'

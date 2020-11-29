@@ -6,7 +6,7 @@ hs.ipc.cliInstall()
 
 -- Define monitor names for layout purposes
 display_mbp = "Color LCD"
-display_monitor = "SwitchResX4 - DELL P2416D"
+display_monitor = "PHL 276E8V"
 
 hostname = hs.host.localizedName()
 hyper = {"cmd", "alt", "ctrl", "shift"}
@@ -127,7 +127,8 @@ lastNumberOfScreens = #hs.screen.allScreens()
 --   Format reminder:
 --     {"App name", "Window name", "Display Name", "unitrect", "framerect", "fullframerect"},
 dual_display = {
-  {"iTerm2",        nil, display_monitor, hs.geometry.unitrect(0,   0,   1.0,   1.0),  nil, nil}, 
+  {"iTerm2",        nil, display_monitor, hs.geometry.unitrect(0,   0,   1.0,   1.0),  nil, nil},
+  {"kitty",         nil, display_monitor, hs.geometry.unitrect(0,   0,   1.0,   1.0),  nil, nil},
   {"Emacs",         nil, display_monitor, hs.geometry.unitrect(0,   0,   1.0,   1.0),  nil, nil}, 
   {"Google Chrome", nil, display_monitor, hs.geometry.unitrect(0,   0,   1.0,   1.0),  nil, nil}, 
   {"Trello",        nil, display_mbp,     hs.geometry.unitrect(0.5, 0.5, 0.5,   0.5),  nil, nil}, 
