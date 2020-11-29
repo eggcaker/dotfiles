@@ -15,14 +15,6 @@ $VISUAL="vim"
 
 $LS_COLORS = 'rs=0:di=01;36:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:'
 
-$PATH.append("/usr/local/opt/decompile-apk/")
-$PATH.insert(0, "~/.dotfiles/bin")
-$PATH.insert(0, "/usr/local/share/dotnet/")
-$PATH.insert(0, "/usr/local/bin")
-$PYENV_ROOT = '%s/.pyenv' % $HOME
-$PATH.insert(0, '%s/bin' % $PYENV_ROOT)
-$PATH.insert(0, "~/src/apps/vsdbg")
-
 $XONSH_COLOR_STYLE = "monokai"
 $SUPPRESS_BRANCH_TIMEOUT_MESSAGE = True
 $WIN_UNICODE_CONSOLE = False
@@ -201,4 +193,13 @@ __xonsh__.execer.exec($("/usr/local/Caskroom/miniconda/base/bin/conda" "shell.xo
 _sys.modules["xontrib.conda"] = _mod
 del _sys, _mod, _ModuleType
 # <<< conda initialize <<<
+
+
+$PATH.append("/usr/local/opt/decompile-apk/")
+$PATH.insert(0, "~/.dotfiles/bin")
+$PATH.insert(0, "/usr/local/share/dotnet/")
+$PATH.insert(0, "/usr/local/bin")
+$PATH.insert(0, "~/src/apps/vsdbg")
+$PATH.insert(0, "~/Library/TinyTeX/bin/x86_64-darwin")
+
 
